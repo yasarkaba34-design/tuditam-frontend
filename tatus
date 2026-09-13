@@ -1,0 +1,172 @@
+[33m3c5e824[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m YKOS Dashboard: Dinamik menü, arama ve admin yönetimi eklendi
+[33me9c127d[m Canli haberler icin Google Translate koprusu ve NEW etiketi eklendi
+[33m545c072[m RSS uzerinden canli veri akisi entegrasyonu saglandi
+[33m77d505d[m App.jsx api ve localstorage yedek sistemi kuruldu
+[33m7f61ecb[m App.jsx api ve localstorage yedek sistemi kuruldu
+[33m3bb2a40[m YKOSDashboard güncellendi: Tasarım temizlendi ve logoya anasayfa yönlendirmesi eklendi
+[33m0ff225a[m App.jsx tam entegrasyon: Otomatik RSS akisi, rte.start hook ve matris yonlendirme duzenlemeleri
+[33me888541[m App.jsx tam entegrasyon: Otomatik RSS akisi, rte.start hook ve matris yonlendirme duzenlemeleri
+[33m6dcb568[m RMVPanel.jsx bileseni sisteme entegre edildi
+[33mecf2276[m RMVPanel.jsx bileseni sisteme entegre edildi
+[33md797e1d[m localStorage guvenli kullanim duzenlemesi eklendi
+[33m0a31fc2[m localStorage guvenli kullanim duzenlemesi eklendi
+[33mdda43a3[m localStorage uzerinden otomatik veri toplama sistemi entegre edildi
+[33m8b4f1c7[m RSS parser kaldirildi, doğrudan ykos.com.tr url baglantili saf JSON matris yapisina gecildi
+[33m7c412ed[m RSS parser kaldirildi, doğrudan ykos.com.tr url baglantili saf JSON matris yapisina gecildi
+[33m5cd7ab4[m RSS parser kaldirildi, doğrudan ykos.com.tr url baglantili saf JSON matris yapisina gecildi
+[33m99ff27d[m YKOS tum arayuz modulleri, baglanti hatlari ve RSS entegrasyonu tamamlandi
+[33m48e3dc9[m Okuma motoruna canli ykos.com.tr RSS akis modulu eklendi
+[33m95ea831[m Okuma motoruna canli ykos.com.tr RSS akis modulu eklendi
+[33m04d31a3[m Okuma motoruna canli ykos.com.tr RSS akis modulu eklendi
+[33mae4b616[m ULUN-YUZ-DIS kök hece baglanti hatlari ve tum baglanti cizgileri SVG tuvaline eklendi
+[33ma2594a7[m ykosApiService.js icindeki cift fonksiyon tanimi temizlendi
+[33m6aede80[m Canli ykos_core JSON matris yapisi servis katmanina eklendi
+[33m614e9d8[m ykosDataService.js dosyasina defaultArchiveArticles exportu eklendi, derleme hatasi giderildi
+[33m2ea1afa[m Okuma ve Analiz Motoru sayfasi karanlik ekran hatasi giderildi ve simülasyon paneli eklendi
+[33m936a377[m ykos.com.tr baglantisi ve buton yonlendirmesi aktif hale getirildi
+[33m58b28eb[m Damga Atlasina Göbeklitepe, Lemnos, Saymalitas ve Orhun verileri eklendi
+[33m13c0142[m Arama raporu altina Akademik Detay, Matris ve Atlas baglanti butonlari eklendi
+[33m1b0a1b0[m ykos.com.tr API arama katmani ve dinamik API-fallback derleme servisi entegre edildi
+[33m9db48ea[m Akademik arsiv derleme ve sentez yanit motoru entegre edildi
+[33m58e9b0e[m Akilli arama motoru entegre edildi, kelime hece ve damga filtreleme aktiflesti
+[33m54f0ee1[m 11 Ciltlik YKOS ve TKOS Master Arsiv verileri veri servisine tam entegre edildi
+[33m2961cb4[m Matris ekranina mobil responsive CSS eklendi, SVG tuvalin mobilde ilk sirada gorunmesi saglandi
+[33m97ea339[m Matris tual ustu slogan ve rehber aciklamalari %100 cok dilli ceviriye baglandi
+[33mf65f851[m Matris sag paneli metinleri ve butonlari secilen dille tam uyumlu hale getirildi
+[33me8d015b[m Dil secim statei ana App seviyesine tasindi, ic sayfalara dil secici buton eklendi
+[33md9c9b2d[m Sag alt makale basliklari ve ozetleri de cok dilli ceviriye tam entegre edildi
+[33mbe47400[m 10 dilli uluslararasi ceviri entegrasyonu tamamlandi
+[33m2af4eea[m Damga Atlasi aciklamalari 11 ciltlik kulliyat metinleriyle derinlestirildi
+[33m9c6dfab[m Damga Atlasi ve Petroglif katmani tipolojik detay ve deformativ analiz paneliyle zenginlestirildi
+[33mc08319d[m Matris balonlarinin koordinatlari genisletildi, ust uste binme engellendi
+[33mbf3fda5[m SVG baloncuk suzulme animasyonlarinin kaybolma sorunu CSS translate ile cozume kavusturuldu
+[33ma0cd373[m Akademik okuma makalesi ve Okuma Motoru sayfaları dolduruldu
+[33m5290710[m YKOS master veri servisi entegre edildi, veriler dinamik veritabanindan akitilmaya baslandi
+[33m3699174[m YKOS 100-200-300 matris baloncuklarina uzay suzulme ve akis animasyonu eklendi
+[33m704aff0[m Kartal amblemi logosu ust basliga geri yerlestirildi
+[33mf03617c[m Dil secenekleri 10 dunya diline tamamlandi (TR, EN, FR, RU, ZH, JA, PT, ES, AR, DE)
+[33m9be4230[m Kok hece baloncuklari 14 ana merkeze ve turetim dallarina genisletildi
+[33mc640dec[m Akademik okuma metinleri ve matris rehber paragraflari eksiksiz dolduruldu
+[33m263f75b[m Kok hece matrisi icerikleri ve detay panelleri zenginlestirildi
+[33m7516600[m Baslik icerikleri dolduruldu ve panel girisleri menunun en altina yerlestirildi
+[33m0f82b76[m Ortadaki logo ve basliga tıklandıgında Ana Sayfaya donus baglantisi eklendi
+[33m24b29a2[m Tum linkler ve okuma sayfalari korumali hale getirildi
+[33m976657f[m Konuk Paneli Girisi eklendi, 3lu nizam giris blogu olusturuldu
+[33mad7878f[m Eksik import kaldirildi, App.jsx bagimsiz hale getirildi
+[33m16b5fb8[m App.jsx dosyasindaki sag ust giris linki tamamen silindi
+[33md95e404[m Sag ustteki link kaldirildi, giris butonlari ayni renk yapilip menuye entegre edildi
+[33mf2e62d3[m Arastirmaci ve Yonetici Veri Giris Portallari Menuye entegre edildi
+[33mc387496[m CSS derleme hatasi ve vite config minify ayari duzeltildi
+[33me5c768d[m SearchBar.jsx dosyasindaki mukerrer import temizlendi
+[33m67b919b[m SearchBar.jsx dosyasindaki mukerrer import temizlendi
+[33m569c372[m YKOSDashboard.jsx dosyasındaki mükerrer React tanımı temizlendi
+[33m75c2be4[m Sayac baslik kutulari tam sola ve saga yaslandi, kompakt nizam saglandi
+[33mbb4633a[m Sayac baslik kutulari tam sola ve saga yaslandi, kompakt nizam saglandi
+[33me20e79a[m Mobilde basliklar tek satirda karsilikli hizalandi, fontlar kucultuldu ve dikey yukseklik dusuruldu
+[33m8ef8d80[m Mobil görünüm için CANLI VERI ISTATISTIKLERI başlığı da kutu içine alındı
+[33m1ebf71e[m Sayac kutusu sol basligi CANLI VERI ISTATISTIKLERI eklendi ve duzen saglandi
+[33m0d3e7ed[m Kartal logosu yukari cekildi, Sistem Durumu AKTIF rozeti tam ortalandi
+[33m5d85080[m Ust logo kutusu dikeyde 2 cm kisaltildi, Kartal amblemine anasayfa baglantisi sabitlendi
+[33m925db53[m[33m ([m[1;31morigin/yedek-2-agustos[m[33m, [m[1;32myedek-2-agustos[m[33m)[m Orijinal tasarıma %100 sadık kalındı: Logo kibarlaştırıldı ve Kartala ana sayfa baglantisi eklendi
+[33mac6076d[m Eksik kalan Dashboard bilesenleri eksiksiz restore edildi, logo alani kibarlastirildi
+[33m8d3da1d[m Ust logo kutusu yuksekligi azaltildi, Kartal amblemine Ana Sayfaya Donus baglantisi eklendi
+[33mcb49410[m ykos.com.tr Veri Giris Portali'na Duzenle, Onayla ve Sil yonetici modulleri eklendi
+[33maec78fb[m ykos.com.tr Veri Giris Portali'na dosya secimi ve gorsel yukleme destegi eklendi
+[33mb1ad716[m Planin 1. Asamasi: ykos.com.tr Veri Giris ve Yonetim Portali entegre edildi
+[33m3bbbbad[m Mobil ekran sayac duzeni 2x4 yani 4 sira halinde duzenlendi
+[33m1cdf560[m ReadingScreen icindeki son kalinti json hatasi da temizlendi, tum sistem bagimsizlastirildi
+[33m115bc82[m App.jsx icindeki hatali json importu kaldirildi, siyah ekran tamamen cozuldu
+[33m83b9491[m Veri yapisi dogrudan bilesene gomulerek 500 hatasi ve siyah ekran sorunu tamamen giderildi
+[33mf034fee[m Akilli arama motoru ve Catalhoyuk verileri sisteme entegre edildi
+[33m79e1887[m YKOS 100, 200 ve 300 katman gostergeleri sol ust bilgi kutusuna eklendi
+[33mae6d28e[m Zengin YKOS ag haritasi ve tum kok hece baglantilari eksiksiz geri yuklendi
+[33md8e21ed[m YOL ve diger kok hecelere tam YKOS cozumleme metinleri eklendi
+[33m18bd034[m YKOS Kartal Amblemi header logosu olarak entegre edildi
+[33m3291cd3[m Vercel canlisindaki tam baglantili YKOS matris ag haritasi birebir entegre edildi
+[33m620ac7b[m Arama baglantisi, matris ve detay okuma yonlendirmeleri eksiksiz tamamlandi
+[33mc3f80b7[m Tum stiller dahili entegre edildi, CSS baglanti hatasi tamamen cozuldu
+[33m3d77f10[m Menu sol ustteki tek tus altina alindi, dil menusu ve matris gecisi sabitlendi
+[33m1e73090[m Sablon bir onceki altin cerceveli duzene geri getirildi, stiller sabitlendi
+[33m0d88c24[m Dil menusu 10 dilli acilir liste haline getirildi
+[33m515c799[m SearchBar.jsx icindeki CSS kodlari ayristirildi ve derleme hatasi cozuldu
+[33m7f79cd6[m Cift header calismasi giderildi, eski harici header kaldirildi
+[33md0f3d05[m Masaustu tasarimi referans gorsele (1 masa ustu.png) %100 birebir sabitlendi
+[33m15ffb6a[m Cift baslik kaldirildi, arama bari tam genislik yapildi, matris alani hizalandi
+[33m943b3a9[m App render zinciri korumaya alindi, siyah ekran hatasi giderildi
+[33m9ca0018[m Modal arka plani tam opak yapildi, okunabilirlik artirildi
+[33m26d4ffd[m Modal arka plani tam opak yapildi, okunabilirlik artirildi
+[33m3536902[m YKOS Cozumleme modal penceresi mobil uyumlu ve kaydirilabilir yapildi
+[33mfef5194[m BubbleMatrix motoru eksik modullere karsi korumaya alindi, derleme hatasi cozuldu
+[33mcd780d8[m BubbleMatrix icindeki goreceli import yollari duzeltildi
+[33m0431bfd[m Baslik kutusundaki butonlar tek tus altina tasindi, menu cizgisi sadeletildi
+[33m03fb501[m Baslik kutusundaki butonlar tek tus altina tasindi, menu cizgisi sadeletildi
+[33m9c02bc1[m Tum menuler tek tus altina toplandi, sade ve derli toplu nizama gecildi
+[33mdfe83ef[m Mobil ust bar tek tus hamburger menu yapisina kavusturuldu
+[33m1ac3d9f[m Header cift baslik kaldirildi, matris tuslari menu cizgisi altina hizalandi
+[33m5430351[m Baloncuk matrisi ve YKOS 100/200 güncellendi
+[33m671dfe6[m fix: add npmrc for peer dependencies
+[33mbf56091[m fix: move api key to environment variable
+[33m735e88e[m Router hatasi giderildi ve sistem stabil hale getirildi
+[33mbd0c91e[m YKOS pano 10 dilli entegrasyon ve moduller tamamlandi
+[33m5cc720e[m YKOS pano 10 dilli entegrasyon ve moduller tamamlandi
+[33m3603026[m 10 dilin tamami i18n matrisine entegre edildi
+[33m581462b[m App.jsx ve sistem baglantilari tamamlandi
+[33m0bc74e9[m main ve App giris noktalari YKOS panosuna baglandi
+[33m132005c[m YKOS pano 10 dilli entegrasyon ve moduller tamamlandi
+[33m080ed47[m fix: import/export ve modul baglantilari duzeltildi
+[33m7abfadb[m fix: import/export ve modul baglantilari duzeltildi
+[33mf03d916[m fix: import/export ve modul baglantilari duzeltildi
+[33m44db6ff[m fix: import/export ve modul baglantilari duzeltildi
+[33m1c7f8ae[m YKOSAnadoluEvrenselPano dosyasi komple nizami kodla yenilendi
+[33m169ad18[m Matris veri baglantisi ve getAllRoots fonksiyonu aktif edildi
+[33m8cb9103[m AutoPilotEngine import yolu uzanti eklenerek guncellendi
+[33m39a2d7c[m AutoPilotEngine veri yolu import pürüzü kesin olarak giderildi
+[33mdcef727[m API veri yolları ve YKOS_API nesnesi nizami hale getirilerek muhurlendi
+[33mcc66746[m AutoPilotEngine import yolu ykos_roots olarak tamamen duzeltildi
+[33m560ba99[m YKOS mukerrer kok tanımları ve kalıntılar tamamen temizlendi
+[33m051c51a[m ycos_geo icindeki mukerrer tanimlar temizlendi ve matris ismi nizami hale getirildi
+[33md45a921[m ykos_roots veri yapisi nesne formatina getirildi ve cift tanimlar temizlendi
+[33mcd7a802[m AudioEngine ses yolları public klasorune gore baglandı
+[33mb406d58[m API ycos.js import yolu components altindaki LayerSystem olarak guncellendi
+[33mae7ee56[m YKOS tum sistem dosya yollari ve katman motoru eksiksiz olarak revize edildi
+[33mb92ef5b[m AtlasMap veri importundaki uc nokta hatasi ve mukerrer satirlar temizlendi
+[33m132c356[m AtlasMap veri importundaki uc nokta hatasi ve mukerrer satirlar temizlendi
+[33m643ca17[m AudioEngine ses yolları hizalandı ve terminal sıfırlandı
+[33me207b4e[m AudioEngine ses yolları hizalandı ve terminal sıfırlandı
+[33mfe724fa[m AudioEngine ses dosyası yolları hizalandı
+[33m5e1451b[m AudioEngine ses dosyası yolları hizalandı
+[33m434c8fd[m AudioEngine ses dosyası yolları nizami sekilde hizalandı
+[33m69c8057[m AudioEngine ses dosyası yolları hizalandı
+[33mbb4e162[m LayerSystem eklendi ve AtlasMap veri yolu src altındaki klasore gore sabitlendi
+[33m9aff66e[m LayerSystem bileseni eksiksiz sekilde sisteme dahil edildi
+[33m1f38ff4[m AtlasMap yolu projenin kok dizinindeki veriye gore mühürlendi
+[33m1fb7e11[m YKOSDashboard yollari kaydedildi ve nizami hale getirildi
+[33m6894e1f[m Tum component yollari src/components altina gore nizamilestirildi
+[33mf784295[m YKOSDashboard bilesen yollari nizami hale getirildi
+[33meb7c001[m App.jsx import eksigi giderildi ve akis nizami baslatildi
+[33me12c5cc[m App.jsx import eksigi tamamen giderildi
+[33mee98ed8[m App.jsx import eksigi tamamen giderildi
+[33m13d4c56[m App.jsx temizlendi ve YKOSDashboard kok bileşen olarak bağlandı
+[33m16acb40[m Google arama cubugu, tek satir gosterge ve sag ust matris yapisi aktife alindi
+[33m1fe627f[m Eski tum css kodlari yok hukmunde sayilarak tek kat nizami global.css yuklendi
+[33m32a0659[m YKOSDashboard ana bar JSX kodu ve ortalanmis duzen mühürlendi
+[33mcabb534[m YKOSDashboard ana bar JSX kodu ve ortalanmis duzen mühürlendi
+[33m5b5ef87[m global.css mukerrer tum bloklar temizlendi ve h1 font boyutu 42px olarak sabitlendi
+[33md05d988[m index.html nizami hale getirildi ve ana giris noktasi duzeltildi
+[33m40f1b05[m Tum ham HTML dosyalari nizami React JSX bilesenlerine donusturuldu ve mukerrer yapilar temizlendi
+[33m9e03029[m Tum stil iskeletleri ve sayfa yapilari nizami hale getirildi
+[33mc4d56bd[m Evrensel pano ana ekran tasarimi sabitlendi
+[33m67d0302[m Anadolu Evrensel Pano baglantisi yapildi
+[33ma482902[m Ana App dosyasi guncellendi
+[33m0f82b53[m Zorunlu temizleme ve yeniden yukleme tetiklendi
+[33m4a59240[m Zorunlu temizleme ve yeniden yukleme tetiklendi
+[33m61c950b[m Vercel arayuz ve alan adi tetikleme guncellemesi
+[33m493df16[m Garantili yerlesim duzeni tamamlandi
+[33mde3b01f[m CSS ve arayuz modulleri birlestirildi
+[33m4a38be1[m Sablon tasarimi ve baglantilar iyilestirildi
+[33m072a745[m YKOS dikey menu ve anasayfa ozet paneli guncellemesi
+[33m02d8186[m Vercel main deploy
+[33mce297e5[m YKOS 4.1 arayuz ve veri girisi guncellemesi
+[33m0cacb87[m Uzantilar ve paket hatalari temizlendi sistem canliya hazir
+[33m56c2ee6[m Vercel build hatasi giderildi
+[33m2a4041e[m[33m ([m[1;31morigin/master[m[33m)[m Anadolu kalkani kilitlenme hatalari giderildi

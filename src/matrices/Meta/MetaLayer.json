@@ -1,0 +1,128 @@
+// FILE: src/matrices/meta/MetaLayer.json
+
+{
+  "version": "1.0.0",
+  "hash": "meta-init-001",
+  "timestamp": "2026-08-07T16:33:00",
+  "metaSchema": {
+    "origin": "string",
+    "semantic_field": "string",
+    "frequency": "number",
+    "atlas_coord": "[x, y]",
+    "bubble_profile": "string",
+    "flux_vector": "[dx, dy, dz]",
+    "rmv_weight": "number",
+    "evaluator_hint": "string"
+  },
+  "languages": ["tr", "en", "ar", "ru", "zh"],
+  "status": "ready"
+}
+// FILE: src/matrices/meta/MetaLayer.json
+
+{
+  "version": "1.0.1",
+  "hash": "meta-tut-001",
+  "timestamp": "2026-08-07T17:02:00",
+
+  "entry": {
+    "root": "TUT",
+    "origin": "Proto-Turkic",
+    "semantic_field": "bağ, kavrama, tutma, sabitleme",
+    "frequency": 0.92,
+
+    "atlas_coord": [42.1, 59.3],
+    "atlas_region": "Orta Asya",
+    "atlas_cluster": "Bağ-Sabitlik Kümesi",
+
+    "bubble_profile": "BP-07",
+    "flux_vector": [0.8, 0.1, 0.0],
+    "flux_energy": 0.74,
+    "flux_phase": "stable",
+
+    "rmv_weight": 0.88,
+    "rmv_priority": "high",
+    "rmv_context": "kavrama, bağlama, sabitleme",
+
+    "evaluator_hint": "TUT hecesi bağlama ve sabitleme semantiğini taşır.",
+    "reading_depth": 3,
+
+    "languages": {
+      "tr": "tutmak",
+      "en": "hold",
+      "ar": "يمسك",
+      "ru": "держать",
+      "zh": "握住",
+      "phonetic": "tʊt",
+      "morphology": "tut- (fiil kökü)"
+    }
+  },
+
+  "status": "ready"
+}
+// FILE: src/matrices/meta/MetaLayer.json
+
+{
+  "version": "1.0.2",
+  "hash": "meta-tut-kur-002",
+  "timestamp": "2026-08-07T17:04:00",
+
+  "entries": [
+    {
+      "root": "TUT",
+      "origin": "Proto-Turkic",
+      "semantic_field": "bağ, kavrama, tutma, sabitleme",
+      "frequency": 0.92,
+      "atlas_coord": [42.1, 59.3],
+      "atlas_region": "Orta Asya",
+      "atlas_cluster": "Bağ-Sabitlik Kümesi",
+      "bubble_profile": "BP-07",
+      "flux_vector": [0.8, 0.1, 0.0],
+      "flux_energy": 0.74,
+      "flux_phase": "stable",
+      "rmv_weight": 0.88,
+      "rmv_priority": "high",
+      "rmv_context": "kavrama, bağlama, sabitleme",
+      "evaluator_hint": "TUT hecesi bağlama ve sabitleme semantiğini taşır.",
+      "reading_depth": 3,
+      "languages": {
+        "tr": "tutmak",
+        "en": "hold",
+        "ar": "يمسك",
+        "ru": "держать",
+        "zh": "握住",
+        "phonetic": "tʊt",
+        "morphology": "tut- (fiil kökü)"
+      }
+    },
+
+    {
+      "root": "KUR",
+      "origin": "Proto-Turkic",
+      "semantic_field": "kurmak, düzenlemek, yapı oluşturmak",
+      "frequency": 0.89,
+      "atlas_coord": [39.9, 35.2],
+      "atlas_region": "Anadolu",
+      "atlas_cluster": "Yapı-Form Kümesi",
+      "bubble_profile": "BP-12",
+      "flux_vector": [0.4, 0.7, 0.1],
+      "flux_energy": 0.81,
+      "flux_phase": "constructive",
+      "rmv_weight": 0.91,
+      "rmv_priority": "high",
+      "rmv_context": "kurma, düzenleme, yapı oluşturma",
+      "evaluator_hint": "KUR hecesi yapı kurma ve düzenleme semantiğini taşır.",
+      "reading_depth": 4,
+      "languages": {
+        "tr": "kurmak",
+        "en": "establish",
+        "ar": "يؤسس",
+        "ru": "создать",
+        "zh": "建立",
+        "phonetic": "kur",
+        "morphology": "kur- (fiil kökü)"
+      }
+    }
+  ],
+
+  "status": "ready"
+}

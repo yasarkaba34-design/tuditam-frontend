@@ -1,0 +1,108 @@
+/* ===========================
+   BUBBLE MATRIX CORE
+=========================== */
+.bubble-matrix {
+  position: relative;
+  width: 100%;
+  min-height: 60vh;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  background: #0a0a0a;
+  border: 1px solid rgba(255, 215, 0, 0.45);
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.25);
+}
+
+/* Baloncuklar */
+.bubble {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin: 0.6rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255,215,0,0.9), #070707);
+  box-shadow: 0 0 12px rgba(255,215,0,0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.bubble:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 20px rgba(255,215,0,0.7);
+}
+
+/* Etiketler */
+.bubble-label {
+  position: absolute;
+  bottom: -1.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255,215,0,0.85);
+  font-size: 0.85rem;
+  text-shadow: 0 0 5px rgba(255,215,0,0.4);
+}
+
+/* ===========================
+   ANİMASYONLAR
+=========================== */
+@keyframes bubblePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.bubble.active {
+  animation: bubblePulse 3s ease-in-out infinite;
+}
+
+/* ===========================
+   RESPONSIVE BREAKPOINTS
+=========================== */
+
+/* TABLET */
+@media (max-width: 1200px) {
+  .bubble {
+    width: 70px;
+    height: 70px;
+    margin: 0.5rem;
+  }
+
+  .bubble-label {
+    font-size: 0.8rem;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .bubble-matrix {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    min-height: 50vh;
+  }
+
+  .bubble {
+    width: 60px;
+    height: 60px;
+    margin: 0.4rem;
+  }
+
+  .bubble-label {
+    font-size: 0.75rem;
+    bottom: -1rem;
+  }
+}
+
+/* SMALL MOBILE */
+@media (max-width: 480px) {
+  .bubble {
+    width: 50px;
+    height: 50px;
+    margin: 0.3rem;
+  }
+
+  .bubble-label {
+    font-size: 0.7rem;
+  }
+}

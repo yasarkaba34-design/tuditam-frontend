@@ -1,0 +1,216 @@
+.matrix-toggle-wrapper {
+  margin-top: 15px;
+  width: 100%;
+}
+
+.matrix-toggle-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #ffd700 0%, #b8860b 100%);
+  color: #000;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
+}
+
+.matrix-toggle-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 215, 0, 0.35);
+}
+
+.matrix-panel {
+  margin-top: 15px;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+/* Çözümleme Modal Kapsayıcısı */
+.node-detail-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 420px;
+  max-height: 85vh;
+  overflow-y: auto;
+  background: rgba(5, 8, 17, 0.95);
+  backdrop-filter: blur(10px);
+  border: 1px solid #ffd700;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 15px rgba(255, 215, 0, 0.2);
+  z-index: 100;
+  box-sizing: border-box;
+}
+
+/* Modal Başlık Çubuğu */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.modal-title {
+  color: #ffd700;
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+/* Kapatma Düğmesi (✕) */
+.modal-close-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 215, 0, 0.5);
+  color: #ffd700;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.modal-close-btn:hover {
+  background: #ffd700;
+  color: #000;
+}
+
+/* Modal İçerik Alanı */
+.modal-body {
+  color: #e0e0e0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.selected-element-tag {
+  display: inline-block;
+  background: rgba(255, 215, 0, 0.15);
+  color: #ffd700;
+  border: 1px solid #ffd700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 0.8rem;
+  margin-bottom: 12px;
+}
+/* YKOS Çözümleme Modal Kapsayıcısı */
+.matrix-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+.matrix-modal-card {
+  background: #050811;
+  border: 1px solid #ffd700;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
+  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.25);
+  overflow-y: auto; /* Mobilde taşarsa rahatça kaydırılır */
+  position: relative;
+}
+.matrix-modal-card {
+  background-color: #050811 !important; /* Arka planı tamamen opak yapar */
+  border: 1px solid #ffd700;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 480px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.95);
+  overflow-y: auto;
+  position: relative;
+  z-index: 10000;
+}
+.matrix-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.25);
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.matrix-modal-title {
+  color: #ffd700;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.matrix-modal-close {
+  background: transparent;
+  border: none;
+  color: #ff4d4d;
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 0 5px;
+}
+
+.selected-element-badge {
+  background: rgba(255, 215, 0, 0.15);
+  border: 1px solid #ffd700;
+  color: #ffd700;
+  padding: 6px 12px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.modal-detail-text {
+  color: #dddddd;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.modal-action-btn {
+  background: linear-gradient(135deg, #ffd700, #b8860b);
+  color: #000;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  margin-top: auto;
+}

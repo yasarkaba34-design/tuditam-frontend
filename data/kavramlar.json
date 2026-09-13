@@ -1,0 +1,22 @@
+[
+  {
+    "id": "KOK",
+    "tr": "kök",
+    "en": "root",
+    "de": "wurzel",
+    "fr": "racine",
+    "es": "raíz",
+    "ru": "корень",
+    "zh": "根"
+  },
+  {
+    "id": "VAR",
+    "tr": "var",
+    "en": "exist",
+    "de": "existiert",
+    "fr": "existe",
+    "es": "existe",
+    "ru": "существует",
+    "zh": "存在"
+  }
+]

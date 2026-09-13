@@ -1,0 +1,32 @@
+.analyzer-panel {
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 20px;
+  color: var(--ykos-gold);
+  margin-bottom: 30px;
+}
+
+.analyzer-title {
+  text-align: center;
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+.analysis-block p {
+  margin: 6px 0;
+  font-size: 16px;
+}
+
+.analysis-note {
+  margin-top: 15px;
+  font-size: 14px;
+  color: var(--ykos-gray);
+  text-align: center;
+}
+
+.analyzer-empty {
+  text-align: center;
+  color: var(--ykos-gray);
+  padding: 20px;
+}

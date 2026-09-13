@@ -1,0 +1,62 @@
+/* --- BubbleMatrix kapsayıcısı --- */
+.bubble-matrix {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: visible; /* 🔥 tıklamayı engelleyen sorunu çözer */
+  background-color: #050811;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 215, 0, 0.25);
+}
+
+/* --- Balon --- */
+.bubble {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffd700, #b8860b);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer; /* 🔥 tıklanabilirlik */
+  user-select: none;
+  z-index: 5; /* 🔥 balonun üstte kalması */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: fadeIn 0.5s ease;
+}
+
+/* --- Hover efekti --- */
+.bubble:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.6);
+  z-index: 10;
+}
+
+/* --- Balon etiketi --- */
+.bubble-label {
+  pointer-events: none; /* 🔥 metin tıklamayı engellemesin */
+  font-size: 11px;
+  text-align: center;
+  line-height: 1.2;
+  padding: 4px;
+  color: #000;
+}
+
+/* --- Evaluator sonucu --- */
+.bubble-evaluator-result {
+  position: absolute;
+  bottom: -18px;
+  font-size: 10px;
+  color: #ffd700;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 2px 6px;
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+/* --- Fade-in animasyonu --- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}

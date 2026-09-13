@@ -1,0 +1,229 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #0a0a0a;
+    color: #f5f5f5;
+    font-family: "Montserrat", sans-serif;
+}
+
+header {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+h1 {
+    font-size: 42px;
+    font-weight: 700;
+    color: #d4af37;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 18px;
+    opacity: 0.8;
+}
+
+.search-box {
+    margin-top: 25px;
+}
+
+.search-box input {
+    width: 60%;
+    padding: 12px 15px;
+    border-radius: 6px;
+    border: 1px solid #d4af37;
+    background-color: #111;
+    color: #f5f5f5;
+    font-size: 16px;
+}
+
+.istatistikler {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    padding: 40px 60px;
+    text-align: center;
+}
+
+.istatistik-kutu {
+    background-color: #111;
+    border: 1px solid #d4af37;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.istatistik-kutu h2 {
+    margin: 0;
+    font-size: 20px;
+    color: #d4af37;
+}
+
+.istatistik-kutu p {
+    font-size: 28px;
+    margin-top: 10px;
+}
+
+.moduller {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    padding: 40px 60px;
+}
+
+.modul {
+    background-color: #111;
+    border: 1px solid #d4af37;
+    padding: 25px;
+    text-align: center;
+    border-radius: 8px;
+    font-size: 20px;
+    transition: 0.3s;
+}
+
+.modul:hover {
+    background-color: #d4af37;
+    color: #0a0a0a;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    border-top: 1px solid #333;
+    opacity: 0.7;
+}
+body {
+    margin: 0;
+    background: #0a0a0a;
+    color: #f5f5f5;
+    font-family: "Montserrat", sans-serif;
+}
+
+.language-selector {
+    text-align: right;
+    padding: 10px 20px;
+}
+
+header {
+    text-align: center;
+    padding: 40px;
+}
+
+#search-input {
+    width: 60%;
+    padding: 12px;
+    border: 1px solid #d4af37;
+    background: #111;
+    color: #fff;
+    border-radius: 6px;
+}
+
+.moduller {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    padding: 40px;
+}
+
+.modul {
+    background: #111;
+    border: 1px solid #d4af37;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+    font-size: 20px;
+    transition: 0.3s;
+}
+
+.modul:hover {
+    background: #d4af37;
+    color: #000;
+}
+
+.result-card {
+    background: #111;
+    border: 1px solid #d4af37;
+    padding: 15px;
+    margin: 10px auto;
+    width: 60%;
+    border-radius: 6px;
+}
+/* --- Modül Kartlarına İkon Desteği --- */
+
+.modul {
+    background: #111;
+    border: 1px solid #d4af37;
+    padding: 25px;
+    text-align: center;
+    border-radius: 8px;
+    font-size: 20px;
+    transition: 0.3s;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.15);
+}
+
+/* İkon alanı */
+.modul-icon {
+    font-size: 40px;
+    color: #d4af37;
+    margin-bottom: 15px;
+    display: block;
+}
+
+/* Hover efekti */
+.modul:hover {
+    background: #d4af37;
+    color: #0a0a0a;
+}
+
+.modul:hover .modul-icon {
+    color: #0a0a0a;
+}
+/* --- YKOS Üst Menü (Navbar) --- */
+
+.navbar {
+    background: #111;
+    border-bottom: 2px solid #d4af37;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    font-size: 28px;
+    font-weight: 700;
+    color: #d4af37;
+    letter-spacing: 2px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links li a {
+    color: #f5f5f5;
+    text-decoration: none;
+    font-size: 18px;
+    transition: 0.3s;
+}
+
+.nav-links li a:hover {
+    color: #d4af37;
+}
+
+/* Mobil uyum */
+@media (max-width: 600px) {
+    .navbar {
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 10px;
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "tr": [
+        { "title": "Yoros — Dört Kol Damga", "module": "Araştırma Merkezi" },
+        { "title": "Hattuşa — Koruyucu Figür", "module": "Damga Atlası" },
+        { "title": "Anadolu Fonetik Matrisi", "module": "Matrisler" }
+    ],
+    "en": [
+        { "title": "Yoros — Four-Arm Seal", "module": "Research Center" },
+        { "title": "Hattusa — Protective Figure", "module": "Stamp Atlas" },
+        { "title": "Anatolian Phonetic Matrix", "module": "Matrices" }
+    ]
+}

@@ -1,0 +1,217 @@
+:root {
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+
+  color: #f4f4f4;
+  background: #070707;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-width: 320px;
+  min-height: 100%;
+
+  margin: 0;
+
+  background: #070707;
+}
+
+button {
+  font: inherit;
+}
+
+.app-shell {
+  min-height: 100vh;
+
+  background:
+    radial-gradient(
+      circle at 75% 10%,
+      rgba(216, 164, 0, 0.04),
+      transparent 25%
+    ),
+    #080808;
+}
+
+.app-main {
+  min-height: 100vh;
+
+  margin-left: 180px;
+  padding: 14px 14px 20px;
+}
+}
+
+.app-frame {
+  width: 100%;
+  max-width: 1360px;
+
+  margin: 0 auto;
+}
+
+.app-workspace {
+  min-height: 350px;
+
+  padding: 14px;
+
+  border: 1px solid #272727;
+  border-radius: 10px;
+
+  background: #0d0d0d;
+}
+
+.temporary-panel {
+  padding: 30px;
+
+  color: #d8a400;
+  text-align: center;
+}
+/* YALNIZCA MOBİL EKRANLAR İÇİN ÖZEL DÜZEN */
+@media (max-width: 768px) {
+  .header-nav-buttons {
+    display: none !important;
+  }
+
+  .header-nav-buttons.active {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .mobile-hamburger-btn {
+    display: flex !important;
+  }
+
+  .header-logo-title {
+    font-size: 22px !important;
+    letter-spacing: 2px !important;
+  }
+
+  .header-sub-title {
+    display: none !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .mobile-hamburger-btn {
+    display: none !important;
+  }
+}
+/* YALNIZCA MOBİL EKRANLAR İÇİN NİZAMİ AKIŞ */
+@media (max-width: 768px) {
+  /* Sol ve sağ paneli mobilde tek sütuna düşür (Alt alta dizilsin) */
+  div[style*="gridTemplateColumns"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Mobil ekranda üst arama barını ve başlıkları rahatlat */
+  h1 {
+    font-size: 20px !important;
+  }
+}
+/* MOBİL EKRAN İÇİN NİZAMİ İNCE AYARLAR */
+@media (max-width: 768px) {
+  /* Sol ve sağ panelleri mobilde tek sütuna düşür (Sıkışmayı engeller) */
+  div[style*="gridTemplateColumns"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Mobilde ana başlığın üstündeki tekrarlayan küçük YKOS rozetini gizle */
+  div[style*="border: 2px solid #ffd700"][style*="fontSize: 14px"] {
+    display: none !important;
+  }
+}
+/* MASAÜSTÜ İÇİN DÜZEN */
+.dashboard-grid-container {
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: 20px;
+}
+
+/* MOBİL EKRAN İÇİN TEMİZ AKIŞ (768px ve altı) */
+@media (max-width: 768px) {
+  /* Sol ve sağ paneller alt alta dizilsin */
+  .dashboard-grid-container {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Mobilde ana başlığın üstündeki küçük çift YKOS rozetini gizle */
+  .dashboard-mini-badge {
+    display: none !important;
+  }
+
+  /* Arama çubuğunun mobilde kenar boşluklarını rahatlat */
+  .search-container-mobile {
+    width: 95% !important;
+  }
+}
+/* MOBİLDE TÜM İKİLİ GRIDLERİ TEK SÜTUNA DÜŞÜR */
+@media (max-width: 768px) {
+  div[style*="display: grid"],
+  div[style*="grid-template-columns"],
+  div[style*="gridTemplateColumns"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+.ykos-search-wrapper {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.search-input-box {
+  display: flex;
+  align-items: center;
+  background-color: #050811;
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  border-radius: 25px;
+  padding: 6px 18px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.search-input-box:focus-within {
+  border-color: #ffd700;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.3);
+}
+
+.search-icon {
+  font-size: 1.1rem;
+  margin-right: 12px;
+  color: #ffd700;
+  user-select: none;
+}
+
+.search-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-size: 0.95rem;
+  padding: 8px 0;
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.85rem;
+}
+
+.search-clear-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 215, 0, 0.7);
+  font-size: 1rem;
+  cursor: pointer;
+}
+.ykos-app {
+  width: 100%;
+  height: 100vh;
+  background-color: #000;
+  overflow: hidden;
+  position: relative;
+}

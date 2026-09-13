@@ -1,0 +1,52 @@
+/* FILE: src/components/flux-chart.css */
+
+.flux-chart-container {
+  background: #000;
+  color: #ffd700;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px #111;
+  max-width: 540px;
+  margin: 24px auto;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.flux-chart-container h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  text-align: left;
+}
+
+.flux-chart-svg {
+  background: #050505;
+  border-radius: 4px;
+  border: 1px solid #333;
+}
+
+.axis {
+  stroke: #555;
+  stroke-width: 1;
+}
+
+.zero-line {
+  stroke: #3333ff;
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+}
+
+.flux-line {
+  fill: none;
+  stroke: #ffd700;
+  stroke-width: 2;
+}
+
+.flux-point {
+  fill: #ff8800;
+}
+
+.flux-chart-meta {
+  margin-top: 8px;
+  font-size: 12px;
+  display: flex;
+  gap: 12px;
+}

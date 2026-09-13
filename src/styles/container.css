@@ -1,0 +1,18 @@
+const styles = {
+  container: {
+    width: "100%",
+    minHeight: "100vh",
+    backgroundColor: "#0a0a0a", // Derin antrasit-siyah arka plan
+    color: "#f5f5f5",
+    padding: "40px",
+    fontFamily: "'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+  },
+const styles = {
+  container: {
+    width: "100%",
+    minHeight: "100vh",
+    background: "linear-gradient(180deg, #0a0a0a 0%, #FFBB00 100%)",
+    color: "#f5f5f5",
+    padding: "40px",
+    fontFamily: "'Segoe UI', Roboto, Helvetica, Arial, sans-serif",
+  },

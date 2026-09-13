@@ -1,0 +1,100 @@
+/* Ana alan */
+.bubble-area {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 550px;
+  background: #0d0d0d;
+  overflow: hidden;
+}
+
+/* Baloncuk */
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Altın parlama */
+  box-shadow:
+    0 0 12px rgba(255, 215, 0, 0.6),
+    0 0 25px rgba(255, 215, 0, 0.4),
+    inset 0 0 10px rgba(255, 215, 0, 0.3);
+
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+/* Hover efekti */
+.bubble:hover {
+  transform: scale(1.08);
+  box-shadow:
+    0 0 18px rgba(255, 215, 0, 0.8),
+    0 0 35px rgba(255, 215, 0, 0.6),
+    inset 0 0 12px rgba(255, 215, 0, 0.4);
+}
+
+/* Etiket */
+.bubble-label {
+  color: #000;
+  font-weight: bold;
+  font-size: 0.75rem;
+  text-align: center;
+  pointer-events: none;
+}
+@keyframes bubbleFlux {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.bubble {
+  animation: bubbleFlux 3s ease-in-out infinite;
+}
+
+.bubble[data-flux="1.5"] {
+  animation-duration: 2.5s;
+  box-shadow: 0 0 15px rgba(255,215,0,0.6);
+}
+
+.bubble[data-flux="2"] {
+  animation-duration: 2s;
+  box-shadow: 0 0 20px rgba(255,215,0,0.8);
+}
+
+.bubble[data-flux="3"] {
+  animation-duration: 1.5s;
+  box-shadow: 0 0 25px rgba(255,215,0,1);
+}
+.bubble-matrix {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-color: #000;
+  overflow: hidden;
+}
+
+.bubble-node {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: rgba(255, 215, 0, 0.25);
+  color: #ffd700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.25s ease, background-color 0.25s ease;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
+}
+
+.bubble-node:hover {
+  transform: scale(1.15);
+  background-color: rgba(255, 215, 0, 0.45);
+}
+
+.bubble-label {
+  font-size: 1.1rem;
+  text-shadow: 0 0 6px #000;
+}

@@ -1,0 +1,46 @@
+.ykos-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  gap: 7px;
+
+  margin-bottom: 9px;
+  padding: 7px;
+
+  border: 1px solid #443600;
+  border-radius: 8px;
+
+  background: #0e0e0e;
+}
+
+.ykos-tab-button {
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+
+  padding: 7px 12px;
+
+  border: 1px solid #303030;
+  border-radius: 6px;
+
+  background: #111;
+  color: #a9a9a9;
+
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.ykos-tab-button:hover {
+  border-color: #6a5200;
+  color: #e5bd34;
+}
+
+.ykos-tab-button.active {
+  border-color: #d8a400;
+  background: #d8a400;
+  color: #080808;
+
+  font-weight: 700;
+}

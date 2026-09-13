@@ -1,0 +1,26 @@
+.chain-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: #0a0a1a;
+  color: #fff;
+  padding: 40px;
+  border-radius: 12px;
+}
+
+.stage {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 0.6;
+}
+
+.stage.active {
+  opacity: 1;
+  transform: scale(1.1);
+  text-shadow: 0 0 10px #00ffff;
+}
+
+.arrow-flow {
+  font-size: 2rem;
+  color: #00ffff;
+}

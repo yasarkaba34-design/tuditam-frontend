@@ -1,0 +1,76 @@
+[
+  {
+    "id": 1,
+    "title": "Anadolu Kök Hece",
+    "content": "Anadolu bölgesinde tespit edilen kadim kök-hece zincirleri. Bu veriler, YKOS AtlasMap üzerinde altın tonlu baloncuklarla gösterilir.",
+    "atlas": "Anadolu",
+    "matrix": "YKOS-100",
+    "tags": ["kök-hece", "kadim", "Anadolu"]
+  },
+  {
+    "id": 2,
+    "title": "Orta Asya Damga Dizgesi",
+    "content": "Orta Asya kültürlerinde kullanılan damga biçimleri ve semiyotik kökenleri. Görselleştirme turkuaz baloncuklarla yapılır.",
+    "atlas": "Orta Asya",
+    "matrix": "YKOS-200",
+    "tags": ["damga", "Orta Asya", "sembol"]
+  },
+  {
+    "id": 3,
+    "title": "Avrupa Dil Akışı",
+    "content": "Avrupa bölgesinde dil akışının kök-hece temelli evrimi. Mavi tonlu baloncuklarla gösterilir.",
+    "atlas": "Avrupa",
+    "matrix": "YKOS-300",
+    "tags": ["dil", "akış", "Avrupa"]
+  },
+  {
+    "id": 4,
+    "title": "Mezopotamya Yazı Matrisi",
+    "content": "Mezopotamya bölgesinde yazı sistemlerinin kök-hece temelli yapısı. Toprak tonlu baloncuklarla görselleştirilir.",
+    "atlas": "Mezopotamya",
+    "matrix": "YKOS-400",
+    "tags": ["yazı", "Mezopotamya", "arkeoloji"]
+  }
+]
+[
+  {
+    "id": 1,
+    "title": "Çatalhöyük Kök Hece ve Damga Sembolizmi",
+    "category": "Arkeolojik Çözümleme",
+    "tags": ["Çatalhöyük", "Anadolu", "Kök Hece", "Piktogram", "YKOS 100"],
+    "summary": "Çatalhöyük duvar resimleri ve pişmiş toprak mühürlerdeki YKOS 100 kök hece eşleşmeleri.",
+    "analysis": "Çatalhöyük M.Ö. 7400 katmanlarında tespit edilen dairesel ve ışınsal motifler, YKOS 'ÇEV' ve 'BA' kök heceleriyle tam fonetik uyum gösterir.",
+    "location": "Konya, Anadolu",
+    "period": "M.Ö. 7400"
+  },
+  {
+    "id": 2,
+    "title": "Göbeklitepe T-Sütunu YKOS Okuması",
+    "category": "Arkeolojik Çözümleme",
+    "tags": ["Göbeklitepe", "T-Sütun", "H Sembolü", "C Sembolü", "YKOS 200"],
+    "summary": "Şanlıurfa Göbeklitepe T-Sütunları üzerindeki ikil sembollerin YKOS çözümü.",
+    "analysis": "T-sütunlardaki 'H' ve 'C' piktogramları ER-İK-AN ve KÖK-SU kavramsal kurgusunu ifade eder.",
+    "location": "Şanlıurfa, Anadolu",
+    "period": "M.Ö. 9600"
+  },
+  {
+    "id": 3,
+    "title": "Etrüsk Lemnos Kitabesi & Ön Türkçe Eşleşmesi",
+    "category": "Dil ve Yazıt Atlası",
+    "tags": ["Etrüsk", "Lemnos", "Yazıt", "Akdeniz", "YKOS 300"],
+    "summary": "Lemnos adası mezar taşındaki alfabetik dizilimin YKOS kök fonetiği ile okuması.",
+    "analysis": "Batı Akdeniz'e taşınan alfabe dizgesi, Anadolu Ön-Türkçe kök ekleriyle deşifre edilmiştir.",
+    "location": "Ege / İtalya",
+    "period": "M.Ö. 600"
+  },
+  {
+    "id": 4,
+    "title": "YOL Kök Hecesi ve Akış Teorisi",
+    "category": "Kök Hece Matrisi",
+    "tags": ["YOL", "Kök Hece", "Dinamik Sistem", "YKOS 100"],
+    "summary": "YKOS Kavramsal Çerçevesi: 'Rulo değil yol' mantığının dilbilimsel matrisi.",
+    "analysis": "Y-O-L kök hecesi; yön, hareket, süreç ve geçiş sembolizmini ifade eden ana eksendir.",
+    "location": "Anadolu Merkezli Küresel Yayılım",
+    "period": "Kadim Dönem"
+  }
+]

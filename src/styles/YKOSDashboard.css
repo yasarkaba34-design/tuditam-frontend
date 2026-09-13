@@ -1,0 +1,75 @@
+.dashboard-wrapper {
+  background: #070707;
+  color: #fff;
+  font-family: "Segoe UI", sans-serif;
+  padding: 20px;
+}
+
+.ykos-header {
+  text-align: center;
+  color: #ffd700;
+  margin-bottom: 20px;
+}
+
+.ykos-search {
+  width: 100%;
+  padding: 12px 20px;
+  border-radius: 25px;
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  background-color: #050811;
+  color: #fff;
+  margin-bottom: 25px;
+}
+
+.matrix-section {
+  border: 1px solid #222;
+  border-radius: 10px;
+  padding: 15px;
+  background: #0a0a0a;
+}
+
+.atlas-status {
+  float: right;
+  background: #ffd70022;
+  color: #ffd700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+}
+
+.matrix-canvas {
+  height: 550px;
+  border: 1px solid #1a233a;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.solutions-section {
+  margin-top: 25px;
+  border: 1px solid #ffd700;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.solution-list button {
+  background: #141414;
+  border: 1px solid #333;
+  color: #fff;
+  padding: 12px;
+  border-radius: 6px;
+  text-align: left;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.visualize-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #ffd700 0%, #b8860b 100%);
+  color: #000;
+  border: none;
+  padding: 11px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 0.85rem;
+  cursor: pointer;
+}

@@ -1,0 +1,10 @@
+.hero {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(5, 5, 8, 0.92),
+      rgba(5, 5, 8, 0.68),
+      rgba(5, 5, 8, 0.88)
+    ),
+    url("/images/ykos-cosmic-wave.png") center / cover no-repeat;
+}

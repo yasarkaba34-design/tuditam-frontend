@@ -1,0 +1,31 @@
+.ykos-top-bar-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.ykos-hamburger-btn {
+  background: rgba(255, 215, 0, 0.1);
+  border: 1px solid #ffd700;
+  color: #ffd700;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.ykos-hamburger-btn:hover {
+  background: rgba(255, 215, 0, 0.25);
+}
+
+.ykos-nav-dropdown-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 8px;
+  margin-top: 15px;
+  border-top: 1px solid rgba(255, 215, 0, 0.25);
+  padding-top: 15px;
+}

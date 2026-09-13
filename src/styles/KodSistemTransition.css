@@ -1,0 +1,76 @@
+/* FILE: src/style/KodSistemTransition.css */
+
+.ks-container {
+  width: 320px;
+  height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* KOD yüzeyi */
+.kod-surface {
+  width: 200px;
+  height: 200px;
+  border-radius: 12px;
+  background: repeating-linear-gradient(
+    90deg,
+    #00ffff 0px,
+    #00ffff 2px,
+    #003333 2px,
+    #003333 8px
+  );
+  box-shadow: 0 0 25px #00ffff;
+  color: #00ffff;
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.kod-surface:hover {
+  transform: scale(1.05);
+}
+
+/* Transition: Kod → Sistem */
+.system-build-grid {
+  width: 200px;
+  height: 200px;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+  animation: buildSystem 1.4s forwards;
+}
+
+.system-build-grid div {
+  background: #003333;
+  border: 1px solid #00ffff33;
+  animation: nodePulse 1.4s forwards;
+}
+
+@keyframes buildSystem {
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0.3; transform: scale(1.15); }
+}
+
+@keyframes nodePulse {
+  0% { transform: scale(0.2); background: #003333; }
+  100% { transform: scale(1); background: #00ffff55; }
+}
+
+/* SİSTEM yüzeyi */
+.sistem-core {
+  width: 200px;
+  height: 200px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #001a1a, #004444);
+  box-shadow: 0 0 40px #00ffffaa;
+  color: #00ffff;
+  font-size: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #00ffff55;
+}

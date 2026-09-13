@@ -1,0 +1,20 @@
+// FILE: src/bubblematrix/profiles/BP-12.json
+
+{
+  "id": "BP-12",
+  "root": "KUR",
+  "theme": "yapı, düzen, form oluşturma",
+  "color": "#00BFFF",
+  "shape": "hexagon",
+  "glow": "strong",
+  "shadow": "hard",
+  "tilt": 0,
+  "vibration": 0.1,
+  "trail": "medium",
+  "fade": "none",
+  "animation": {
+    "rotate": true,
+    "rotateSpeed": 0.8,
+    "rotateDirection": "cw"
+  }
+}

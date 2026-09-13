@@ -1,0 +1,115 @@
+/* === GENEL === */
+.navbar {
+  width: 100%;
+  background: #000;
+  color: #fff;
+  padding: 12px 20px;
+  border-bottom: 2px solid #d4af37;
+}
+
+.navbar-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* === Logo Alanı === */
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: 2px;
+  color: #d4af37;
+}
+
+/* Altın çizgi */
+.logo-line {
+  width: 45px;
+  height: 2px;
+  background: #d4af37;
+  border-radius: 2px;
+}
+
+/* === Tek Tuş (DİLGİBİ) === */
+.menu-toggle {
+  background: #111;
+  color: #d4af37;
+  border: 1px solid #d4af37;
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+/* === Menü Paneli === */
+.menu-panel {
+  display: none;
+  margin-top: 15px;
+  background: #111;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  animation: fadeIn 0.3s ease;
+}
+
+.menu-panel.open {
+  display: block;
+}
+
+/* Dil Seçici */
+.language-select {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.language-select button {
+  background: #222;
+  color: #fff;
+  border: 1px solid #444;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.language-select button:hover {
+  border-color: #d4af37;
+  color: #d4af37;
+}
+
+/* Menü Listesi */
+.menu-list {
+  list-style: none;
+  padding: 0;
+}
+
+.menu-list li {
+  padding: 12px 0;
+  border-bottom: 1px solid #333;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.menu-list li:hover {
+  color: #d4af37;
+}
+
+/* Animasyon */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Masaüstü */
+@media (min-width: 769px) {
+  .menu-panel {
+    display: none !important;
+  }
+}

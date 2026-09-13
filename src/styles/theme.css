@@ -1,0 +1,82 @@
+/* === YKOS Kurumsal Tema — Altın & Siyah === */
+
+:root {
+  --ykos-black: #0a0a0a;
+  --ykos-dark: #111;
+  --ykos-gold: #d4af37;
+  --ykos-gold-light: #f2d675;
+  --ykos-text: #e6e6e6;
+  --ykos-muted: #999;
+  --ykos-radius: 8px;
+  --ykos-transition: 0.25s ease;
+}
+
+/* Genel Arka Plan */
+body {
+  background: var(--ykos-black);
+  color: var(--ykos-text);
+  font-family: "Inter", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Başlıklar */
+h1, h2, h3 {
+  color: var(--ykos-gold);
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+
+/* Bölüm Kartları */
+section {
+  background: var(--ykos-dark);
+  border: 1px solid var(--ykos-gold);
+  padding: 24px;
+  border-radius: var(--ykos-radius);
+  margin: 24px 0;
+  transition: var(--ykos-transition);
+}
+
+section:hover {
+  border-color: var(--ykos-gold-light);
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.25);
+}
+
+/* Butonlar */
+button {
+  background: var(--ykos-gold);
+  color: var(--ykos-black);
+  padding: 12px 20px;
+  border: none;
+  border-radius: var(--ykos-radius);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--ykos-transition);
+}
+
+button:hover {
+  background: var(--ykos-gold-light);
+}
+
+/* Linkler */
+a {
+  color: var(--ykos-gold);
+  text-decoration: none;
+  transition: var(--ykos-transition);
+}
+
+a:hover {
+  color: var(--ykos-gold-light);
+}
+
+/* YKOS Yönetici Rozeti */
+.ykos-admin-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  background: var(--ykos-gold);
+  color: var(--ykos-black);
+  border-radius: var(--ykos-radius);
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}

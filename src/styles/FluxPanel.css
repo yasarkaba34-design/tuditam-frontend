@@ -1,0 +1,56 @@
+.flux-panel {
+  background: #0a0a0a;
+  color: #f2f2f2;
+  padding: 20px;
+  border-left: 2px solid gold;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.flux-block {
+  margin-bottom: 15px;
+  padding: 10px;
+  background: #111;
+  border: 1px solid #333;
+}
+
+.flux-chain {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.flux-item {
+  padding: 6px 10px;
+  background: #222;
+  border: 1px solid gold;
+  border-radius: 4px;
+}
+
+.flux-timeline {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.timeline-item {
+  display: flex;
+  align-items: center;
+}
+
+.timeline-circle {
+  width: 40px;
+  height: 40px;
+  background: #222;
+  border: 2px solid gold;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.timeline-line {
+  width: 60px;
+  height: 2px;
+  background: gold;
+}
