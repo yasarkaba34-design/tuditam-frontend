@@ -1,0 +1,94 @@
+.archive-panel {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 420px;
+  height: 100vh;
+  background-color: #0f0f0f;
+  color: #f5f5f5;
+  box-shadow: 4px 0 12px rgba(0, 0, 0, 0.4);
+  animation: slideInLeft 0.35s ease-out;
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.archive-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #333;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: #f5f5f5;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.archive-list {
+  flex: 1;
+  overflow-y: auto;
+  border-bottom: 1px solid #333;
+}
+
+.archive-item {
+  padding: 1rem;
+  border-bottom: 1px solid #222;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.archive-item:hover {
+  background-color: #1a1a1a;
+}
+
+.archive-item.active {
+  background-color: #222;
+  border-left: 3px solid #ffd700;
+}
+
+.archive-type {
+  color: #bbb;
+  font-size: 0.85rem;
+}
+
+.archive-date {
+  color: #888;
+  font-size: 0.8rem;
+}
+
+.archive-details {
+  padding: 1rem;
+  height: 220px;
+  overflow-y: auto;
+}
+
+.placeholder {
+  color: #777;
+  font-style: italic;
+}
+
+.download-btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.6rem 1rem;
+  background-color: #ffd700;
+  color: #111;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+}

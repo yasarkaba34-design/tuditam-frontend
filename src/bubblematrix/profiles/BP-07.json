@@ -1,0 +1,20 @@
+// FILE: src/bubblematrix/profiles/BP-07.json
+
+{
+  "id": "BP-07",
+  "root": "TUT",
+  "theme": "bağ, kavrama, sabitleme",
+  "color": "#FFD700",
+  "shape": "circle",
+  "glow": "medium",
+  "shadow": "soft",
+  "tilt": 2,
+  "vibration": 0.3,
+  "trail": "short",
+  "fade": "slow",
+  "animation": {
+    "pulse": true,
+    "pulseIntensity": 0.4,
+    "pulseSpeed": 1.2
+  }
+}

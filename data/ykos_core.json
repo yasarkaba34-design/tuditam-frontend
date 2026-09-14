@@ -1,0 +1,81 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "generated": "YKOS Semiyotik Motor",
+    "description": "Proto-Türk damgaları, heceler, kavramlar ve kozmolojik eşlemeler"
+  },
+
+  "damgalar": [
+    {
+      "id": "AT",
+      "hece": "AT",
+      "kavram": "liderlik",
+      "cosmic": "3 unsurdan 4 unsura geçiş",
+      "regions": ["Anadolu", "Ugarit", "Skandinavya", "Mısır"],
+      "examples": ["Göbeklitepe", "Kylver Yazıtı", "Nagy-Szent-Miklos"]
+    },
+    {
+      "id": "OQ",
+      "hece": "OQ",
+      "kavram": "oluş / kuantum",
+      "cosmic": "geçiş alanı",
+      "regions": ["Anadolu", "Cunni Mağarası", "Side"],
+      "examples": ["Beşparmak Kaya", "Cunni Mağarası"]
+    },
+    {
+      "id": "ON",
+      "hece": "ON",
+      "kavram": "kozmos",
+      "cosmic": "bütünlük alanı",
+      "regions": ["Anadolu", "İsviçre", "Ugarit"],
+      "examples": ["Graubünden", "Ugarit Kama Yazıtları"]
+    },
+    {
+      "id": "UÇ",
+      "hece": "UÇ",
+      "kavram": "ölüm / yükseliş",
+      "cosmic": "ruh geçişi",
+      "regions": ["Anadolu", "Attika", "Hakkari"],
+      "examples": ["Cunni Mağarası", "Kızların Mağarası"]
+    },
+    {
+      "id": "ÖG",
+      "hece": "ÖG",
+      "kavram": "ruh / bilinç",
+      "cosmic": "şahsiyet alanı",
+      "regions": ["Anadolu", "Ugarit"],
+      "examples": ["Ugarit Kama Yazıtları"]
+    },
+    {
+      "id": "TÖRT",
+      "hece": "TÖRT",
+      "kavram": "dört unsur",
+      "cosmic": "vakuum unsurları",
+      "regions": ["Anadolu", "Göbeklitepe"],
+      "examples": ["Çatalhöyük", "Göbeklitepe"]
+    }
+  ],
+
+  "semiyotik_zincir": {
+    "default": ["AT", "OQ", "ON", "UÇ", "ÖG", "TÖRT"],
+    "description": "Proto-Türk damgalarının kozmik akış sırası"
+  },
+
+  "kaya_ornekleri": [
+    {
+      "yer": "Göbeklitepe",
+      "damgalar": ["AT", "TÖRT", "OQ"],
+      "yorum": "Dört unsurdan üç unsura geçiş"
+    },
+    {
+      "yer": "Cunni Mağarası",
+      "damgalar": ["UÇ", "ÖG", "ON"],
+      "yorum": "Ruhun kozmik geçişi"
+    },
+    {
+      "yer": "Beşparmak Kaya",
+      "damgalar": ["OQ", "AT"],
+      "yorum": "Kuantum oluşumu ve liderlik"
+    }
+  ]
+}

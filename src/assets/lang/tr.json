@@ -1,0 +1,77 @@
+{
+    "title": "YKOS BİLGİ SİSTEMİ",
+    "subtitle": "Disiplinler Arası Kültür ve Dil Tabanı",
+    "search": "Araştırma, damga, ülke veya modül ara...",
+    "countries": "Ülkeler",
+    "research": "Araştırmalar",
+    "atlas": "Damga Atlası",
+    "archive": "Dijital Arşiv",
+    "matrices": "Matrisler",
+    "cultureMaps": "Kültür Haritaları",
+    "languageModule": "Dil Modülü",
+    "researchCenter": "Araştırma Merkezi"
+}
+{
+    "title": "YKOS BİLGİ SİSTEMİ",
+    "subtitle": "Disiplinler Arası Kültür ve Dil Tabanı",
+    "search": "Araştırma, damga, ülke veya modül ara...",
+    "countries": "Ülkeler",
+    "research": "Araştırmalar",
+    "atlas": "Damga Atlası",
+    "archive": "Dijital Arşiv",
+    "matrices": "Matrisler",
+    "cultureMaps": "Kültür Haritaları",
+    "languageModule": "Dil Modülü",
+    "researchCenter": "Araştırma Merkezi"
+}
+{
+    "title": "YKOS BİLGİ SİSTEMİ",
+    "subtitle": "Disiplinler Arası Kültür ve Dil Tabanı",
+    "search": "Araştırma, damga, ülke veya modül ara...",
+
+    "countries": "Ülkeler",
+    "research": "Araştırmalar",
+    "atlas": "Damga Atlası",
+    "archive": "Dijital Arşiv",
+
+    "matrices": "Matrisler",
+    "cultureMaps": "Kültür Haritaları",
+    "languageModule": "Dil Modülü",
+    "researchCenter": "Araştırma Merkezi",
+
+    "matrices_title": "Matrisler",
+    "matrices_sub": "YKOS Çok Katmanlı Matris Sistemi",
+    "matrices_list": [
+        "Fonetik Matris",
+        "Damga Matris",
+        "Kültürel Süreklilik Matrisi",
+        "Coğrafi Dağılım Matrisi"
+    ],
+
+    "atlas_title": "Damga Atlası",
+    "atlas_sub": "3401 Damga — Tipoloji, Fonetik, Coğrafi Yayılım",
+
+    "archive_title": "Dijital Arşiv",
+    "archive_sub": "912 Dijital Kayıt — Görsel, Metin, Harita",
+
+    "culture_title": "Kültür Haritaları",
+    "culture_sub": "Coğrafi ve Kültürel Süreklilik Analizi",
+
+    "language_title": "Dil Modülü",
+    "language_sub": "TKOS — Türkçe Yapısal Okuma Sistemi",
+
+    "research_title": "Araştırma Merkezi",
+    "research_sub": "Disiplinler Arası Analiz ve Veri İşleme"
+}
+{
+    "title": "YKOS BİLGİ SİSTEMİ",
+    "subtitle": "Disiplinler Arası Kültür ve Dil Tabanı",
+    "search": "Araştırma, damga, ülke veya modül ara...",
+
+    "matrices": "Matrisler",
+    "atlas": "Damga Atlası",
+    "archive": "Dijital Arşiv",
+    "cultureMaps": "Kültür Haritaları",
+    "languageModule": "Dil Modülü",
+    "researchCenter": "Araştırma Merkezi"
+}

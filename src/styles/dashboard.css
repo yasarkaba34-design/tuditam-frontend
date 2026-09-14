@@ -1,0 +1,23 @@
+/* YKOS Kontrol Paneli Yerleşim Şablonu */
+.ykos-dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.ykos-dashboard-stat-card {
+  background: rgba(15, 23, 42, 0.4);
+  border: 1px solid var(--ykos-border);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ykos-dashboard-value {
+  font-size: 32px;
+  font-weight: bold;
+  color: var(--ykos-gold);
+}

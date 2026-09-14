@@ -1,0 +1,22 @@
+{
+  "chain": [
+    { "id": "TUT", "color": "#ffcc00", "energy": 0.82, "freq": 1.1, "phase": 0.4, "meta": 0.63 },
+    { "id": "KUR", "color": "#ff9900", "energy": 0.76, "freq": 1.3, "phase": 0.7, "meta": 0.58 },
+    { "id": "BA",  "color": "#ff6600", "energy": 0.71, "freq": 1.5, "phase": 1.1, "meta": 0.55 },
+    { "id": "YOL", "color": "#0099ff", "energy": 0.88, "freq": 1.9, "phase": 1.4, "meta": 0.79 },
+    { "id": "BIR", "color": "#33cc33", "energy": 0.93, "freq": 2.2, "phase": 1.7, "meta": 0.91 },
+    { "id": "KAL", "color": "#9933ff", "energy": 0.67, "freq": 1.0, "phase": 2.0, "meta": 0.52 }
+  ]
+}
+{
+  "title": {
+    "tr": "Göbeklitepe Tamga Dizisi",
+    "en": "Göbeklitepe Symbol Sequence",
+    "ja": "ゴベクリテペの記号列"
+  },
+  "description": {
+    "tr": "Anadolu’nun en eski tamga dizilerinden biri.",
+    "en": "One of the oldest symbol sequences in Anatolia.",
+    "ja": "アナトリア最古の記号列の一つ。"
+  }
+}

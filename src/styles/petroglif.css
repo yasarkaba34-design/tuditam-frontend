@@ -1,0 +1,44 @@
+/* Petroglif ve Sembol Kartları İskeleti */
+.ykos-petroglyph-panel {
+  background: #000005;
+  border: 1px solid #1a1a2e;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.ykos-symbol-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.ykos-symbol-box {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid #333;
+  border-radius: 8px;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.ykos-symbol-box:hover {
+  border-color: #c9a948; /* Sisteminizin asil altın tonu */
+  box-shadow: 0 0 15px rgba(201, 169, 72, 0.2);
+  transform: translateY(-2px);
+}
+
+.ykos-symbol-svg {
+  width: 48px;
+  height: 48px;
+  fill: #fff;
+  transition: fill 0.3s ease;
+}
+
+.ykos-symbol-box:hover .ykos-symbol-svg {
+  fill: #c9a948;
+}

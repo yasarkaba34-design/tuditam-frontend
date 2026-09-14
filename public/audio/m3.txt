@@ -1,0 +1,8 @@
+public/
+  audio/
+    tut.mp3
+    kur.mp3
+    ba.mp3
+    yol.mp3
+    bir.mp3
+    kal.mp3

@@ -1,0 +1,39 @@
+.chain-motion {
+  animation: chainFlow 2.5s linear infinite;
+}
+
+@keyframes chainFlow {
+  0% { opacity: 0.2; }
+  50% { opacity: 1; }
+  100% { opacity: 0.2; }
+}
+.geo-pulse {
+  width: 20px;
+  height: 20px;
+  background: #C62828;
+  border-radius: 50%;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.8); opacity: 0.4; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(0.8); opacity: 0.4; }
+}
+.layer-fade {
+  animation: fadeLayer 1.2s ease-in-out;
+}
+
+@keyframes fadeLayer {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.graph-flow {
+  animation: graphFlow 3s linear infinite;
+}
+
+@keyframes graphFlow {
+  0% { border-color: #283593; }
+  50% { border-color: #2E7D32; }
+  100% { border-color: #6A1B9A; }
+}

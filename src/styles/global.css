@@ -1,0 +1,248 @@
+/* ==========================================================================
+   YKOS Global Stil Kuralları
+   ========================================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #000000;
+  color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ==========================================================================
+   Panel ve Başlık Yapısı
+   ========================================================================== */
+.ykos-panel {
+  background: #000000;
+  color: #f5f5f5;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  padding: 40px 60px;
+}
+
+.ykos-title h1 {
+  color: #d4af37;
+  font-size: 42px;
+  text-align: center;
+  margin: 0;
+  letter-spacing: 0.06em;
+}
+
+.ykos-title h2 {
+  color: #f5f5f5;
+  font-size: 20px;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+/* ==========================================================================
+   Üst Bar ve Menü Yapısı (Ortalanmış ve Parıltılı)
+   ========================================================================== */
+.top-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 25px 0 20px 0;
+  background: #000000;
+  border-bottom: 1px solid #333333;
+  position: relative;
+}
+
+.top-logo {
+  color: #d4af37;
+  font-size: 40px;
+  font-weight: 900;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.45);
+}
+
+.top-menu {
+  display: flex;
+  gap: 22px;
+  color: #f5f5f5;
+  font-size: 16px;
+  font-weight: 500;
+  justify-content: center;
+}
+
+.top-menu span {
+  transition: color 0.25s ease, text-shadow 0.25s ease;
+  cursor: pointer;
+}
+
+.top-menu span:hover {
+  color: #d4af37;
+  text-shadow: 0 0 6px rgba(212, 175, 55, 0.35);
+}
+
+.language-selector {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #d4af37;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   İstatistiki Veri Barı (Stats Bar)
+   ========================================================================== */
+.stats-bar {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  background: #000000;
+  border-top: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  white-space: nowrap;
+}
+
+.stats-item {
+  color: #f5f5f5;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.stats-item span.icon {
+  color: #d4af37;
+  font-size: 18px;
+}
+
+.stats-item span.value {
+  font-weight: 600;
+  color: #d4af37;
+}
+
+.stats-item span.label {
+  color: #f5f5f5;
+  opacity: 0.85;
+}
+
+/* ==========================================================================
+   Arama Arayüzü (Aura Efektli ve Yuvarlatılmış)
+   ========================================================================== */
+.search-box {
+  width: 65%;
+  max-width: 700px;
+  margin: 0 auto 25px auto;
+  background: #000000;
+  border: 1px solid #333333;
+  border-radius: 32px;
+  padding: 14px 22px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.35);
+}
+
+.search-box input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #f5f5f5;
+  font-size: 17px;
+  outline: none;
+}
+
+.search-results {
+  width: 65%;
+  max-width: 700px;
+  margin: 12px auto 0 auto;
+  background: #0a0a0a;
+  border: 1px solid #333333;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.result-item {
+  padding: 14px 20px;
+  border-bottom: 1px solid #222222;
+  transition: background 0.2s, transform 0.1s;
+  cursor: pointer;
+}
+
+.result-item:last-child {
+  border-bottom: none;
+}
+
+.result-item:hover {
+  background: #111111;
+  transform: scale(1.015);
+  color: #d4af37;
+}
+
+/* ==========================================================================
+   Veri Giriş Paneli (Data Entry)
+   ========================================================================== */
+.data-entry-panel {
+  margin: 30px auto 0 auto;
+  max-width: 700px;
+  border: 1px solid #333333;
+  padding: 20px 24px;
+  background: #050505;
+}
+
+.data-entry-panel h3 {
+  color: #d4af37;
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.data-entry-panel label {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 4px;
+  font-size: 13px;
+  color: #f5f5f5;
+}
+
+.data-entry-panel select,
+.data-entry-panel input,
+.data-entry-panel textarea {
+  width: 100%;
+  background: #000000;
+  border: 1px solid #333333;
+  color: #f5f5f5;
+  padding: 8px 10px;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.data-entry-panel textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.data-entry-panel button {
+  margin-top: 12px;
+  padding: 10px 18px;
+  background: #d4af37;
+  color: #000000;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.data-entry-panel button:hover {
+  background: #f0c94a;
+}

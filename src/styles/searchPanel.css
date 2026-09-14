@@ -1,0 +1,107 @@
+.ykos-search-panel {
+  width: min(900px, 100%);
+
+  margin: 0 auto 9px;
+  padding: 10px 12px;
+
+  border: 1px solid #554300;
+  border-radius: 10px;
+
+  background: #101010;
+}
+
+.ykos-search-row {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+}
+
+.ykos-search-icon {
+  position: absolute;
+  left: 15px;
+  z-index: 2;
+
+  color: #b58a00;
+  font-size: 20px;
+  pointer-events: none;
+}
+
+.ykos-search-row input {
+  width: 100%;
+
+  padding: 12px 46px;
+
+  border: 1px solid #d8a400;
+  border-radius: 999px;
+  outline: none;
+
+  background: #0b0b0b;
+  color: #fff;
+
+  font-size: 12px;
+}
+
+.ykos-search-row input::placeholder {
+  color: #666;
+}
+
+.ykos-search-clear {
+  position: absolute;
+  right: 15px;
+
+  border: 0;
+  background: transparent;
+
+  color: #777;
+  font-size: 21px;
+
+  cursor: pointer;
+}
+
+.ykos-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  gap: 6px;
+
+  margin-top: 9px;
+}
+
+.ykos-filter-button {
+  padding: 5px 10px;
+
+  border: 1px solid #303030;
+  border-radius: 999px;
+
+  background: #121212;
+  color: #999;
+
+  font-size: 9px;
+  cursor: pointer;
+}
+
+.ykos-filter-button:hover {
+  border-color: #665000;
+  color: #e2ba33;
+}
+
+.ykos-filter-button.active {
+  border-color: #d8a400;
+  background: #d8a400;
+  color: #090909;
+
+  font-weight: 700;
+}
+
+@media (max-width: 650px) {
+  .ykos-search-panel {
+    padding: 9px;
+  }
+
+  .ykos-search-row input {
+    padding: 11px 42px;
+    font-size: 11px;
+  }
+}

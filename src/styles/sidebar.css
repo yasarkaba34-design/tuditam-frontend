@@ -1,0 +1,536 @@
+/* =========================================
+   YKOS SIDEBAR v2.2 — NİHAİ SÜRÜM
+========================================= */
+
+:root {
+    --ykos-sidebar-width: 220px;
+
+    --ykos-sidebar-bg: #090a0c;
+    --ykos-sidebar-footer-bg: #07080a;
+    --ykos-sidebar-border: #4c3b00;
+
+    --ykos-gold: #d6ad2f;
+    --ykos-gold-dark: #b38b00;
+
+    --ykos-text: #f3f3f3;
+    --ykos-muted: #9a9a9a;
+}
+
+/* =========================================
+   ANA SOL PANEL
+========================================= */
+
+.ykos-sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+
+    width: var(--ykos-sidebar-width) !important;
+    height: 100vh !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+
+    overflow: hidden !important;
+
+    background: var(--ykos-sidebar-bg) !important;
+    border-right: 1px solid var(--ykos-sidebar-border) !important;
+
+    color: var(--ykos-text) !important;
+
+    box-sizing: border-box !important;
+    z-index: 9999 !important;
+}
+
+/* =========================================
+   ÜST MARKA ALANI
+========================================= */
+
+.ykos-sidebar-brand {
+    height: 72px !important;
+    min-height: 72px !important;
+
+    padding: 0 14px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    gap: 11px !important;
+
+    border-bottom: 1px solid rgba(214, 173, 47, 0.24) !important;
+
+    box-sizing: border-box !important;
+}
+
+.ykos-sidebar-logo {
+    width: 40px !important;
+    height: 40px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    flex-shrink: 0 !important;
+
+    border: 1px solid var(--ykos-gold-dark) !important;
+    border-radius: 10px !important;
+
+    background: #102436 !important;
+    color: #ffffff !important;
+
+    font-size: 12px !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.3px !important;
+}
+
+.ykos-sidebar-brand-text {
+    display: flex !important;
+    flex-direction: column !important;
+
+    min-width: 0 !important;
+}
+
+.ykos-sidebar-brand-text strong {
+    display: block !important;
+
+    color: #ffffff !important;
+
+    font-size: 16px !important;
+    font-weight: 800 !important;
+    line-height: 1.2 !important;
+}
+
+.ykos-sidebar-brand-text small {
+    display: block !important;
+
+    margin-top: 3px !important;
+
+    color: var(--ykos-muted) !important;
+
+    font-size: 10px !important;
+    line-height: 1.2 !important;
+}
+
+/* =========================================
+   ORTA MENÜ ALANI
+========================================= */
+
+.ykos-sidebar-content {
+    flex: 1 1 auto !important;
+
+    min-height: 0 !important;
+
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+
+    padding: 15px 10px !important;
+
+    box-sizing: border-box !important;
+}
+
+.ykos-sidebar-nav {
+    width: 100% !important;
+}
+
+/* Scrollbar */
+
+.ykos-sidebar-content::-webkit-scrollbar {
+    width: 4px;
+}
+
+.ykos-sidebar-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.ykos-sidebar-content::-webkit-scrollbar-thumb {
+    background: rgba(179, 139, 0, 0.65);
+    border-radius: 20px;
+}
+
+.ykos-sidebar-content {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(179, 139, 0, 0.65) transparent;
+}
+
+/* =========================================
+   MENÜ GRUPLARI
+========================================= */
+
+.ykos-sidebar-section {
+    margin: 0 0 15px !important;
+    padding: 0 0 15px !important;
+
+    border: 0 !important;
+    border-bottom: 1px solid rgba(214, 173, 47, 0.15) !important;
+
+    background: transparent !important;
+}
+
+/* Matris bölümü diğer gruplarla aynı bütünlükte görünür */
+
+.ykos-sidebar-section--matrices {
+    margin: 0 0 15px !important;
+    padding: 0 0 15px !important;
+
+    border: 0 !important;
+    border-bottom: 1px solid rgba(214, 173, 47, 0.15) !important;
+    border-radius: 0 !important;
+
+    background: transparent !important;
+}
+
+.ykos-sidebar-section:last-child {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+
+    border-bottom: 0 !important;
+}
+
+.ykos-sidebar-group-title {
+    margin: 0 0 8px !important;
+    padding: 0 8px !important;
+
+    color: #caa11f !important;
+
+    font-size: 10px !important;
+    font-weight: 800 !important;
+    letter-spacing: 1.25px !important;
+    line-height: 1.4 !important;
+
+    text-transform: uppercase !important;
+}
+
+.ykos-sidebar-items {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 3px !important;
+}
+
+/* =========================================
+   MENÜ DÜĞMELERİ
+========================================= */
+
+.ykos-sidebar-item {
+    position: relative !important;
+
+    width: 100% !important;
+    min-height: 38px !important;
+
+    margin: 0 !important;
+    padding: 0 10px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    gap: 9px !important;
+
+    border: 1px solid transparent !important;
+    border-radius: 6px !important;
+
+    background: transparent !important;
+    color: #d8d8d8 !important;
+
+    font-family: inherit !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    line-height: 1 !important;
+    text-align: left !important;
+
+    cursor: pointer !important;
+
+    box-sizing: border-box !important;
+
+    transition:
+        background 0.18s ease,
+        border-color 0.18s ease,
+        color 0.18s ease,
+        transform 0.18s ease !important;
+}
+
+.ykos-sidebar-item:hover {
+    transform: translateX(2px) !important;
+
+    background: rgba(214, 173, 47, 0.08) !important;
+    border-color: rgba(214, 173, 47, 0.28) !important;
+
+    color: #ffffff !important;
+}
+
+.ykos-sidebar-item.active {
+    padding-left: 9px !important;
+
+    background: linear-gradient(
+        90deg,
+        rgba(214, 173, 47, 0.18),
+        rgba(214, 173, 47, 0.05)
+    ) !important;
+
+    border-color: rgba(214, 173, 47, 0.48) !important;
+    border-left: 3px solid var(--ykos-gold) !important;
+
+    color: #ffffff !important;
+    font-weight: 800 !important;
+}
+
+.ykos-sidebar-item:focus-visible {
+    outline: 2px solid var(--ykos-gold) !important;
+    outline-offset: 2px !important;
+}
+
+/* =========================================
+   MENÜ İKONLARI VE YAZILARI
+========================================= */
+
+.ykos-sidebar-icon {
+    width: 20px !important;
+    min-width: 20px !important;
+
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    flex-shrink: 0 !important;
+
+    color: var(--ykos-gold) !important;
+
+    font-size: 14px !important;
+    line-height: 1 !important;
+    text-align: center !important;
+}
+
+.ykos-sidebar-label {
+    flex: 1 1 auto !important;
+
+    min-width: 0 !important;
+
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+}
+
+.ykos-sidebar-external-icon {
+    margin-left: auto !important;
+
+    flex-shrink: 0 !important;
+
+    color: #777777 !important;
+
+    font-size: 11px !important;
+    line-height: 1 !important;
+}
+
+/* =========================================
+   ALT SİSTEM DURUMU
+========================================= */
+
+.ykos-sidebar-footer {
+    height: 68px !important;
+    min-height: 68px !important;
+
+    padding: 12px 14px !important;
+
+    border-top: 1px solid rgba(214, 173, 47, 0.22) !important;
+
+    background: var(--ykos-sidebar-footer-bg) !important;
+
+    box-sizing: border-box !important;
+}
+
+.ykos-sidebar-status {
+    display: flex !important;
+    align-items: center !important;
+    gap: 7px !important;
+
+    color: #e4e4e4 !important;
+
+    font-size: 11px !important;
+    font-weight: 700 !important;
+}
+
+.ykos-sidebar-status-dot {
+    width: 8px !important;
+    height: 8px !important;
+
+    display: inline-block !important;
+    flex-shrink: 0 !important;
+
+    border-radius: 50% !important;
+
+    background: #22c66a !important;
+
+    box-shadow: 0 0 7px rgba(34, 198, 106, 0.65) !important;
+}
+
+.ykos-sidebar-version {
+    margin-top: 5px !important;
+    padding-left: 15px !important;
+
+    color: #777777 !important;
+
+    font-size: 9px !important;
+    line-height: 1.2 !important;
+}
+
+/* =========================================
+   SAĞ İÇERİK ALANI
+========================================= */
+
+.ykos-main-content,
+.ykos-app-main {
+    width: calc(100% - var(--ykos-sidebar-width)) !important;
+    min-height: 100vh !important;
+
+    margin-left: var(--ykos-sidebar-width) !important;
+
+    box-sizing: border-box !important;
+}
+
+/*
+   "main" etiketi özellikle kullanılmadı.
+   Böylece uygulamadaki başka main alanları yanlışlıkla kaymaz.
+*/
+
+/* =========================================
+   MATRİS PANELLERİ
+========================================= */
+
+.ykos-matrix-panel {
+    padding: 24px !important;
+
+    border: 1px solid var(--ykos-sidebar-border) !important;
+    border-radius: 12px !important;
+
+    background: #111214 !important;
+    color: var(--ykos-text) !important;
+
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+
+    box-sizing: border-box !important;
+}
+
+.ykos-matrix-panel h2 {
+    margin: 0 0 12px !important;
+    padding-bottom: 10px !important;
+
+    border-bottom: 1px solid rgba(214, 173, 47, 0.2) !important;
+
+    color: var(--ykos-gold) !important;
+
+    font-size: 20px !important;
+    line-height: 1.3 !important;
+}
+
+.ykos-matrix-panel p {
+    margin: 0 !important;
+
+    color: var(--ykos-muted) !important;
+
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1100px) {
+    :root {
+        --ykos-sidebar-width: 200px;
+    }
+
+    .ykos-sidebar-brand {
+        padding: 0 12px !important;
+    }
+
+    .ykos-sidebar-content {
+        padding: 14px 8px !important;
+    }
+
+    .ykos-sidebar-item {
+        padding-right: 8px !important;
+        padding-left: 8px !important;
+
+        font-size: 11px !important;
+    }
+}
+
+/* =========================================
+   MOBİL — DAR MENÜ
+========================================= */
+
+@media (max-width: 760px) {
+    :root {
+        --ykos-sidebar-width: 68px;
+    }
+
+    .ykos-sidebar-brand {
+        justify-content: center !important;
+
+        padding: 0 8px !important;
+    }
+
+    .ykos-sidebar-logo {
+        width: 38px !important;
+        height: 38px !important;
+    }
+
+    .ykos-sidebar-brand-text,
+    .ykos-sidebar-group-title,
+    .ykos-sidebar-label,
+    .ykos-sidebar-external-icon,
+    .ykos-sidebar-version {
+        display: none !important;
+    }
+
+    .ykos-sidebar-content {
+        padding: 13px 7px !important;
+    }
+
+    .ykos-sidebar-section,
+    .ykos-sidebar-section--matrices {
+        margin-bottom: 10px !important;
+        padding-bottom: 10px !important;
+    }
+
+    .ykos-sidebar-items {
+        gap: 5px !important;
+    }
+
+    .ykos-sidebar-item {
+        min-height: 42px !important;
+
+        justify-content: center !important;
+
+        padding: 0 !important;
+    }
+
+    .ykos-sidebar-item:hover {
+        transform: none !important;
+    }
+
+    .ykos-sidebar-item.active {
+        padding: 0 !important;
+
+        border-left: 1px solid rgba(214, 173, 47, 0.48) !important;
+    }
+
+    .ykos-sidebar-icon {
+        width: auto !important;
+        min-width: 0 !important;
+
+        font-size: 17px !important;
+    }
+
+    .ykos-sidebar-footer {
+        height: 58px !important;
+        min-height: 58px !important;
+
+        padding: 10px 7px !important;
+    }
+
+    .ykos-sidebar-status {
+        justify-content: center !important;
+    }
+
+    .ykos-sidebar-status span:not(.ykos-sidebar-status-dot) {
+        display: none !important;
+    }
+}

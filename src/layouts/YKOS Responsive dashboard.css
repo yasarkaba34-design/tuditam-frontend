@@ -1,0 +1,197 @@
+/* ===========================
+   GLOBAL ROOT
+=========================== */
+html, body, #root {
+  min-width: 320px;
+  min-height: 100vh;
+  background: #070707;
+  color: #e6e6e6;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Altın ton */
+:root {
+  --gold: rgba(255, 215, 0, 0.85);
+  --gold-soft: rgba(255, 215, 0, 0.45);
+  --bg-dark: #070707;
+}
+
+/* ===========================
+   HEADER
+=========================== */
+.ykos-header {
+  text-align: center;
+  padding: 1.2rem 0 0.6rem 0;
+}
+
+.ykos-header h1 {
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  color: var(--gold);
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+/* ===========================
+   BUBBLE MATRIX AREA
+=========================== */
+.matrix-wrapper {
+  width: 100%;
+  min-height: 60vh;
+  background: #0a0a0a;
+  border: 1px solid var(--gold-soft);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 1rem;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.25);
+}
+
+/* ===========================
+   STATISTICS GRID
+=========================== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.stats-box {
+  background: #0d0d0d;
+  border: 1px solid var(--gold-soft);
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.25);
+  transition: 0.25s ease;
+}
+
+.stats-box:hover {
+  box-shadow: 0 0 15px var(--gold);
+}
+
+/* ===========================
+   LIST SECTIONS (Matrisler, Katmanlar)
+=========================== */
+.section-list {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: #0d0d0d;
+  border: 1px solid var(--gold-soft);
+  border-radius: 8px;
+}
+
+.section-list h2 {
+  color: var(--gold);
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  margin-bottom: 0.8rem;
+}
+
+.section-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.section-list li {
+  padding: 0.4rem 0;
+  border-bottom: 1px solid #222;
+  font-size: 0.95rem;
+}
+
+/* ===========================
+   SOLUTIONS & INDEX CARDS
+=========================== */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.card {
+  background: #0d0d0d;
+  border: 1px solid var(--gold-soft);
+  padding: 1rem;
+  border-radius: 8px;
+  transition: 0.25s ease;
+}
+
+.card:hover {
+  box-shadow: 0 0 15px var(--gold);
+}
+
+.card h3 {
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.card p {
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+/* ===========================
+   RESPONSIVE BREAKPOINTS
+=========================== */
+
+/* TABLET */
+@media (max-width: 1200px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .matrix-wrapper {
+    min-height: 55vh;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .ykos-header {
+    padding-top: 0.6rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+  }
+
+  .section-list {
+    padding: 0.8rem;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+
+  .card {
+    padding: 0.8rem;
+  }
+
+  .matrix-wrapper {
+    min-height: 50vh;
+    border-radius: 6px;
+  }
+}
+
+/* SMALL MOBILE */
+@media (max-width: 480px) {
+  .ykos-header h1 {
+    font-size: 1.2rem;
+  }
+
+  .section-list li {
+    font-size: 0.85rem;
+  }
+
+  .card p {
+    font-size: 0.85rem;
+  }
+}

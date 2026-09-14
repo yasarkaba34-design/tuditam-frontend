@@ -1,0 +1,58 @@
+/* ------------------------------------------
+   MOBİL (768px ve altı): KESİN TEK SÜTUN ZORLAMASI
+   ------------------------------------------ */
+@media (max-width: 768px) {
+  /* Üst sayaçlar ikişerli kalsın */
+  .ykos-section:first-of-type div[style*="grid"],
+  .ykos-section:first-of-type .ykos-solutions-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+
+  /* Alt kısımdaki tüm grid/flex yapılarını tek sütun yap ve inline stilleri ez */
+  .ykos-section:not(:first-of-type) [style*="grid"],
+  .ykos-section:not(:first-of-type) [style*="display: grid"],
+  .ykos-section:not(:first-of-type) div {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: 1fr !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .ykos-solutions-grid:not(:first-of-type),
+  .content-grid-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  .ykos-section {
+    padding: 20px 12px;
+  }
+
+  .header-nav-buttons {
+    display: none !important;
+  }
+
+  .header-nav-buttons.active {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .mobile-hamburger-btn {
+    display: flex !important;
+  }
+
+  .header-logo-title {
+    font-size: 22px !important;
+    letter-spacing: 2px !important;
+  }
+
+  .header-sub-title {
+    display: none !important;
+  }
+}

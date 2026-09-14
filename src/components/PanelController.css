@@ -1,0 +1,28 @@
+.panel-controller {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.panel-controller-buttons {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 999;
+}
+
+.ykos-btn {
+  background-color: #ffd700;
+  color: #111;
+  border: none;
+  padding: 0.7rem 1.2rem;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+  transition: background 0.2s;
+}
+
+.ykos-btn:hover {
+  background-color: #e6c200;
+}

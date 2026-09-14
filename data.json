@@ -1,0 +1,52 @@
+{
+  "QuantumFlux": "Aktif",
+  "OmniField": "Yükleniyor",
+  "CosmicField": null,
+  "Atlas": "Göbeklitepe rezonans hattı"
+}
+{
+  "damgalar": [
+    {
+      "id": "AT",
+      "shape": "yıldız",
+      "hece": "AT",
+      "kavram": "liderlik",
+      "cosmic": "3 unsurdan 4 unsura geçiş"
+    },
+    {
+      "id": "OQ",
+      "shape": "haç",
+      "hece": "OQ",
+      "kavram": "oluş / kuantum",
+      "cosmic": "geçiş alanı"
+    },
+    {
+      "id": "ON",
+      "shape": "daire",
+      "hece": "ON",
+      "kavram": "kozmos",
+      "cosmic": "bütünlük alanı"
+    },
+    {
+      "id": "UÇ",
+      "shape": "kuş",
+      "hece": "UÇ",
+      "kavram": "ölüm / yükseliş",
+      "cosmic": "ruh geçişi"
+    },
+    {
+      "id": "ÖG",
+      "shape": "boynuzlu baş",
+      "hece": "ÖG",
+      "kavram": "ruh / bilinç",
+      "cosmic": "şahsiyet alanı"
+    },
+    {
+      "id": "TÖRT",
+      "shape": "dört çizgi",
+      "hece": "TÖRT",
+      "kavram": "dört unsur",
+      "cosmic": "vakuum unsurları"
+    }
+  ]
+}

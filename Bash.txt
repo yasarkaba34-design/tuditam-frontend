@@ -1,0 +1,2 @@
+vercel login
+vercel --prod

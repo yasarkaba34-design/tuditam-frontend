@@ -1,0 +1,64 @@
+{
+  "chain": [
+    {
+      "id": "TUT",
+      "name": "TUT",
+      "meaning": "Kavrama, tutunma, varlığı elde tutma.",
+      "cosmic": "Kozmik çekirdek: varlığın ilk tutunma noktası.",
+      "color": "#ffcc00",
+      "next": "KUR"
+    },
+    {
+      "id": "KUR",
+      "name": "KUR",
+      "meaning": "Kurma, düzen verme, yapı başlatma.",
+      "cosmic": "Kozmik düzen: ilk yapılaşma.",
+      "color": "#ff9900",
+      "next": "BA"
+    },
+    {
+      "id": "BA",
+      "name": "BA",
+      "meaning": "Bağlama, ilişki kurma.",
+      "cosmic": "Kozmik bağ: parçaların birbirine tutunması.",
+      "color": "#ff6600",
+      "next": "YOL"
+    },
+    {
+      "id": "YOL",
+      "name": "YOL",
+      "meaning": "Akış, yön, hareket.",
+      "cosmic": "Kozmik akış: enerji ve bilginin yönü.",
+      "color": "#0099ff",
+      "next": "BIR"
+    },
+    {
+      "id": "BIR",
+      "name": "BIR",
+      "meaning": "Birlik, bütünlük.",
+      "cosmic": "Kozmik birlik: tüm akışların birleşimi.",
+      "color": "#33cc33",
+      "next": "KAL"
+    },
+    {
+      "id": "KAL",
+      "name": "KAL",
+      "meaning": "Kalma, süreklilik.",
+      "cosmic": "Kozmik süreklilik: varlığın zaman içinde devamı.",
+      "color": "#9933ff",
+      "next": null
+    }
+  ]
+}
+{
+  "title": {
+    "tr": "Göbeklitepe Tamga Dizisi",
+    "en": "Göbeklitepe Symbol Sequence",
+    "ja": "ゴベクリテペの記号列"
+  },
+  "description": {
+    "tr": "Anadolu’nun en eski tamga dizilerinden biri.",
+    "en": "One of the oldest symbol sequences in Anatolia.",
+    "ja": "アナトリア最古の記号列の一つ。"
+  }
+}

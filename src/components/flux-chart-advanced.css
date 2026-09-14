@@ -1,0 +1,61 @@
+/* FILE: src/components/flux-chart-advanced.css */
+
+.flux-advanced-container {
+  background: #000;
+  color: #ffd700;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 25px #111;
+  max-width: 640px;
+  margin: 30px auto;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.flux-advanced-container h3 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  text-align: left;
+}
+
+.flux-advanced-svg {
+  background: #050505;
+  border-radius: 6px;
+  border: 1px solid #333;
+}
+
+.axis {
+  stroke: #555;
+  stroke-width: 1;
+}
+
+.zero-line {
+  stroke: #3333ff;
+  stroke-width: 1;
+  stroke-dasharray: 4 4;
+}
+
+.flux-line {
+  fill: none;
+  stroke: #ffd700;
+  stroke-width: 2.5;
+  filter: drop-shadow(0 0 4px #ffd700);
+}
+
+.flux-point {
+  transition: all 0.3s ease;
+}
+
+.flux-point.positive {
+  fill: #00ff88;
+}
+
+.flux-point.negative {
+  fill: #ff3366;
+}
+
+.flux-meta {
+  margin-top: 10px;
+  font-size: 13px;
+  display: flex;
+  gap: 14px;
+}

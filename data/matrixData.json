@@ -1,0 +1,99 @@
+{
+  "nodes": [
+    {
+      "id": "anadolu",
+      "label": "Anadolu",
+      "title": "Anadolu – Kök Kültürel Alan",
+      "summary": "YKOS’un kültürel ve dilsel kök alanı.",
+      "context": "Anadolu, çok katmanlı kültürel etkileşimlerin merkezidir.",
+      "semanticRole": "KÖK katmanının coğrafi karşılığı.",
+      "damga": ["GT-12 spiral", "Hitit güneş", "Urartu üç çizgi"],
+      "language": ["Proto-Türkçe *ok", "Hititçe taru", "Luwice pa"],
+      "position": { "top": "42%", "left": "38%" }
+    },
+
+    {
+      "id": "orta_asya",
+      "label": "Orta Asya",
+      "title": "Orta Asya – Dilsel Yayılım Alanı",
+      "summary": "Dil ailelerinin genişleme bölgesi.",
+      "context": "Türkçe, Moğolca ve Altay dilleri için merkezdir.",
+      "semanticRole": "BA katmanının genişleme alanı.",
+      "damga": ["Tamga-1", "Tamga-7"],
+      "language": ["*bal", "*bar", "*var"],
+      "position": { "top": "28%", "left": "52%" }
+    },
+
+    {
+      "id": "avrupa",
+      "label": "Avrupa",
+      "title": "Avrupa – Etkileşim Alanı",
+      "summary": "Kültürel temas ve dönüşüm bölgesi.",
+      "context": "Hint-Avrupa dilleri ile temas noktası.",
+      "semanticRole": "VAR katmanının yüzeysel genişleme alanı.",
+      "damga": ["Runik çizgi", "Kelt spiral"],
+      "language": ["*wer", "*var", "bar"],
+      "position": { "top": "40%", "left": "70%" }
+    },
+
+    {
+      "id": "amerika",
+      "label": "Amerika",
+      "title": "Amerika – Uzak Yayılım Alanı",
+      "summary": "Kültürel sembollerin uzak paralelleri.",
+      "context": "Maya, Aztek ve İnka sembol sistemleri.",
+      "semanticRole": "DIŞ katmanının uzak karşılığı.",
+      "damga": ["Maya spiral", "Aztek güneş"],
+      "language": ["nahu ‘pa’", "maya ‘ba’"],
+      "position": { "top": "55%", "left": "80%" }
+    },
+
+    {
+      "id": "o",
+      "label": "O",
+      "title": "O – Ontolojik Merkez",
+      "summary": "Varlığın sıfır noktası.",
+      "context": "YKOS’un tüm semantik zincirinin başlangıcı.",
+      "semanticRole": "Ontolojik çekirdek.",
+      "damga": ["Nokta sembolü"],
+      "language": ["Proto *o", "Türkçe ‘o’"],
+      "position": { "top": "50%", "left": "50%" }
+    },
+
+    {
+      "id": "kok",
+      "label": "KÖK",
+      "title": "KÖK – Temel Yapı",
+      "summary": "Anlamın ilk katmanı.",
+      "context": "Dilsel köklerin oluştuğu katman.",
+      "semanticRole": "O’dan türeyen ilk anlam.",
+      "damga": ["Çift çizgi"],
+      "language": ["*ok", "*uk"],
+      "position": { "top": "45%", "left": "50%" }
+    },
+
+    {
+      "id": "ba",
+      "label": "BA",
+      "title": "BA – Bağ Katmanı",
+      "summary": "Anlamın bağ kurduğu katman.",
+      "context": "Kültürel bağların oluştuğu alan.",
+      "semanticRole": "KÖK → BA geçişi.",
+      "damga": ["Bağ sembolü"],
+      "language": ["*ba", "pa"],
+      "position": { "top": "40%", "left": "50%" }
+    },
+
+    {
+      "id": "var",
+      "label": "VAR",
+      "title": "VAR – Varlık Katmanı",
+      "summary": "Anlamın görünür olduğu katman.",
+      "context": "Dilsel ve kültürel yüzey.",
+      "semanticRole": "BA → VAR tamamlanışı.",
+      "damga": ["Var sembolü"],
+      "language": ["var", "bar"],
+      "position": { "top": "35%", "left": "50%" }
+    }
+  ]
+}

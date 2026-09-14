@@ -1,0 +1,19 @@
+.ykos-matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 16px;
+}
+
+.ykos-matrix-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid #222;
+  border-radius: 10px;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.ykos-matrix-card:hover {
+  border-color: var(--ykos-gold);
+  background: rgba(255, 255, 255, 0.05);
+}

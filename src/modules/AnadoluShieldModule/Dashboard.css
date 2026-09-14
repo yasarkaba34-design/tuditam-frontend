@@ -1,0 +1,120 @@
+.dashboard{
+padding:20px;
+color:#fff;
+}
+
+.hero{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:30px;
+margin-bottom:30px;
+}
+
+.hero h1{
+font-size:40px;
+margin:0;
+color:#fff;
+}
+
+.hero p{
+max-width:700px;
+line-height:1.8;
+color:#bdbdbd;
+}
+
+.systemBox{
+background:#111;
+border:1px solid #333;
+padding:20px;
+border-radius:12px;
+text-align:center;
+min-width:220px;
+}
+
+.systemBox h2{
+color:#d8a400;
+margin:10px 0;
+}
+
+.statsGrid{
+display:grid;
+grid-template-columns:repeat(8,1fr);
+gap:8px;
+margin-bottom:20px;
+}
+.statCard{
+background:#111;
+border:1px solid #2d2d2d;
+border-radius:12px;
+padding:20px;
+display:flex;
+align-items:center;
+gap:18px;
+transition:.25s;
+}
+
+.statCard:hover{
+border-color:#d8a400;
+transform:translateY(-3px);
+}
+
+.icon{
+font-size:40px;
+}
+
+.statCard h3{
+margin:0;
+font-size:28px;
+color:#d8a400;
+}
+
+.statCard p{
+margin:6px 0 0;
+color:#c7c7c7;
+}
+
+.bottomGrid{
+display:grid;
+grid-template-columns:2fr 1fr;
+gap:20px;
+}
+
+.panel{
+background:#111;
+border:1px solid #2c2c2c;
+border-radius:12px;
+padding:20px;
+}
+
+.panel h2{
+margin-top:0;
+color:#d8a400;
+}
+
+.panel ul{
+margin:0;
+padding-left:18px;
+}
+
+.panel li{
+margin:10px 0;
+}
+
+.quickGrid{
+display:grid;
+gap:12px;
+}
+
+.quickGrid button{
+padding:14px;
+background:#1c1c1c;
+color:white;
+border:1px solid #333;
+border-radius:8px;
+cursor:pointer;
+}
+
+.quickGrid button:hover{
+border-color:#d8a400;
+}
