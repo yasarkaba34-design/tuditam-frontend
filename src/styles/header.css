@@ -15,6 +15,9 @@
   box-sizing: border-box;
 }
 
+/* ==========================================
+   HEADER ANA KAPSAYICI
+   ========================================== */
 .ykos-header {
   position: relative;
   z-index: 1000;
@@ -24,9 +27,12 @@
   box-shadow: 0 5px 24px rgba(13, 36, 56, 0.08);
 }
 
+/* ==========================================
+   ÜST BAR — TAM GENİŞLİK DÜZENLENMİŞ
+   ========================================== */
 .ykos-header-top {
   min-height: 92px;
-  padding: 16px clamp(18px, 4vw, 64px);
+  padding: 16px 24px; /* clamp kaldırıldı → tam genişlik */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -40,6 +46,9 @@
     linear-gradient(135deg, #ffffff 0%, #f7f9fb 100%);
 }
 
+/* ==========================================
+   MARKA BLOĞU
+   ========================================== */
 .ykos-brand {
   min-width: 0;
   display: flex;
@@ -73,10 +82,6 @@
   letter-spacing: 1.7px;
 }
 
-.ykos-header-text {
-  min-width: 0;
-}
-
 .ykos-header-text h1 {
   margin: 0;
   color: var(--ykos-navy);
@@ -94,58 +99,12 @@
   letter-spacing: 0.15px;
 }
 
-.ykos-header-meta {
-  flex: 0 0 auto;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.ykos-system-status {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  border: 1px solid rgba(35, 148, 91, 0.18);
-  border-radius: 999px;
-  background: rgba(35, 148, 91, 0.07);
-  color: #17683e;
-  font-size: 12px;
-  font-weight: 750;
-  white-space: nowrap;
-}
-
-.ykos-live-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #28b76b;
-  box-shadow: 0 0 0 5px rgba(40, 183, 107, 0.13);
-  animation: ykos-pulse 2s infinite;
-}
-
-.ykos-version {
-  color: var(--ykos-muted);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.4px;
-  white-space: nowrap;
-}
-
-@keyframes ykos-pulse {
-  0%,
-  100% {
-    box-shadow: 0 0 0 4px rgba(40, 183, 107, 0.11);
-  }
-
-  50% {
-    box-shadow: 0 0 0 8px rgba(40, 183, 107, 0);
-  }
-}
-
+/* ==========================================
+   NAVBAR — TAM GENİŞLİK DÜZENLENMİŞ
+   ========================================== */
 .ykos-navbar {
   min-height: 58px;
-  padding: 0 clamp(18px, 4vw, 64px);
+  padding: 0 24px; /* clamp kaldırıldı → tam genişlik */
   display: flex;
   align-items: stretch;
   justify-content: space-between;
@@ -171,6 +130,9 @@
   gap: 8px;
 }
 
+/* ==========================================
+   NAV LINKLERİ
+   ========================================== */
 .ykos-nav-link,
 .ykos-dropdown-trigger {
   min-height: 58px;
@@ -182,15 +144,10 @@
   border: 0;
   background: transparent;
   color: rgba(255, 255, 255, 0.86);
-  font: inherit;
   font-size: 13px;
   font-weight: 690;
-  text-decoration: none;
-  white-space: nowrap;
   cursor: pointer;
-  transition:
-    color 180ms ease,
-    background 180ms ease;
+  transition: color 180ms ease, background 180ms ease;
 }
 
 .ykos-nav-link:hover,
@@ -198,27 +155,12 @@
 .ykos-dropdown.is-open > .ykos-dropdown-trigger {
   background: rgba(255, 255, 255, 0.08);
   color: #ffffff;
-  outline: none;
 }
 
-.ykos-nav-link::after {
-  content: "";
-  position: absolute;
-}
-
-.ykos-chevron {
-  display: inline-flex;
-  font-size: 10px;
-  transition: transform 180ms ease;
-}
-
-.ykos-dropdown.is-open .ykos-chevron,
-.ykos-language.is-open .ykos-chevron {
-  transform: rotate(180deg);
-}
-
-.ykos-dropdown,
-.ykos-language {
+/* ==========================================
+   DROPDOWN
+   ========================================== */
+.ykos-dropdown {
   position: relative;
 }
 
@@ -235,27 +177,7 @@
   opacity: 0;
   visibility: hidden;
   transform: translateY(-7px);
-  transition:
-    opacity 170ms ease,
-    transform 170ms ease,
-    visibility 170ms ease;
-}
-
-.ykos-dropdown-panel::before,
-.ykos-language-panel::before {
-  content: "";
-  position: absolute;
-  top: -7px;
-  width: 14px;
-  height: 14px;
-  background: #ffffff;
-  border-top: 1px solid var(--ykos-border);
-  border-left: 1px solid var(--ykos-border);
-  transform: rotate(45deg);
-}
-
-.ykos-dropdown-panel::before {
-  left: 25px;
+  transition: opacity 170ms ease, transform 170ms ease, visibility 170ms ease;
 }
 
 .ykos-dropdown.is-open .ykos-dropdown-panel {
@@ -264,100 +186,11 @@
   transform: translateY(0);
 }
 
-.ykos-dropdown-title {
-  margin: 3px 6px 7px;
-  padding: 5px 7px 10px;
-  border-bottom: 1px solid var(--ykos-border);
-  color: var(--ykos-gold);
-  font-size: 11px;
-  font-weight: 850;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-}
-
-.ykos-dropdown-panel a {
-  display: flex;
-  align-items: center;
-  min-height: 40px;
-  padding: 9px 12px;
-  border-radius: 10px;
-  color: var(--ykos-text);
-  font-size: 13px;
-  font-weight: 620;
-  text-decoration: none;
-  transition:
-    background 160ms ease,
-    color 160ms ease,
-    transform 160ms ease;
-}
-
-.ykos-dropdown-panel a:hover,
-.ykos-dropdown-panel a:focus-visible {
-  background: #f1f5f8;
-  color: var(--ykos-navy);
-  outline: none;
-  transform: translateX(3px);
-}
-
-.ykos-icon-button {
-  width: 39px;
-  height: 39px;
-  display: grid;
-  place-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.07);
-  color: #ffffff;
-  font-size: 23px;
-  line-height: 1;
-  cursor: pointer;
-  transition:
-    background 160ms ease,
-    border-color 160ms ease,
-    transform 160ms ease;
-}
-
-.ykos-icon-button:hover,
-.ykos-icon-button:focus-visible {
-  border-color: rgba(225, 191, 122, 0.6);
-  background: rgba(255, 255, 255, 0.12);
-  outline: none;
-  transform: translateY(-1px);
-}
-
-.ykos-language-trigger {
-  min-height: 40px;
-  padding: 0 12px;
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.07);
-  color: #ffffff;
-  font: inherit;
-  font-size: 12px;
-  font-weight: 720;
-  cursor: pointer;
-  transition:
-    background 160ms ease,
-    border-color 160ms ease;
-}
-
-.ykos-language-trigger:hover,
-.ykos-language-trigger:focus-visible,
-.ykos-language.is-open .ykos-language-trigger {
-  border-color: rgba(225, 191, 122, 0.65);
-  background: rgba(255, 255, 255, 0.12);
-  outline: none;
-}
-
-.ykos-globe {
-  font-size: 16px;
-}
-
-.ykos-active-flag {
-  font-size: 17px;
+/* ==========================================
+   DİL PANELİ
+   ========================================== */
+.ykos-language {
+  position: relative;
 }
 
 .ykos-language-panel {
@@ -373,14 +206,7 @@
   opacity: 0;
   visibility: hidden;
   transform: translateY(-7px);
-  transition:
-    opacity 170ms ease,
-    transform 170ms ease,
-    visibility 170ms ease;
-}
-
-.ykos-language-panel::before {
-  right: 24px;
+  transition: opacity 170ms ease, transform 170ms ease, visibility 170ms ease;
 }
 
 .ykos-language.is-open .ykos-language-panel {
@@ -389,344 +215,15 @@
   transform: translateY(0);
 }
 
-.ykos-language-heading {
-  padding: 3px 3px 13px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 14px;
-  border-bottom: 1px solid var(--ykos-border);
-}
-
-.ykos-language-heading strong {
-  color: var(--ykos-navy);
-  font-size: 16px;
-}
-
-.ykos-language-heading span {
-  color: var(--ykos-muted);
-  font-size: 11px;
-}
-
-.ykos-language-grid {
-  padding-top: 13px;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 7px;
-}
-
-.ykos-language-grid button {
-  min-width: 0;
-  min-height: 43px;
-  padding: 8px 10px;
-  display: grid;
-  grid-template-columns: 27px minmax(0, 1fr) 18px;
-  align-items: center;
-  gap: 7px;
-  border: 1px solid transparent;
-  border-radius: 11px;
-  background: transparent;
-  color: var(--ykos-text);
-  font: inherit;
-  font-size: 13px;
-  font-weight: 620;
-  text-align: left;
-  cursor: pointer;
-  transition:
-    background 160ms ease,
-    border-color 160ms ease;
-}
-
-.ykos-language-grid button:hover,
-.ykos-language-grid button:focus-visible {
-  border-color: var(--ykos-border);
-  background: #f3f6f8;
-  outline: none;
-}
-
-.ykos-language-grid button.is-selected {
-  border-color: rgba(201, 154, 72, 0.28);
-  background: rgba(201, 154, 72, 0.1);
-  color: var(--ykos-navy);
-}
-
-.ykos-language-flag {
-  font-size: 19px;
-}
-
-.ykos-language-check {
-  color: #23945b;
-  font-weight: 900;
-  text-align: center;
-}
-
-.ykos-language-note {
-  margin-top: 13px;
-  padding: 10px 12px;
-  border-radius: 10px;
-  background: #f4f7f9;
-  color: var(--ykos-muted);
-  font-size: 11px;
-  line-height: 1.45;
-}
-
-.ykos-mobile-toggle {
-  display: none;
-  width: 44px;
-  height: 42px;
-  padding: 10px;
-  border: 1px solid var(--ykos-border);
-  border-radius: 12px;
-  background: #ffffff;
-  cursor: pointer;
-}
-
-.ykos-mobile-toggle span {
-  width: 100%;
-  height: 2px;
-  display: block;
-  margin: 4px 0;
-  border-radius: 999px;
-  background: var(--ykos-navy);
-}
-
-/* Tablet */
-
-@media (max-width: 1120px) {
-  .ykos-header-meta {
-    display: none;
-  }
-
-  .ykos-nav-link,
-  .ykos-dropdown-trigger {
-    padding-right: 9px;
-    padding-left: 9px;
-    font-size: 12px;
-  }
-
-  .ykos-language-name {
-    display: none;
-  }
-}
-
-/* Mobil */
-
+/* ==========================================
+   MOBİL DÜZEN
+   ========================================== */
 @media (max-width: 900px) {
   .ykos-header-top {
-    min-height: 78px;
     padding: 12px 16px;
   }
 
-  .ykos-header-logo {
-    width: 54px;
-    height: 54px;
-    flex-basis: 54px;
-    border-radius: 15px;
-    font-size: 15px;
-  }
-
-  .ykos-header-text h1 {
-    font-size: 18px;
-  }
-
-  .ykos-header-text p {
-    max-width: 420px;
-    font-size: 11px;
-  }
-
-  .ykos-mobile-toggle {
-    flex: 0 0 auto;
-    display: block;
-  }
-
   .ykos-navbar {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    left: 0;
-    max-height: 0;
     padding: 0 16px;
-    display: block;
-    overflow: hidden;
-    background: var(--ykos-navy);
-    opacity: 0;
-    visibility: hidden;
-    transition:
-      max-height 280ms ease,
-      opacity 180ms ease,
-      visibility 180ms ease,
-      padding 280ms ease;
   }
-
-  .ykos-navbar.is-open {
-    max-height: calc(100vh - 78px);
-    padding-top: 12px;
-    padding-bottom: 18px;
-    overflow-y: auto;
-    opacity: 1;
-    visibility: visible;
-  }
-
-  .ykos-navbar-menu,
-  .ykos-navbar-actions {
-    width: 100%;
-    display: block;
-  }
-
-  .ykos-nav-link,
-  .ykos-dropdown-trigger {
-    width: 100%;
-    min-height: 46px;
-    padding: 0 12px;
-    justify-content: space-between;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.075);
-    font-size: 13px;
-  }
-
-  .ykos-dropdown-panel {
-    position: static;
-    width: 100%;
-    max-height: 0;
-    padding: 0 8px;
-    overflow: hidden;
-    border: 0;
-    border-radius: 0;
-    background: rgba(255, 255, 255, 0.055);
-    box-shadow: none;
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-    transition:
-      max-height 260ms ease,
-      padding 260ms ease;
-  }
-
-  .ykos-dropdown-panel::before {
-    display: none;
-  }
-
-  .ykos-dropdown.is-open .ykos-dropdown-panel {
-    max-height: 520px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-  }
-
-  .ykos-dropdown-title {
-    display: none;
-  }
-
-  .ykos-dropdown-panel a {
-    min-height: 38px;
-    color: rgba(255, 255, 255, 0.78);
-    font-size: 12px;
-  }
-
-  .ykos-dropdown-panel a:hover,
-  .ykos-dropdown-panel a:focus-visible {
-    background: rgba(255, 255, 255, 0.08);
-    color: #ffffff;
-    transform: none;
-  }
-
-  .ykos-navbar-actions {
-    padding-top: 14px;
-  }
-
-  .ykos-icon-button {
-    display: inline-grid;
-    margin-right: 7px;
-  }
-
-  .ykos-language {
-    position: static;
-    display: inline-block;
-    width: calc(100% - 54px);
-    vertical-align: top;
-  }
-
-  .ykos-language-trigger {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .ykos-language-name {
-    display: inline;
-  }
-
-  .ykos-language-panel {
-    position: static;
-    width: 100%;
-    max-height: 0;
-    margin-top: 0;
-    padding: 0;
-    overflow: hidden;
-    border: 0;
-    border-radius: 13px;
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-    transition:
-      max-height 260ms ease,
-      margin 260ms ease,
-      padding 260ms ease;
-  }
-
-  .ykos-language-panel::before {
-    display: none;
-  }
-
-  .ykos-language.is-open .ykos-language-panel {
-    max-height: 650px;
-    margin-top: 10px;
-    padding: 14px;
-  }
-}
-
-@media (max-width: 560px) {
-  .ykos-header-text p {
-    display: none;
-  }
-
-  .ykos-header-text h1 {
-    font-size: 16px;
-    letter-spacing: 0.2px;
-  }
-
-  .ykos-brand {
-    gap: 11px;
-  }
-
-  .ykos-language-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .ykos-language-heading {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 3px;
-  }
-}
-/* Üst bar konteyner */
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 24px; /* kenar boşluklarını artır */
-  height: 60px;
-}
-
-/* Sol menü butonu */
-.menu-button {
-  margin-left: 4px; /* kenardan biraz içeri al */
-}
-
-/* Sağ dil seçici */
-.lang-button {
-  margin-right: 4px; /* sağ kenardan biraz içeri al */
-}
-
-/* YKOS logosu */
-.logo {
-  flex-grow: 1;
-  text-align: center;
 }

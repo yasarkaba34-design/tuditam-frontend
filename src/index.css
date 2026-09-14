@@ -1,8 +1,319 @@
-/* ------------------------------------------
-   MOBİL (768px ve altı): KESİN TEK SÜTUN ZORLAMASI
-   ------------------------------------------ */
+/* ==========================================
+   1. GENEL KÖK VE SIFIRLAMA AYARLARI
+   ========================================== */
+:root {
+  --ykos-navy: #0d2438;
+  --ykos-navy-soft: #16364f;
+  --ykos-gold: #c99a48;
+  --ykos-gold-light: #e1bf7a;
+  --ykos-text: #17222d;
+  --ykos-muted: #667788;
+  --ykos-border: rgba(13, 36, 56, 0.12);
+  --ykos-surface: #ffffff;
+  --ykos-page: #f5f7f9;
+  --ykos-shadow: 0 18px 50px rgba(13, 36, 56, 0.16);
+
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  color: #f4f4f4;
+  background: #070707;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-width: 320px;
+  min-height: 100%;
+  margin: 0;
+  background: #070707;
+}
+
+button {
+  font: inherit;
+}
+
+/* ==========================================
+   2. APP SHELL VE DÜZEN YAPILARI
+   ========================================== */
+.ykos-app {
+  width: 100%;
+  height: 100vh;
+  background-color: #000;
+  overflow: hidden;
+  position: relative;
+}
+
+.app-shell {
+  min-height: 100vh;
+  background:
+    radial-gradient(
+      circle at 75% 10%,
+      rgba(216, 164, 0, 0.04),
+      transparent 25%
+    ),
+    #080808;
+}
+
+.app-main {
+  min-height: 100vh;
+  margin-left: 180px;
+  padding: 14px 0 20px; /* Sağ-sol boşluk sıfırlandı */
+}
+
+.app-frame {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app-workspace {
+  min-height: 350px;
+  padding: 14px;
+  border: 1px solid #272727;
+  border-radius: 10px;
+  background: #0d0d0d;
+}
+
+.temporary-panel {
+  padding: 30px;
+  color: #d8a400;
+  text-align: center;
+}
+
+/* ==========================================
+   3. MASAÜSTÜ & GENİŞ EKRAN GRID SİSTEMİ
+   ========================================== */
+.dashboard-grid-container {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ykos-index-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  justify-content: stretch;
+  align-items: start;
+}
+
+@media (min-width: 1600px) {
+  .ykos-index-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ==========================================
+   4. HEADER VE NAVBAR KAPSAYICILARI
+   ========================================== */
+.ykos-header {
+  position: relative;
+  z-index: 1000;
+  width: 100%;
+  background: var(--ykos-surface);
+  border-bottom: 1px solid var(--ykos-border);
+  box-shadow: 0 5px 24px rgba(13, 36, 56, 0.08);
+}
+
+.ykos-header-top {
+  min-height: 92px;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  margin: 0;
+  background:
+    radial-gradient(
+      circle at 15% 50%,
+      rgba(201, 154, 72, 0.12),
+      transparent 28%
+    ),
+    linear-gradient(135deg, #ffffff 0%, #f7f9fb 100%);
+}
+
+.ykos-brand {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.ykos-header-logo {
+  width: 68px;
+  height: 68px;
+  flex: 0 0 68px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(201, 154, 72, 0.75);
+  border-radius: 18px;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.16),
+      rgba(255, 255, 255, 0)
+    ),
+    var(--ykos-navy);
+  box-shadow:
+    inset 0 0 0 4px rgba(255, 255, 255, 0.06),
+    0 10px 24px rgba(13, 36, 56, 0.2);
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 850;
+  letter-spacing: 1.7px;
+}
+
+.ykos-header-text h1 {
+  margin: 0;
+  color: var(--ykos-navy);
+  font-size: clamp(20px, 2vw, 29px);
+  font-weight: 820;
+  line-height: 1.15;
+  letter-spacing: 0.5px;
+}
+
+.ykos-header-text p {
+  margin: 6px 0 0;
+  color: var(--ykos-muted);
+  font-size: clamp(12px, 1.2vw, 14px);
+  line-height: 1.45;
+  letter-spacing: 0.15px;
+}
+
+.ykos-navbar {
+  min-height: 58px;
+  padding: 0 24px;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  margin: 0;
+  background: var(--ykos-navy);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.ykos-navbar-menu,
+.ykos-navbar-actions {
+  display: flex;
+  align-items: stretch;
+}
+
+.ykos-navbar-menu {
+  min-width: 0;
+  gap: 2px;
+}
+
+.ykos-navbar-actions {
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 8px;
+}
+
+.ykos-nav-link,
+.ykos-dropdown-trigger {
+  min-height: 58px;
+  padding: 0 13px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 0;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 13px;
+  font-weight: 690;
+  cursor: pointer;
+  transition: color 180ms ease, background 180ms ease;
+}
+
+.ykos-nav-link:hover,
+.ykos-nav-link:focus-visible,
+.ykos-dropdown.is-open > .ykos-dropdown-trigger {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+/* ==========================================
+   5. ARAMA ÇUBUĞU BİLEŞENİ
+   ========================================== */
+.ykos-search-wrapper {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.search-input-box {
+  display: flex;
+  align-items: center;
+  background-color: #050811;
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  border-radius: 25px;
+  padding: 6px 18px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.search-input-box:focus-within {
+  border-color: #ffd700;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.3);
+}
+
+.search-icon {
+  font-size: 1.1rem;
+  margin-right: 12px;
+  color: #ffd700;
+  user-select: none;
+}
+
+.search-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-size: 0.95rem;
+  padding: 8px 0;
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.85rem;
+}
+
+.search-clear-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 215, 0, 0.7);
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* ==========================================
+   6. MOBİL DUYARLI (RESPONSIVE) OPTİMİZASYONLAR
+   ========================================== */
+@media (min-width: 769px) {
+  .mobile-hamburger-btn {
+    display: none !important;
+  }
+}
+
 @media (max-width: 768px) {
-  /* Üst sayaçlar ikişerli kalsın */
   .ykos-section:first-of-type div[style*="grid"],
   .ykos-section:first-of-type .ykos-solutions-grid {
     display: grid !important;
@@ -10,7 +321,6 @@
     gap: 10px !important;
   }
 
-  /* Alt kısımdaki tüm grid/flex yapılarını tek sütun yap ve inline stilleri ez */
   .ykos-section:not(:first-of-type) [style*="grid"],
   .ykos-section:not(:first-of-type) [style*="display: grid"],
   .ykos-section:not(:first-of-type) div {
@@ -54,5 +364,41 @@
 
   .header-sub-title {
     display: none !important;
+  }
+
+  .dashboard-grid-container,
+  .app-frame {
+    grid-template-columns: 1fr !important;
+    padding: 0 10px;
+    margin: 0;
+    flex-direction: column !important;
+  }
+
+  .dashboard-mini-badge {
+    display: none !important;
+  }
+
+  .search-container-mobile {
+    width: 95% !important;
+  }
+
+  div[style*="display: grid"],
+  div[style*="grid-template-columns"],
+  div[style*="gridTemplateColumns"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  h1 {
+    font-size: 20px !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .ykos-header-top {
+    padding: 12px 16px;
+  }
+
+  .ykos-navbar {
+    padding: 0 16px;
   }
 }
