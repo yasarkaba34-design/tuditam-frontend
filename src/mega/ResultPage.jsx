@@ -20,12 +20,17 @@ export default function ResultPage() {
   return (
     <div className="result-wrapper">
       <h1 className="result-title">
-        {data.title || data.root || "Sonuç"}
+        {data.title || data.analysis?.root || "Sonuç"}
       </h1>
 
-      <ReadingPanel content={data} />
-      <AnalyzerPanel content={data} />
-      <VisualizerPanel content={data} />
+      {/* OKUMA PANELİ */}
+      <ReadingPanel content={data.analysis} />
+
+      {/* ANALİZ PANELİ */}
+      <AnalyzerPanel content={data.analysis} />
+
+      {/* GÖÇ & AKIŞ HARİTASI */}
+      <VisualizerPanel flow={data.flow} atlas={data.atlas} />
     </div>
   );
 }

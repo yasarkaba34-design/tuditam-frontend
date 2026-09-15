@@ -1,5 +1,6 @@
 // YKOS Motoru → Normalize → ResultPage
 import { normalizeResult } from "./normalizeResult";
+import { ykosPipeline } from "./ykosPipeline";
 
 export function runFluxEngine(input) {
   const raw = ykosPipeline.run(input);

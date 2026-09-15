@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from "react";
 import SearchBar from "../components/SearchBar";
 import { translations } from "../data/i18n";
-import YKOSLabMatrix from '../components/YKOSLabMatrix';
+import { BubbleMatrixView } from "../mega/BubbleMatrixView";
+import { YKOSPanel } from "./YKOSPanel";
 
 const YKOS_POSTERS = [
   { id: 1, no: "01", title: "Sıfır Noktası & Pleistosen Sığınağı", desc: "Anadolu Refugium Modeli, mikroklima koruması ve derin zaman hafızası.", icon: "🌋", tag: "BUZUL ÇAĞI" },
