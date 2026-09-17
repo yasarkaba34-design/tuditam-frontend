@@ -7,6 +7,8 @@ import "./ResultPage.css";
 
 export default function ResultPage() {
   const location = useLocation();
+
+  // normalizeResult çıktısı buraya geliyor
   const data = location.state?.result;
 
   if (!data) {
@@ -19,6 +21,8 @@ export default function ResultPage() {
 
   return (
     <div className="result-wrapper">
+
+      {/* BAŞLIK */}
       <h1 className="result-title">
         {data.title || data.analysis?.root || "Sonuç"}
       </h1>
@@ -31,6 +35,7 @@ export default function ResultPage() {
 
       {/* GÖÇ & AKIŞ HARİTASI */}
       <VisualizerPanel flow={data.flow} atlas={data.atlas} />
+
     </div>
   );
 }

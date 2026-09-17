@@ -1,6 +1,7 @@
 // src/data/firebase.js
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -12,12 +13,15 @@ const firebaseConfig = {
 };
 
 // Firebase yalnızca bir kez başlatılır.
-// Vite Hot Reload sırasında siyah ekran ve duplicate-app hatasını önler.
-const app = getApps().length === 0
-  ? initializeApp(firebaseConfig)
-  : getApp();
+const app =
+  getApps().length === 0
+    ? initializeApp(firebaseConfig)
+    : getApp();
 
-// Firestore veritabanı bağlantısı
+// Firestore bağlantısı
 export const db = getFirestore(app);
+
+// Firebase Authentication bağlantısı
+export const auth = getAuth(app);
 
 export default app;

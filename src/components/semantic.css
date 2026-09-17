@@ -1,0 +1,10 @@
+.semantic-area {
+  padding: 20px;
+  color: #fff;
+}
+
+.semantic-item {
+  margin-bottom: 15px;
+  padding: 10px;
+  border-bottom: 1px solid #333;
+}
