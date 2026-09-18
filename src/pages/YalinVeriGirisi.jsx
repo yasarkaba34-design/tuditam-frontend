@@ -7,173 +7,182 @@ export default function YalinVeriGirisi({ onGoHome }) {
   const [category, setCategory] = useState("Damga & Sembol");
   const [location, setLocation] = useState("");
   const [description, setDescription] = useState("");
-  
- // Manşet ve Çoklu Galeri Görselleri
 
-const [mainImage, setMainImage] = useState("");
+  // Manşet ve Çoklu Galeri Görselleri
+  const [mainImage, setMainImage] = useState("");
+  const [galleryImages, setGalleryImages] = useState([]);
+  const [galleryInputKey, setGalleryInputKey] = useState(0);
+  const [isSuccess, setIsSuccess] = useState(false);
 
-const [galleryImages, setGalleryImages] = useState([]);
+  // Epigrafik inceleme ve damga netliği için 1920px tavan optimizasyonu
+  // (1280px ve 1920px arası görseller küçültülmez, orijinal netlik korunur)
+  const resizeImageTo1920 = (file) => {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (event) => {
+        const img = new Image();
+        img.src = event.target.result;
+        img.onload = () => {
+          const maxDimension = 1920;
+          let width = img.width;
+          let height = img.height;
 
-const [galleryInputKey, setGalleryInputKey] = useState(0);
+          // Eğer görsel 1920px'den büyükse en uzun kenara göre orantılı küçült
+          if (width > maxDimension || height > maxDimension) {
+            if (width > height) {
+              height = Math.round((height * maxDimension) / width);
+              width = maxDimension;
+            } else {
+              width = Math.round((width * maxDimension) / height);
+              height = maxDimension;
+            }
+          }
 
-const [isSuccess, setIsSuccess] = useState(false);
+          const canvas = document.createElement("canvas");
+          canvas.width = width;
+          canvas.height = height;
+
+          const ctx = canvas.getContext("2d");
+          ctx.imageSmoothingEnabled = true;
+          ctx.imageSmoothingQuality = "high";
+          ctx.drawImage(img, 0, 0, width, height);
+
+          // Epigrafik hatları ve keski detaylarını korumak için %92 kalite
+          resolve(canvas.toDataURL("image/jpeg", 0.92));
+        };
+      };
+    });
+  };
 
   // Tekil Manşet Görseli
-  const handleMainImageChange = (e) => {
+  const handleMainImageChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => setMainImage(reader.result);
-      reader.readAsDataURL(file);
+      const optimized = await resizeImageTo1920(file);
+      setMainImage(optimized);
     }
   };
 
-// Çoklu Fotoğraf / Galeri Yükleme
-const handleGalleryImagesChange = (e) => {
-  const files = Array.from(e.target.files);
+  // Çoklu Fotoğraf / Galeri Yükleme
+  const handleGalleryImagesChange = async (e) => {
+    const files = Array.from(e.target.files);
+    for (const file of files) {
+      const optimized = await resizeImageTo1920(file);
+      setGalleryImages((prev) => [...prev, optimized]);
+    }
+  };
 
-  files.forEach((file) => {
-    const reader = new FileReader();
+  // Galeri Fotoğrafı Silme
+  const removeGalleryImage = (index) => {
+    setGalleryImages((prev) => {
+      const updated = prev.filter((_, i) => i !== index);
+      if (updated.length === 0) {
+        setGalleryInputKey((prevKey) => prevKey + 1);
+      }
+      return updated;
+    });
+  };
 
-    reader.onloadend = () => {
-      setGalleryImages((prev) => [...prev, reader.result]);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!researcherName.trim()) {
+      alert("Lütfen İsim Soyisim alanını doldurunuz.");
+      return;
+    }
+
+    if (!researcherEmail.trim()) {
+      alert("Lütfen E-Posta alanını doldurunuz.");
+      return;
+    }
+
+    if (!title.trim()) {
+      alert("Lütfen Bulgu Başlığı alanını doldurunuz.");
+      return;
+    }
+
+    const newRecord = {
+      id: "GUEST-" + Date.now(),
+      researcher: {
+        name: researcherName.trim(),
+        email: researcherEmail.trim(),
+      },
+      title: title.trim(),
+      category,
+      location: location.trim(),
+      summary: `${researcherName.trim()} (${
+        location.trim() || "Konum Belirtilmedi"
+      }) tarafından iletilen açık veri bulgusu.`,
+      content: description.trim(),
+      image: mainImage || "",
+      gallery: galleryImages || [],
+      status: "pending",
+      durum: "beklemede",
+      source: "guest",
+      createdAt: new Date().toISOString(),
+      date: new Date().toLocaleDateString("tr-TR"),
     };
 
-    reader.readAsDataURL(file);
-  });
-};
+    try {
+      const existingRaw = localStorage.getItem("ykos_admin_records");
+      let existing = [];
 
-// Galeri Fotoğrafı Silme
-const removeGalleryImage = (index) => {
-  setGalleryImages((prev) => {
-    const updated = prev.filter((_, i) => i !== index);
+      if (existingRaw) {
+        const parsed = JSON.parse(existingRaw);
+        existing = Array.isArray(parsed) ? parsed : [];
+      }
 
-    // Galeride fotoğraf kalmadığında
-    // dosya seçme alanını da tamamen sıfırla
-    if (updated.length === 0) {
+      const updatedRecords = [newRecord, ...existing];
+      localStorage.setItem("ykos_admin_records", JSON.stringify(updatedRecords));
+
+      setIsSuccess(true);
+
+      // Formu sıfırla
+      setTitle("");
+      setLocation("");
+      setDescription("");
+      setMainImage("");
+      setGalleryImages([]);
       setGalleryInputKey((prevKey) => prevKey + 1);
+
+      alert("✓ Bulgu TÜDİTAM Kurul Onay Havuzuna başarıyla gönderildi.");
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+
+    } catch (err) {
+      console.error("Kayıt hatası:", err);
+
+      if (err?.name === "QuotaExceededError") {
+        alert("Fotoğrafların toplam boyutu tarayıcı sınırını aştı. Lütfen daha az görselle tekrar deneyiniz.");
+      } else {
+        alert("Kayıt sırasında hata oluştu: " + (err?.message || "Bilinmeyen hata"));
+      }
     }
-
-    return updated;
-  });
-};
- const handleSubmit = (e) => {
-  e.preventDefault();
-
-  if (!researcherName.trim()) {
-    alert("Lütfen İsim Soyisim alanını doldurunuz.");
-    return;
-  }
-
-  if (!researcherEmail.trim()) {
-    alert("Lütfen E-Posta alanını doldurunuz.");
-    return;
-  }
-
-  if (!title.trim()) {
-    alert("Lütfen Bulgu Başlığı alanını doldurunuz.");
-    return;
-  }
-
-  const newRecord = {
-    id: "GUEST-" + Date.now(),
-
-    researcher: {
-      name: researcherName.trim(),
-      email: researcherEmail.trim(),
-    },
-
-    title: title.trim(),
-    category,
-    location: location.trim(),
-
-    summary: `${researcherName.trim()} (${
-      location.trim() || "Konum Belirtilmedi"
-    }) tarafından iletilen açık veri bulgusu.`,
-
-    content: description.trim(),
-
-    image: mainImage || "",
-    gallery: galleryImages || [],
-
-    status: "pending",
-    durum: "beklemede",
-
-    source: "guest",
-    createdAt: new Date().toISOString(),
-    date: new Date().toLocaleDateString("tr-TR"),
   };
 
-  try {
-    const existingRaw = localStorage.getItem("ykos_admin_records");
-
-    let existing = [];
-
-    if (existingRaw) {
-      const parsed = JSON.parse(existingRaw);
-      existing = Array.isArray(parsed) ? parsed : [];
-    }
-
-    const updatedRecords = [newRecord, ...existing];
-
-    localStorage.setItem(
-      "ykos_admin_records",
-      JSON.stringify(updatedRecords)
-    );
-
-    console.log("YKOS KONUK KAYDI BAŞARILI:", newRecord);
-
-    setIsSuccess(true);
-
-    // Formu temizle
-    setTitle("");
-    setLocation("");
-    setDescription("");
-    setMainImage("");
-    setGalleryImages([]);
-
-    alert(
-      "✓ Bulgu TÜDİTAM Kurul Onay Havuzuna başarıyla gönderildi."
-    );
-
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-
-  } catch (err) {
-    console.error("YKOS kayıt hatası:", err);
-
-    if (err?.name === "QuotaExceededError") {
-      alert(
-        "Fotoğrafların toplam boyutu tarayıcı kayıt sınırını aştı. Daha küçük görsellerle tekrar deneyiniz."
-      );
-    } else {
-      alert(
-        "Kayıt sırasında hata oluştu: " +
-        (err?.message || "Bilinmeyen hata")
-      );
-    }
-  }
-};
   return (
     <div style={{ maxWidth: "780px", margin: "0 auto", padding: "20px", background: "#060913", border: "1.5px solid #ffd700", borderRadius: "10px", color: "#fff" }}>
       <button
-  type="button"
-  onClick={onGoHome}
-  style={{
-    background: "#1e293b",
-    color: "#ffd700",
-    border: "1px solid #ffd700",
-    padding: "7px 14px",
-    borderRadius: "5px",
-    fontWeight: "bold",
-    cursor: "pointer",
-    marginBottom: "15px"
-  }}
->
-  ← ANA SAYFAYA DÖN
-</button>
+        type="button"
+        onClick={onGoHome}
+        style={{
+          background: "#1e293b",
+          color: "#ffd700",
+          border: "1px solid #ffd700",
+          padding: "7px 14px",
+          borderRadius: "5px",
+          fontWeight: "bold",
+          cursor: "pointer",
+          marginBottom: "15px"
+        }}
+      >
+        ← ANA SAYFAYA DÖN
+      </button>
+
       <div style={{ textAlign: "center", borderBottom: "1px solid rgba(255,215,0,0.3)", paddingBottom: "12px", marginBottom: "16px" }}>
         <h2 style={{ color: "#ffd700", margin: "0 0 4px 0", fontSize: "1.3rem", letterSpacing: "1px" }}>
           🌐 AÇIK VERİ & KONUK BULGU GİRİŞİ
@@ -234,21 +243,21 @@ const removeGalleryImage = (index) => {
         {/* FOTOĞRAF YÜKLEME ALANI */}
         <div style={{ background: "rgba(255,255,255,0.02)", padding: "12px", borderRadius: "8px", border: "1px solid #334155" }}>
           <div style={{ marginBottom: "10px" }}>
-            <label style={{ display: "block", fontSize: "0.75rem", color: "#ffd700", fontWeight: "bold", marginBottom: "4px" }}>📸 MANŞET KAPAK GÖRSELİ</label>
+            <label style={{ display: "block", fontSize: "0.75rem", color: "#ffd700", fontWeight: "bold", marginBottom: "4px" }}>📸 MANŞET KAPAK GÖRSELİ (1920px)</label>
             <input type="file" accept="image/*" onChange={handleMainImageChange} style={{ fontSize: "0.75rem", color: "#94a3b8" }} />
-            {mainImage && <img src={mainImage} alt="Manşet" style={{ height: "60px", marginTop: "6px", borderRadius: "4px", border: "1px solid #ffd700" }} />}
+            {mainImage && <img src={mainImage} alt="Manşet" style={{ height: "65px", marginTop: "6px", borderRadius: "4px", border: "1px solid #ffd700", objectFit: "contain" }} />}
           </div>
 
           <div>
-            <label style={{ display: "block", fontSize: "0.75rem", color: "#38bdf8", fontWeight: "bold", marginBottom: "4px" }}>🖼️ ÇOKLU DETAY FOTOĞRAFLARI (GALERİ)</label>
-            <input type="file" accept="image/*" multiple onChange={handleGalleryImagesChange} style={{ fontSize: "0.75rem", color: "#94a3b8" }} />
+            <label style={{ display: "block", fontSize: "0.75rem", color: "#38bdf8", fontWeight: "bold", marginBottom: "4px" }}>🖼️ ÇOKLU DETAY FOTOĞRAFLARI (GALERİ - 1920px)</label>
+            <input key={galleryInputKey} type="file" accept="image/*" multiple onChange={handleGalleryImagesChange} style={{ fontSize: "0.75rem", color: "#94a3b8" }} />
             
             {galleryImages.length > 0 && (
               <div style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginTop: "8px" }}>
                 {galleryImages.map((img, i) => (
                   <div key={i} style={{ position: "relative" }}>
-                    <img src={img} alt={`Galeri ${i}`} style={{ width: "60px", height: "60px", objectFit: "cover", borderRadius: "4px", border: "1px solid #38bdf8" }} />
-                    <button type="button" onClick={() => removeGalleryImage(i)} style={{ position: "absolute", top: "-5px", right: "-5px", background: "#ef4444", color: "#fff", border: "none", borderRadius: "50%", width: "18px", height: "18px", fontSize: "10px", cursor: "pointer" }}>✕</button>
+                    <img src={img} alt={`Galeri ${i}`} style={{ width: "65px", height: "65px", objectFit: "cover", borderRadius: "4px", border: "1px solid #38bdf8" }} />
+                    <button type="button" onClick={() => removeGalleryImage(i)} style={{ position: "absolute", top: "-5px", right: "-5px", background: "#ef4444", color: "#fff", border: "none", borderRadius: "50%", width: "18px", height: "18px", fontSize: "10px", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center" }}>✕</button>
                   </div>
                 ))}
               </div>
