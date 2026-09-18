@@ -1,4 +1,3 @@
-// src/pages/YalinVeriGirisi.jsx
 import React, { useState } from "react";
 
 export default function YalinVeriGirisi({ onGoHome }) {
@@ -9,10 +8,15 @@ export default function YalinVeriGirisi({ onGoHome }) {
   const [location, setLocation] = useState("");
   const [description, setDescription] = useState("");
   
-  // Manşet ve Çoklu Galeri Görselleri
-  const [mainImage, setMainImage] = useState("");
-  const [galleryImages, setGalleryImages] = useState([]);
-  const [isSuccess, setIsSuccess] = useState(false);
+ // Manşet ve Çoklu Galeri Görselleri
+
+const [mainImage, setMainImage] = useState("");
+
+const [galleryImages, setGalleryImages] = useState([]);
+
+const [galleryInputKey, setGalleryInputKey] = useState(0);
+
+const [isSuccess, setIsSuccess] = useState(false);
 
   // Tekil Manşet Görseli
   const handleMainImageChange = (e) => {
@@ -24,67 +28,152 @@ export default function YalinVeriGirisi({ onGoHome }) {
     }
   };
 
-  // Çoklu Fotoğraf / Galeri Yükleme
-  const handleGalleryImagesChange = (e) => {
-    const files = Array.from(e.target.files);
-    files.forEach((file) => {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setGalleryImages((prev) => [...prev, reader.result]);
-      };
-      reader.readAsDataURL(file);
-    });
-  };
+// Çoklu Fotoğraf / Galeri Yükleme
+const handleGalleryImagesChange = (e) => {
+  const files = Array.from(e.target.files);
 
-  const removeGalleryImage = (index) => {
-    setGalleryImages(galleryImages.filter((_, i) => i !== index));
-  };
+  files.forEach((file) => {
+    const reader = new FileReader();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (!researcherName.trim() || !researcherEmail.trim() || !title.trim()) {
-      alert("Lütfen İsim-Soyisim, E-Posta ve Başlık alanlarını eksiksiz doldurunuz.");
-      return;
-    }
-
-    const newRecord = {
-      id: "GUEST-" + Date.now(),
-      researcher: {
-        name: researcherName,
-        email: researcherEmail,
-      },
-      title,
-      category,
-      location,
-      summary: `${researcherName} (${location || "Konum Belirtilmedi"}) tarafından iletilen açık veri bulgusu.`,
-      content: description,
-      image: mainImage,
-      gallery: galleryImages,
-      status: "pending", // Yönetici Onayını Bekler
-      durum: "beklemede",
-      date: new Date().toLocaleDateString("tr-TR")
+    reader.onloadend = () => {
+      setGalleryImages((prev) => [...prev, reader.result]);
     };
 
-    try {
-      const existing = JSON.parse(localStorage.getItem("ykos_admin_records") || "[]");
-      existing.unshift(newRecord);
-      localStorage.setItem("ykos_admin_records", JSON.stringify(existing));
-      
-      setIsSuccess(true);
-      setTitle("");
-      setLocation("");
-      setDescription("");
-      setMainImage("");
-      setGalleryImages([]);
-    } catch (err) {
-      console.error(err);
+    reader.readAsDataURL(file);
+  });
+};
+
+// Galeri Fotoğrafı Silme
+const removeGalleryImage = (index) => {
+  setGalleryImages((prev) => {
+    const updated = prev.filter((_, i) => i !== index);
+
+    // Galeride fotoğraf kalmadığında
+    // dosya seçme alanını da tamamen sıfırla
+    if (updated.length === 0) {
+      setGalleryInputKey((prevKey) => prevKey + 1);
     }
+
+    return updated;
+  });
+};
+ const handleSubmit = (e) => {
+  e.preventDefault();
+
+  if (!researcherName.trim()) {
+    alert("Lütfen İsim Soyisim alanını doldurunuz.");
+    return;
+  }
+
+  if (!researcherEmail.trim()) {
+    alert("Lütfen E-Posta alanını doldurunuz.");
+    return;
+  }
+
+  if (!title.trim()) {
+    alert("Lütfen Bulgu Başlığı alanını doldurunuz.");
+    return;
+  }
+
+  const newRecord = {
+    id: "GUEST-" + Date.now(),
+
+    researcher: {
+      name: researcherName.trim(),
+      email: researcherEmail.trim(),
+    },
+
+    title: title.trim(),
+    category,
+    location: location.trim(),
+
+    summary: `${researcherName.trim()} (${
+      location.trim() || "Konum Belirtilmedi"
+    }) tarafından iletilen açık veri bulgusu.`,
+
+    content: description.trim(),
+
+    image: mainImage || "",
+    gallery: galleryImages || [],
+
+    status: "pending",
+    durum: "beklemede",
+
+    source: "guest",
+    createdAt: new Date().toISOString(),
+    date: new Date().toLocaleDateString("tr-TR"),
   };
 
+  try {
+    const existingRaw = localStorage.getItem("ykos_admin_records");
+
+    let existing = [];
+
+    if (existingRaw) {
+      const parsed = JSON.parse(existingRaw);
+      existing = Array.isArray(parsed) ? parsed : [];
+    }
+
+    const updatedRecords = [newRecord, ...existing];
+
+    localStorage.setItem(
+      "ykos_admin_records",
+      JSON.stringify(updatedRecords)
+    );
+
+    console.log("YKOS KONUK KAYDI BAŞARILI:", newRecord);
+
+    setIsSuccess(true);
+
+    // Formu temizle
+    setTitle("");
+    setLocation("");
+    setDescription("");
+    setMainImage("");
+    setGalleryImages([]);
+
+    alert(
+      "✓ Bulgu TÜDİTAM Kurul Onay Havuzuna başarıyla gönderildi."
+    );
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+
+  } catch (err) {
+    console.error("YKOS kayıt hatası:", err);
+
+    if (err?.name === "QuotaExceededError") {
+      alert(
+        "Fotoğrafların toplam boyutu tarayıcı kayıt sınırını aştı. Daha küçük görsellerle tekrar deneyiniz."
+      );
+    } else {
+      alert(
+        "Kayıt sırasında hata oluştu: " +
+        (err?.message || "Bilinmeyen hata")
+      );
+    }
+  }
+};
   return (
     <div style={{ maxWidth: "780px", margin: "0 auto", padding: "20px", background: "#060913", border: "1.5px solid #ffd700", borderRadius: "10px", color: "#fff" }}>
-      
+      <button
+  type="button"
+  onClick={onGoHome}
+  style={{
+    background: "#1e293b",
+    color: "#ffd700",
+    border: "1px solid #ffd700",
+    padding: "7px 14px",
+    borderRadius: "5px",
+    fontWeight: "bold",
+    cursor: "pointer",
+    marginBottom: "15px"
+  }}
+>
+  ← ANA SAYFAYA DÖN
+</button>
       <div style={{ textAlign: "center", borderBottom: "1px solid rgba(255,215,0,0.3)", paddingBottom: "12px", marginBottom: "16px" }}>
         <h2 style={{ color: "#ffd700", margin: "0 0 4px 0", fontSize: "1.3rem", letterSpacing: "1px" }}>
           🌐 AÇIK VERİ & KONUK BULGU GİRİŞİ

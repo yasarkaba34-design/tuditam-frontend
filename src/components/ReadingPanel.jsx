@@ -1,40 +1,24 @@
 // src/components/ReadingPanel.jsx
-import React from "react";
-import data from "../data/data.json"; // Güncel merkezi veri dosyamız
+import React, { useState } from "react";
 
 export default function ReadingPanel({ content }) {
-  // Eğer dışarıdan doğrudan obje gelmediyse, gelen ID'ye göre data.json içinden damgayı bulalım
-  let damgaVerisi = null;
-
-  if (content && typeof content === "object") {
-    damgaVerisi = content;
-  } else if (content) {
-    // ID ile eşleştirme (Örn: "AT", "OQ" vb.)
-    damgaVerisi = data.damgalar.find(
-      (d) => d.id === content || d.hece === content
-    );
-  }
-
-  // Eğer hâlâ veri bulunamadıysa ilk damgayı varsayılan olarak gösterelim veya uyarı verelim
-  if (!damgaVerisi && data.damgalar && data.damgalar.length > 0) {
-    damgaVerisi = data.damgalar[0]; 
-  }
-
-  if (!damgaVerisi) {
+  if (!content) {
     return (
-      <div style={{ color: "#fff", padding: "20px", textAlign: "center" }}>
+      <div style={{ color: "#fff", padding: "20px" }}>
         İçerik bulunamadı.
       </div>
     );
   }
 
-  // YKOS Veri Alanlarına Göre Eşleştirme
-  const root = damgaVerisi.hece || damgaVerisi.id;
-  const phonetic = [damgaVerisi.shape, damgaVerisi.hece];
-  const semantic = damgaVerisi.kavram;
-  const cultureLinks = [damgaVerisi.cosmic, data.systemStatus?.Atlas || "Göbeklitepe rezonans hattı"];
-  const score = "98.5"; // YKOS Doğrulama Skoru
-  const validated = true;
+  // YKOS motorundan gelen normalizeResult.analysis verisi:
+  const {
+    root,
+    phonetic = [],
+    semantic,
+    cultureLinks = [],
+    score,
+    validated
+  } = content;
 
   return (
     <div
@@ -160,7 +144,7 @@ export default function ReadingPanel({ content }) {
             ✔ Doğrulama: {validated ? "Geçerli" : "Geçersiz"}
           </div>
           <div style={{ fontSize: "0.95rem" }}>
-            📊 Skor: {score}
+            📊 Skor: {score || "—"}
           </div>
         </div>
       </div>

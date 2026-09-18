@@ -1,86 +1,101 @@
-import { useEffect, useState } from "react";
-import WorldMap from "./WorldMap";
-import BubbleInfoPanel from "./BubbleInfoPanel";
+// src/mega/BubbleMatrixView.jsx
+import React, { useEffect } from "react";
+import { useYKOS } from "../../hooks/useYKOS";
 
-export default function BubbleMatrixView({ db }) {
-  const [geoBubbles, setGeoBubbles] = useState([]);
-  const [geoCenters, setGeoCenters] = useState([]);
-  const [geoHeatmap, setGeoHeatmap] = useState([]);
-  const [selectedBubble, setSelectedBubble] = useState(null);
+export const BubbleMatrixView = () => {
+  const ykos = useYKOS();
 
   useEffect(() => {
-    let mounted = true;
+    if (!ykos) return;
 
-    async function load() {
-      const { bubbleMatrix, bubbleFlux, clusterEngine, atlasMap } = await bootstrapYKOS(db);
+    // YKOS çekirdeğini başlat
+    ykos.startLoop();
 
-      const rows = await bubbleMatrix.getBubbles();
-      const normalized = rows.map(r => r.bubble).filter(Boolean);
+    // Canvas referansı
+    const canvas = document.getElementById("bubble-matrix");
+    const ctx = canvas.getContext("2d");
 
-      const clusters = clusterEngine.cluster(normalized);
+    // Pipeline verisini al
+    const pipeline = ykos.pipeline;
+    if (!pipeline || !pipeline.atlas) return;
 
-      const centers = clusters.map(cluster => {
-        const cx = cluster.reduce((sum, b) => sum + b.x, 0) / cluster.length;
-        const cy = cluster.reduce((sum, b) => sum + b.y, 0) / cluster.length;
-        return { x: cx, y: cy };
+    const coords = pipeline.atlas.coordinates || [];
+    const phonetic = pipeline.evaluator.chain || [];
+
+    // Çizim fonksiyonu
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Arka plan
+      ctx.fillStyle = "#050811";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Baloncuklar (fonetik zincir)
+      coords.forEach((coord, index) => {
+        const x = 100 + index * 120;
+        const y = 300 + Math.sin(index) * 40;
+
+        ctx.beginPath();
+        ctx.arc(x, y, 35, 0, Math.PI * 2);
+        ctx.fillStyle = "rgba(255, 215, 0, 0.25)";
+        ctx.fill();
+        ctx.strokeStyle = "#ffd700";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        ctx.fillStyle = "#ffd700";
+        ctx.font = "16px Segoe UI";
+        ctx.textAlign = "center";
+        ctx.fillText(phonetic[index] || coord.id, x, y + 5);
       });
 
-      setGeoBubbles(normalized.map(b => atlasMap.toGeo(b)));
-      setGeoCenters(centers.map(c => atlasMap.centerToGeo(c)));
-      setGeoHeatmap(
-        normalized.map(b => ({
-          ...atlasMap.toGeo(b),
-          intensity: b.weight || Math.random()
-        }))
-      );
+      // Flux çizgileri
+      ctx.strokeStyle = "#38bdf8";
+      ctx.lineWidth = 2;
 
-      setInterval(() => {
-        const flux = {
-          dx: Math.random() - 0.5,
-          dy: Math.random() - 0.5,
-          intensity: Math.random()
-        };
+      coords.forEach((coord, index) => {
+        if (index === 0) return;
+        const x1 = 100 + (index - 1) * 120;
+        const y1 = 300 + Math.sin(index - 1) * 40;
 
-        const updated = normalized.map(b => bubbleFlux.applyFlux(b, flux));
-        const updatedClusters = clusterEngine.cluster(updated);
+        const x2 = 100 + index * 120;
+        const y2 = 300 + Math.sin(index) * 40;
 
-        const updatedCenters = updatedClusters.map(cluster => {
-          const cx = cluster.reduce((sum, b) => sum + b.x, 0) / cluster.length;
-          const cy = cluster.reduce((sum, b) => sum + b.y, 0) / cluster.length;
-          return { x: cx, y: cy };
-        });
-
-        setGeoBubbles(updated.map(b => atlasMap.toGeo(b)));
-        setGeoCenters(updatedCenters.map(c => atlasMap.centerToGeo(c)));
-        setGeoHeatmap(
-          updated.map(b => ({
-            ...atlasMap.toGeo(b),
-            intensity: b.weight || Math.random()
-          }))
-        );
-      }, 200);
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.stroke();
+      });
     }
 
-    load();
+    draw();
 
     return () => {
-      mounted = false;
+      ykos.stopLoop();
     };
-  }, []);
+  }, [ykos]);
 
   return (
-    <div style={{ width: "100%", height: "100vh" }}>
-      <WorldMap
-        bubbles={geoBubbles}
-        centers={geoCenters}
-        heatmap={geoHeatmap}
-        onBubbleClick={setSelectedBubble}
-      />
-
-      <BubbleInfoPanel
-        bubble={selectedBubble}
-        onClose={() => setSelectedBubble(null)}
+    <div
+      style={{
+        width: "100%",
+        display: "flex",
+        justifyContent: "center",
+        padding: "10px"
+      }}
+    >
+      <canvas
+        id="bubble-matrix"
+        width={800}
+        height={600}
+        style={{
+          maxWidth: "100%",
+          height: "auto",
+          border: "1px solid #ffd700",
+          borderRadius: "8px",
+          background: "#050811"
+        }}
       />
     </div>
   );
-}
+};

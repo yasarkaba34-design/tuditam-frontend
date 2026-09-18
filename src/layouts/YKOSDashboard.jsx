@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import SearchBar from "../components/SearchBar";
 import { translations } from "../data/i18n";
+import { BubbleMatrixView } from "../mega/BubbleMatrixView";
 import { YKOSPanel } from "./YKOSPanel";
 
 const YKOS_POSTERS = [
@@ -164,7 +165,7 @@ export default function YKOSDashboard({
   };
 
   return (
-    <div style={{ width: "calc(100% - 20px)", maxWidth: "1500px", margin: "0 auto", padding: "10px", boxSizing: "border-box", color: "#ffffff", fontFamily: "Segoe UI, sans-serif" }}>
+    <div style={{ width: "100%", maxWidth: "1280px", margin: "0 auto", padding: "10px", color: "#ffffff", fontFamily: "Segoe UI, sans-serif" }}>
       
       <style>{`
         @media (max-width: 768px) {
@@ -355,7 +356,7 @@ export default function YKOSDashboard({
           ⚡ YKOS ÇÖZÜMLERİ VE İNDEKSLER (CANLI ARŞİV)
         </h3>
 
-        <div className="ykos-main-content-grid" style={{ display: "grid", gridTemplateColumns: "2fr 1fr", gap: "14px", minHeight: "440px", maxHeight: "560px" }}>
+        <div className="ykos-main-content-grid" style={{ display: "grid", gridTemplateColumns: "2.3fr 1fr", gap: "14px", minHeight: "440px", maxHeight: "560px" }}>
           
           <div className="ykos-archive-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", overflowY: "auto", paddingRight: "6px" }}>
             {filteredGridCards.map((card, idx) => {

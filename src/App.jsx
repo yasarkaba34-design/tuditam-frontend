@@ -1,56 +1,20 @@
 // src/App.jsx
-import React, { useState, useEffect } from "react";
-import { onAuthStateChanged, signOut } from "firebase/auth";
-
-import { nodeAnalysisData } from "./nodeAnalysisData";
-import { defaultArchiveArticles } from "./data/ykosDataService";
-import { auth } from "./data/firebase";
-
+import React, { useState } from "react";
 import YKOSDashboard from "./layouts/YKOSDashboard";
 import AdminPanel from "./layouts/AdminPanel";
-import OpsCenter from "./layouts/OpsCenter";
-
-import AdminLogin from "./pages/AdminLogin";
+import AdminLogin from "./components/AdminLogin";
 import YalinVeriGirisi from "./pages/YalinVeriGirisi";
-import Hakkimizda from "./pages/Hakkimizda";
-
+import OpsCenter from "./layouts/OpsCenter";
 import BubbleMatrix from "./mega/BubbleMatrix.jsx";
 import AtlasMap from "./mega/AtlasMap";
-import ReadingPanel from "./components/ReadingPanel";
-
+import Hakkimizda from "./pages/Hakkimizda";
+import ContentDetail from "./layouts/ContentDetail";
 import "./index.css";
 
 export default function App() {
   const [currentLang, setCurrentLang] = useState("TR");
   const [activeView, setActiveView] = useState("dashboard");
   const [selectedContentId, setSelectedContentId] = useState(null);
-
-  // Firebase yönetici oturumu
-  const [adminUser, setAdminUser] = useState(null);
-  const [authLoading, setAuthLoading] = useState(true);
-
-  // Firebase oturum durumunu sürekli takip eder
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      setAdminUser(user);
-      setAuthLoading(false);
-    });
-
-    return () => unsubscribe();
-  }, []);
-
-  // Gerçek Firebase çıkış işlemi
-  const handleLogout = async () => {
-    try {
-      await signOut(auth);
-      setAdminUser(null);
-      setActiveView("dashboard");
-      window.scrollTo(0, 0);
-    } catch (error) {
-      console.error("Çıkış işlemi başarısız:", error);
-      alert("Çıkış yapılamadı. Lütfen tekrar deneyiniz.");
-    }
-  };
 
   const handleNavigateRead = (id) => {
     setSelectedContentId(id);
@@ -66,6 +30,7 @@ export default function App() {
         color: "#fff",
       }}
     >
+      {/* ANA SAYFA */}
       {activeView === "dashboard" && (
         <YKOSDashboard
           currentLang={currentLang}
@@ -82,6 +47,7 @@ export default function App() {
         />
       )}
 
+      {/* İÇERİK DETAY */}
       {activeView === "detail" && (
         <div>
           <div style={{ padding: "10px 20px" }}>
@@ -101,13 +67,14 @@ export default function App() {
             </button>
           </div>
 
-          <ReadingPanel
-            content={selectedContentId}
+          <ContentDetail
+            selectedId={selectedContentId}
             currentLang={currentLang}
           />
         </div>
       )}
 
+      {/* BALONCUK MATRİSİ */}
       {activeView === "matrix" && (
         <div>
           <div style={{ padding: "10px 20px" }}>
@@ -131,6 +98,7 @@ export default function App() {
         </div>
       )}
 
+      {/* ATLAS */}
       {activeView === "atlas" && (
         <div>
           <div style={{ padding: "10px 20px" }}>
@@ -154,6 +122,7 @@ export default function App() {
         </div>
       )}
 
+      {/* YÖNTEM / HAKKIMIZDA */}
       {activeView === "method" && (
         <div>
           <div style={{ padding: "10px 20px" }}>
@@ -177,13 +146,15 @@ export default function App() {
         </div>
       )}
 
+      {/* AÇIK VERİ / KONUK GİRİŞİ */}
       {activeView === "acikveri" && (
         <YalinVeriGirisi
           currentLang={currentLang}
-          onLogout={() => setActiveView("dashboard")}
+          onGoHome={() => setActiveView("dashboard")}
         />
       )}
 
+      {/* OPERASYON MERKEZİ */}
       {activeView === "ops" && (
         <div>
           <div style={{ padding: "10px 20px" }}>
@@ -207,30 +178,21 @@ export default function App() {
         </div>
       )}
 
-      {activeView === "login" &&
-        (authLoading ? (
-          <div
-            style={{
-              minHeight: "100vh",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              color: "#ffd700",
-              fontWeight: "bold",
-            }}
-          >
-            Oturum kontrol ediliyor...
-          </div>
-        ) : adminUser ? (
-          <AdminPanel
-            currentLang={currentLang}
-            onLogout={handleLogout}
-          />
-        ) : (
-          <AdminLogin
-            onBack={() => setActiveView("dashboard")}
-          />
-        ))}
+      {/* YÖNETİCİ GİRİŞİ */}
+      {activeView === "login" && (
+        <AdminLogin
+          onSuccess={() => setActiveView("admin")}
+          onCancel={() => setActiveView("dashboard")}
+        />
+      )}
+
+      {/* YÖNETİCİ PANELİ */}
+      {activeView === "admin" && (
+        <AdminPanel
+          currentLang={currentLang}
+          onLogout={() => setActiveView("dashboard")}
+        />
+      )}
     </div>
   );
 }

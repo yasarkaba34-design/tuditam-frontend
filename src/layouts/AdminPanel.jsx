@@ -4,8 +4,41 @@ import React, { useState, useEffect } from "react";
 export default function AdminPanel({ onLogout, userRole = "admin" }) {
   const [records, setRecords] = useState([]);
   const [editingId, setEditingId] = useState(null);
+  const [showPasswordChange, setShowPasswordChange] = useState(false);
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [newPasswordAgain, setNewPasswordAgain] = useState("");
+  const handlePasswordChange = () => {
+    const PASSWORD_KEY = "tuditam_admin_password";
+    const DEFAULT_PASSWORD = "YKOS2026";
 
-  // Form Alanları
+    const currentPassword =
+      localStorage.getItem(PASSWORD_KEY) || DEFAULT_PASSWORD;
+
+    if (oldPassword !== currentPassword) {
+      alert("Mevcut şifre yanlış.");
+      return;
+    }
+
+    if (newPassword.length < 6) {
+      alert("Yeni şifre en az 6 karakter olmalıdır.");
+      return;
+    }
+
+    if (newPassword !== newPasswordAgain) {
+      alert("Yeni şifreler birbiriyle uyuşmuyor.");
+      return;
+    }
+
+    localStorage.setItem(PASSWORD_KEY, newPassword);
+
+    setOldPassword("");
+    setNewPassword("");
+    setNewPasswordAgain("");
+    setShowPasswordChange(false);
+
+    alert("✓ Yönetici şifresi değiştirildi.");
+  };
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("Damga & Epigrafi");
   const [summary, setSummary] = useState("");
@@ -41,32 +74,71 @@ export default function AdminPanel({ onLogout, userRole = "admin" }) {
     loadRecords();
   }, []);
 
-  const handleMainImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => setMainImage(reader.result);
-      reader.readAsDataURL(file);
-    }
+  const resizeImage = (file, callback) => {
+  const reader = new FileReader();
+
+  reader.onload = (event) => {
+    const img = new Image();
+
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = 1280;
+      canvas.height = 720;
+
+      const ctx = canvas.getContext("2d");
+
+      const scale = Math.min(
+        1280 / img.width,
+        720 / img.height
+      );
+
+      const width = img.width * scale;
+      const height = img.height * scale;
+      const x = (1280 - width) / 2;
+      const y = (720 - height) / 2;
+
+      ctx.fillStyle = "#000";
+      ctx.fillRect(0, 0, 1280, 720);
+      ctx.drawImage(img, x, y, width, height);
+
+      const compressedImage =
+        canvas.toDataURL("image/jpeg", 0.7);
+
+      callback(compressedImage);
+    };
+
+    img.src = event.target.result;
   };
 
-  const handleGalleryChange = (e) => {
-    const files = Array.from(e.target.files);
-    files.forEach((file) => {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setGalleryImages((prev) => [...prev, reader.result]);
-      };
-      reader.readAsDataURL(file);
+  reader.readAsDataURL(file);
+};
+
+const handleMainImageChange = (e) => {
+  const file = e.target.files[0];
+
+  if (file) {
+    resizeImage(file, (imageData) => {
+      setMainImage(imageData);
     });
-  };
+  }
+};
 
+const handleGalleryChange = (e) => {
+  const files = Array.from(e.target.files);
+
+  files.forEach((file) => {
+    resizeImage(file, (imageData) => {
+      setGalleryImages((prev) => [...prev, imageData]);
+    });
+  });
+};
   const removeGalleryImage = (index) => {
     setGalleryImages(galleryImages.filter((_, i) => i !== index));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (!title || !title.trim()) {
       alert("Lütfen geçerli bir başlık giriniz.");
       return;
@@ -74,41 +146,59 @@ export default function AdminPanel({ onLogout, userRole = "admin" }) {
 
     const existing = JSON.parse(localStorage.getItem("ykos_admin_records") || "[]");
 
-    if (editingId) {
-      const updated = existing.map((r) =>
-        r.id === editingId
-          ? {
-              ...r,
-              title: title.trim(),
-              category,
-              summary: summary.trim(),
-              content: content.trim(),
-              image: mainImage || r.image,
-              gallery: galleryImages.length > 0 ? galleryImages : (r.gallery || []),
-              videoUrl: videoUrl.trim() // Güncelleme
-            }
-          : r
-      );
-      localStorage.setItem("ykos_admin_records", JSON.stringify(updated));
-      setEditingId(null);
-    } else {
-      const newRecord = {
-        id: "YKOS-" + Date.now(),
-        title: title.trim(),
-        category,
-        summary: summary.trim(),
-        content: content.trim(),
-        image: mainImage,
-        gallery: galleryImages,
-        videoUrl: videoUrl.trim(), // Yeni kayıt video URL
-        status: "published",
-        durum: "onaylandi",
-        date: new Date().toLocaleDateString("tr-TR")
-      };
-      existing.unshift(newRecord);
-      localStorage.setItem("ykos_admin_records", JSON.stringify(existing));
-    }
+if (editingId) {
+  const updated = existing.map((r) =>
+    String(r.id) === String(editingId)
+      ? {
+          ...r,
+          title: title.trim() || r.title || r.baslik || "",
+          category: category || r.category || r.kategori || "",
+          summary: summary.trim() || r.summary || r.ozet || "",
+          content: content.trim() || r.content || r.icerik || "",
+          image: mainImage || r.image || r.gorsel || "",
+          gallery:
+            galleryImages.length > 0
+              ? galleryImages
+              : (r.gallery || r.galeri || []),
+          videoUrl:
+            videoUrl.trim() ||
+            r.videoUrl ||
+            r.video ||
+            r.videoBaglantisi ||
+            ""
+        }
+      : r
+  );
 
+  localStorage.setItem(
+    "ykos_admin_records",
+    JSON.stringify(updated)
+  );
+
+  setEditingId(null);
+
+} else {
+  const newRecord = {
+    id: "YKOS-" + Date.now(),
+    title: title.trim(),
+    category,
+    summary: summary.trim(),
+    content: content.trim(),
+    image: mainImage || "",
+    gallery: galleryImages || [],
+    videoUrl: videoUrl.trim(),
+    status: "published",
+    durum: "onaylandi",
+    date: new Date().toLocaleDateString("tr-TR")
+  };
+
+  existing.unshift(newRecord);
+
+  localStorage.setItem(
+    "ykos_admin_records",
+    JSON.stringify(existing)
+  );
+}
     // Formu sıfırla
     setTitle("");
     setSummary("");
@@ -165,22 +255,94 @@ export default function AdminPanel({ onLogout, userRole = "admin" }) {
     <div style={{ maxWidth: "1350px", margin: "0 auto", padding: "12px", color: "#fff" }}>
       
       {/* ÜST BAŞLIK BARI */}
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1.5px solid #ffd700", paddingBottom: "8px", marginBottom: "12px" }}>
-        <div>
-          <h1 style={{ color: "#ffd700", margin: "0 0 2px 0", fontSize: "1.25rem", letterSpacing: "1px", fontWeight: "900" }}>
-            ⚙️ YKOS İÇERİK & YÖNETİM MERKEZİ
-          </h1>
-          <div style={{ fontSize: "0.75rem", color: "#94a3b8" }}>
-            Yetki: <b style={{ color: "#00ff7f" }}>{userRole.toUpperCase()}</b> | Toplam Arşiv: <b>{records.length}</b> | Onay Bekleyen: <b style={{ color: "#eab308" }}>{pendingRecords.length}</b>
-          </div>
-        </div>
-        <button
-          onClick={onLogout}
-          style={{ background: "#dc2626", color: "#fff", border: "none", padding: "6px 16px", borderRadius: "5px", fontWeight: "bold", cursor: "pointer", fontSize: "0.8rem" }}
-        >
-          Çıkış Yap
-        </button>
-      </div>
+     <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+  <button
+    onClick={() => setShowPasswordChange(!showPasswordChange)}
+    style={{
+      background: "#d4a900",
+      color: "#000",
+      border: "none",
+      padding: "6px 12px",
+      borderRadius: "5px",
+      fontWeight: "bold",
+      cursor: "pointer",
+      fontSize: "0.8rem"
+    }}
+  >
+    🔑 Şifre Değiştir
+  </button>
+
+  <button
+    onClick={onLogout}
+    style={{
+      background: "#dc2626",
+      color: "#fff",
+      border: "none",
+      padding: "6px 16px",
+      borderRadius: "5px",
+      fontWeight: "bold",
+      cursor: "pointer",
+      fontSize: "0.8rem"
+    }}
+  >
+    Çıkış Yap
+  </button>
+</div>
+{showPasswordChange && (
+  <div
+    style={{
+      marginTop: "10px",
+      marginBottom: "12px",
+      padding: "12px",
+      border: "1px solid #d4a900",
+      borderRadius: "6px",
+      background: "#0c101d"
+    }}
+  >
+    <div style={{ color: "#ffd700", fontWeight: "bold", marginBottom: "8px" }}>
+      🔑 Yönetici Şifresini Değiştir
+    </div>
+
+    <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
+      <input
+        type="password"
+        placeholder="Mevcut şifre"
+        value={oldPassword}
+        onChange={(e) => setOldPassword(e.target.value)}
+      />
+
+      <input
+        type="password"
+        placeholder="Yeni şifre"
+        value={newPassword}
+        onChange={(e) => setNewPassword(e.target.value)}
+      />
+
+      <input
+        type="password"
+        placeholder="Yeni şifre tekrar"
+        value={newPasswordAgain}
+        onChange={(e) => setNewPasswordAgain(e.target.value)}
+      />
+
+      <button
+        type="button"
+        onClick={handlePasswordChange}
+        style={{
+          background: "#22c55e",
+          color: "#000",
+          border: "none",
+          borderRadius: "4px",
+          padding: "7px 12px",
+          fontWeight: "bold",
+          cursor: "pointer"
+        }}
+      >
+        ✓ KAYDET
+      </button>
+    </div>
+  </div>
+)}
 
       {/* 2 SÜTUNLU GÖVDE */}
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1.25fr", gap: "16px", alignItems: "start" }}>
@@ -212,7 +374,11 @@ export default function AdminPanel({ onLogout, userRole = "admin" }) {
 
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "1px dashed #334155", paddingTop: "5px" }}>
                       <span style={{ fontSize: "0.65rem", color: "#94a3b8" }}>
-                        {item.image ? "📸 Manşet Var" : "Görsel Yok"} {item.videoUrl ? "| 🎥 Video Var" : ""}
+                    {item.image ? "📸 Manşet Var" : "Görsel Yok"}
+{(item.gallery?.length || item.galeri?.length || 0) > 0
+  ? ` | 🖼️ Galeri +${item.gallery?.length || item.galeri?.length || 0}`
+  : ""}
+{item.videoUrl ? " | 🎥 Video Var" : ""}
                       </span>
                       <div style={{ display: "flex", gap: "4px" }}>
                         <button onClick={() => handleApprove(item.id)} style={{ background: "#22c55e", color: "#000", border: "none", padding: "3px 8px", borderRadius: "3px", fontSize: "0.72rem", fontWeight: "900", cursor: "pointer" }}>
