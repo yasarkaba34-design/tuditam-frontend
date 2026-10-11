@@ -2,8 +2,33 @@
 import React, { useState, useEffect } from "react";
 import SearchBar from "../components/SearchBar";
 import { translations } from "../data/i18n";
-import { BubbleMatrixView } from "../mega/BubbleMatrixView";
-import { YKOSPanel } from "./YKOSPanel";
+
+// Search uses Turkish casing even when the interface language changes.
+function normalizeSearch(value) {
+  return String(value ?? "").toLocaleLowerCase("tr-TR").trim();
+}
+function readRecords() {
+  try {
+    const value = JSON.parse(localStorage.getItem("ykos_admin_records") || "[]");
+    return Array.isArray(value) ? value.filter(r => r && typeof r === "object") : [];
+  } catch { return []; }
+}
+function isApproved(record) {
+  return record.status === "approved" || record.durum === "onaylandi" || record.status === "published";
+}
+function videoEmbedUrl(value) {
+  try {
+    const url = new URL(String(value));
+    if (url.protocol !== "https:") return "";
+    const host = url.hostname.toLowerCase();
+    if (host === "youtu.be" || ["youtube.com", "www.youtube.com", "m.youtube.com", "youtube-nocookie.com", "www.youtube-nocookie.com"].includes(host)) {
+      const parts = url.pathname.split("/").filter(Boolean);
+      const id = host === "youtu.be" ? parts[0] : url.searchParams.get("v") || (["embed", "shorts", "live", "v"].includes(parts[0]) ? parts[1] : "");
+      return /^[\w-]{11}$/.test(id || "") ? `https://www.youtube.com/embed/${id}` : "";
+    }
+    return url.href;
+  } catch { return ""; }
+}
 
 const YKOS_POSTERS = [
   { id: 1, no: "01", title: "Sıfır Noktası & Pleistosen Sığınağı", desc: "Anadolu Refugium Modeli, mikroklima koruması ve derin zaman hafızası.", icon: "🌋", tag: "BUZUL ÇAĞI" },
@@ -18,7 +43,6 @@ const YKOS_POSTERS = [
   { id: 10, no: "10", title: "Şartlandırmadan Okumak (YKOS Manifestosu)", desc: "Önce Veri ➔ Sonra Analiz ➔ Sonra Değerlendirme ➔ Sürekli Güncelleme.", icon: "⚖️", tag: "BİLİMSEL MANİFESTO" },
   { id: 11, no: "11", title: "YKOS 1000: Kuantum & Yapay Zekâ", desc: "Disiplinler arası canlı bilgi ağı, graf veri tabanı ve yapay zekâ entegrasyonu.", icon: "🚀", tag: "AI VE ENTEGRASYON" }
 ];
-
 export default function YKOSDashboard({
   currentLang = "TR",
   setCurrentLang = () => {},
@@ -38,15 +62,13 @@ export default function YKOSDashboard({
   const [selectedPoster, setSelectedPoster] = useState(YKOS_POSTERS[0]);
   const [searchQuery, setSearchQuery] = useState("");
   const [adminRecords, setAdminRecords] = useState([]);
-
   const [videoModalOpen, setVideoModalOpen] = useState(false);
   const [allVideoRecords, setAllVideoRecords] = useState([]);
   const [activeVideo, setActiveVideo] = useState(null);
-
   const handleOpenVideoArchive = () => {
     try {
-      const saved = JSON.parse(localStorage.getItem("ykos_admin_records") || "[]");
-      const vids = saved.filter(r => r.videoUrl || r.video || r.videoBaglantisi);
+      const saved = readRecords();
+      const vids = saved.filter(r => isApproved(r) && (r.videoUrl || r.video || r.videoBaglantisi));
       setAllVideoRecords(vids);
       if (vids.length > 0) {
         setActiveVideo(vids[0]);
@@ -58,21 +80,31 @@ export default function YKOSDashboard({
       console.error(e);
     }
   };
-
   const t = (translations && translations[currentLang]) ? translations[currentLang] : (translations?.TR || {});
-
   useEffect(() => {
     try {
-      const saved = JSON.parse(localStorage.getItem("ykos_admin_records") || "[]");
-      const approved = saved.filter(
-        (r) => r.status === "approved" || r.durum === "onaylandi" || r.status === "published"
-      );
+      const saved = readRecords();
+      const approved = saved.filter(isApproved);
       setAdminRecords(approved);
     } catch (e) {
       console.error(e);
     }
   }, []);
-
+  useEffect(() => {
+    const previousTitle = document.title;
+    document.title = "TÜDİTAM | Türk Dili ve Tarihi Araştırma Merkezi";
+    return () => { document.title = previousTitle; };
+  }, []);
+  useEffect(() => {
+    const closeOnEscape = (event) => {
+      if (event.key === "Escape") {
+        setMenuOpen(false); setLangOpen(false);
+        setVideoModalOpen(false); setPosterModalOpen(false);
+      }
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, []);
   const languages = [
     { code: "TR", label: "Türkçe" },
     { code: "EN", label: "English" },
@@ -86,7 +118,6 @@ export default function YKOSDashboard({
     { code: "AR", label: "العربية" },
     { code: "FA", label: "فارسی" }
   ];
-
   const initialStats = [
     { icon: "🌐", count: "214", label: t.stats?.countries || "Ülkeler" },
     { icon: "🏛️", count: "248", label: t.stats?.researches || "Araştırmalar" },
@@ -97,7 +128,6 @@ export default function YKOSDashboard({
     { icon: "📷", count: "46.900", label: t.stats?.images || "Görseller" },
     { icon: "🗺️", count: "58", label: t.stats?.atlases || "Atlaslar" },
   ];
-
   const cardStyle = {
     backgroundColor: "#050811",
     border: "1.5px solid #ffd700",
@@ -106,14 +136,13 @@ export default function YKOSDashboard({
     marginBottom: "12px",
     boxShadow: "0 4px 20px rgba(0, 0, 0, 0.7)",
   };
-
   const btnBaseStyle = {
     background: "#050811",
     border: "1px solid rgba(255, 215, 0, 0.4)",
     color: "#ffffff",
     padding: "10px 4px",
     borderRadius: "8px",
-    fontSize: "0.78rem",
+    fontSize: "0.95rem",
     fontWeight: "bold",
     letterSpacing: "0.5px",
     cursor: "pointer",
@@ -124,36 +153,27 @@ export default function YKOSDashboard({
     gap: "6px",
     transition: "all 0.2s ease",
   };
-
   const sourceCards = t.cards && t.cards.length > 0 ? t.cards : [];
-
-  const filteredGridCards = sourceCards.filter((card) => {
-    if (!searchQuery) return true;
-    const q = searchQuery.toLowerCase();
-    return card.title?.toLowerCase().includes(q) || (card.desc && card.desc.toLowerCase().includes(q));
-  });
-
-  const rightColumnItems = currentLang === "TR" && adminRecords.length > 0
-    ? [
-        ...adminRecords.map((rec) => ({
-          id: rec.id,
-          title: rec.title || rec.baslik,
-          desc: rec.summary || rec.ozet,
-          tag: rec.category || rec.kategori || "YAYIN",
-          image: rec.image || rec.gorsel || rec.imageUrl || rec.resim,
-          icon: "📑",
-          onClick: () => onNavigateRead(rec.id)
-        })),
-        ...(t.verifiedItems || []).map((item) => ({
-          ...item,
-          onClick: () => (item.id === "ACIK-VERI" ? onNavigateAcikVeri() : onNavigateRead(item.id))
-        }))
-      ].slice(0, 4)
-    : (t.verifiedItems || []).slice(0, 4).map((item) => ({
-        ...item,
-        onClick: () => (item.id === "ACIK-VERI" ? onNavigateAcikVeri() : onNavigateRead(item.id))
-      }));
-
+  const matchesSearch = (item) => {
+    const query = normalizeSearch(searchQuery);
+    return !query || [item.title, item.desc, item.id, item.tag, item.category]
+      .some(value => normalizeSearch(value).includes(query));
+  };
+  const filteredGridCards = sourceCards.filter(matchesSearch);
+  const allRightColumnItems = [
+    ...(currentLang === "TR" ? adminRecords.map(rec => ({
+      id: rec.id, title: rec.title || rec.baslik, desc: rec.summary || rec.ozet,
+      tag: rec.category || rec.kategori || "YAYIN",
+      image: rec.image || rec.gorsel || rec.imageUrl || rec.resim,
+      icon: "📑", onClick: () => onNavigateRead(rec.id),
+    })) : []),
+    ...(t.verifiedItems || []).map(item => ({
+      ...item,
+      onClick: () => item.id === "ACIK-VERI" ? onNavigateAcikVeri() : onNavigateRead(item.id),
+    })),
+  ];
+  const rightColumnItems = normalizeSearch(searchQuery)
+    ? allRightColumnItems.filter(matchesSearch) : allRightColumnItems.slice(0, 4);
   const handleCardClick = (card) => {
     if (card.isMatrixCard) {
       onVisualize();
@@ -163,12 +183,22 @@ export default function YKOSDashboard({
       onNavigateRead(card.title || "detay");
     }
   };
-
   return (
-    <div style={{ width: "100%", maxWidth: "1280px", margin: "0 auto", padding: "10px", color: "#ffffff", fontFamily: "Segoe UI, sans-serif" }}>
-      
+    <div className="tuditam-dashboard" style={{ boxSizing: "border-box", width: "100%", maxWidth: "1280px", margin: "0 auto", padding: "10px", color: "#ffffff", fontFamily: "Segoe UI, sans-serif" }}>
       <style>{`
+        .tuditam-dashboard { line-height: 1.55; overflow-wrap: anywhere; }
+        .tuditam-dashboard *, .tuditam-dashboard *::before, .tuditam-dashboard *::after { box-sizing: border-box; }
+        .tuditam-dashboard button { font-family: inherit; min-height: 44px; }
+        .tuditam-dashboard button:focus-visible, .tuditam-dashboard [role="button"]:focus-visible { outline: 3px solid #38bdf8; outline-offset: 3px; }
+        .tuditam-dashboard .ykos-main-content-grid > * { min-width: 0; }
+        .tuditam-dashboard .ykos-archive-grid { align-content: start; }
+        @media (max-width: 1000px) {
+          .tuditam-dashboard .ykos-main-content-grid { grid-template-columns: 1fr !important; }
+        }
+
         @media (max-width: 768px) {
+          .tuditam-header { padding-top: 64px !important; }
+          .tuditam-modal-grid { grid-template-columns: 1fr !important; padding: 12px !important; }
           .ykos-main-content-grid {
             display: flex !important;
             flex-direction: column !important;
@@ -182,12 +212,12 @@ export default function YKOSDashboard({
           }
         }
       `}</style>
-
       {/* 1. ÜST BAR & KURUMSAL MÜHÜR */}
-      <div style={{ ...cardStyle, paddingTop: "0px", position: "relative" }}>
-        
+      <div className="tuditam-header" style={{ ...cardStyle, paddingTop: "12px", position: "relative" }}>
         <div style={{ position: "absolute", left: "14px", top: "14px", zIndex: 10 }}>
           <button
+            aria-expanded={menuOpen}
+            aria-label="Ana menü"
             onClick={() => setMenuOpen(!menuOpen)}
             style={{
               background: menuOpen ? "#f59e0b" : "rgba(245, 158, 11, 0.1)",
@@ -206,10 +236,9 @@ export default function YKOSDashboard({
             ☰ {t.nav?.menu || "MENÜ"}
           </button>
         </div>
-
         <div style={{ position: "absolute", right: "14px", top: "14px", zIndex: 10 }}>
           <div style={{ position: "relative" }}>
-            <span
+            <button type="button" aria-label="Dil seçimi" aria-expanded={langOpen}
               onClick={() => setLangOpen(!langOpen)}
               style={{
                 background: "rgba(15, 23, 42, 0.8)",
@@ -227,8 +256,7 @@ export default function YKOSDashboard({
             >
               <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: "#00ff7f", display: "inline-block" }}></span>
               {currentLang} ▾
-            </span>
-
+            </button>
             {langOpen && (
               <div style={{
                 position: "absolute", right: 0, top: "110%",
@@ -257,69 +285,65 @@ export default function YKOSDashboard({
             )}
           </div>
         </div>
-
         <div style={{ textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", marginTop: "0px", marginBottom: "8px" }}>
           <div style={{ margin: "0 0 6px 0", filter: "drop-shadow(0 0 16px rgba(245, 158, 11, 0.45))" }}>
             <img
-              src="/ykos-logo.png"
-              alt="YKOS Logo"
-              style={{ width: "260px", height: "auto", maxHeight: "220px", objectFit: "contain", display: "block", margin: "0 auto" }}
-            />
-          </div>
-
+ src="/tuditam.logo.png"
+alt="TÜDİTAM Logo"
+style={{
+  width: "clamp(130px, 38vw, 180px)",
+  height: "auto",
+  maxHeight: "180px",
+  objectFit: "contain",
+  display: "block",
+  margin: "0 auto"
+}}
+/>
+</div>
           <h1 style={{ color: "#f59e0b", fontSize: "1.95rem", fontWeight: "900", letterSpacing: "3px", margin: "0 0 4px 0", textShadow: "0 0 20px rgba(245, 158, 11, 0.4)" }}>
-            YKOS BİLGİ SİSTEMİ
+           TÜDİTAM
           </h1>
-
-          <div style={{ color: "#ffd700", fontSize: "0.82rem", fontWeight: "bold", letterSpacing: "1px", margin: "4px 0 6px 0", textTransform: "uppercase" }}>
-            Gazeteciler Sosyal Sorumluluk Projeleri Derneği Kuruluşudur
+          <p style={{ color: "#f1f5f9", fontSize: "clamp(1rem, 2.6vw, 1.25rem)", fontWeight: "700", margin: "4px 0 8px" }}>
+            Türk Dili ve Tarihi Araştırma Merkezi
+          </p>
+          <div style={{ color: "#ffd700", fontSize: "0.95rem", fontWeight: "bold", letterSpacing: "1px", margin: "4px 0 6px 0", textTransform: "uppercase" }}>
+         DİSİPLİNLER ARASI ALGORİTMİK KÜLTÜR VE DİL VERİ TABANI 
           </div>
-
           <p style={{ color: "#94a3b8", fontSize: "0.8rem", letterSpacing: "1.2px", margin: 0, textTransform: "uppercase", fontWeight: "600" }}>
-            DİSİPLİNLER ARASI ALGORİTMİK KÜLTÜR VE DİL VERİ TABANI
+         GAZETECİLER SOSYAL SORUMLULUK PROJELERİ DERNEĞİ KURULUŞUDUR
           </p>
         </div>
-
         {menuOpen && (
           <div style={{ marginTop: "14px", borderTop: "1px dashed rgba(255, 215, 0, 0.3)", paddingTop: "12px" }}>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px", marginBottom: "12px" }}>
-              <button onClick={() => { setMenuOpen(false); window.location.reload(); }} style={{ ...btnBaseStyle, border: "1.5px solid #ffd700", background: "rgba(255, 215, 0, 0.15)", color: "#ffd700", fontWeight: "900" }}>
+              <button onClick={() => { setMenuOpen(false); setSearchQuery(""); window.scrollTo({ top: 0, behavior: "smooth" }); }} style={{ ...btnBaseStyle, border: "1.5px solid #ffd700", background: "rgba(255, 215, 0, 0.15)", color: "#ffd700", fontWeight: "900" }}>
                 🏠 {t.nav?.home || "ANASAYFA"}
               </button>
-              
               <button onClick={() => { setMenuOpen(false); onNavigateMethod(); }} style={{ ...btnBaseStyle, border: "1.5px solid #ffd700", color: "#ffd700", fontWeight: "bold" }}>
                 🏛️ {t.nav?.about || "HAKKIMIZDA"}
               </button>
-
               <button onClick={() => { setMenuOpen(false); setPosterModalOpen(true); }} style={{ ...btnBaseStyle, border: "1.5px solid #f59e0b", background: "rgba(245, 158, 11, 0.15)", color: "#f59e0b", fontWeight: "900" }}>
                 🖼️ 11'Lİ AFİŞ & MANİFESTO SERİSİ
               </button>
-
               <button onClick={() => { setMenuOpen(false); onNavigateMethod(); }} style={btnBaseStyle}>
                 📖 {t.nav?.methodology || "YKOS METODOLOJİSİ"}
               </button>
-              
               <button onClick={() => { setMenuOpen(false); onVisualize(); }} style={{ ...btnBaseStyle, border: "1.5px solid #ffd700", color: "#ffd700", fontWeight: "900" }}>
                 🌌 {t.nav?.matrix || "KÖK HECE MATRİSİ"}
               </button>
-              
               <button onClick={() => { setMenuOpen(false); onNavigateAtlas(); }} style={btnBaseStyle}>
                 🗺️ {t.nav?.atlas || "DAMGA ATLASI"}
               </button>
-              
               <button onClick={() => { setMenuOpen(false); onNavigateEngine(); }} style={btnBaseStyle}>
                 ⚙️ {t.nav?.engine || "OKUMA & ANALİZ MOTORU"}
               </button>
-              
               <button onClick={() => { setMenuOpen(false); onNavigateFlow(); }} style={btnBaseStyle}>
                 🧭 {t.nav?.flow || "GÖÇ & AKIŞ HARİTASI"}
               </button>
-              
               <button onClick={() => { setMenuOpen(false); onNavigateOpsCenter(); }} style={{ ...btnBaseStyle, border: "1.5px solid #06b6d4", color: "#38bdf8", fontWeight: "900", background: "rgba(6, 182, 212, 0.1)" }}>
                 🚀 {t.opsCenterBtn || "OPERASYON MERKEZİ"}
               </button>
             </div>
-
             <div style={{ display: "flex", flexDirection: "column", gap: "8px", borderTop: "1px dashed rgba(255, 215, 0, 0.25)", paddingTop: "10px" }}>
               <button onClick={() => { setMenuOpen(false); onNavigateAcikVeri(); }} style={{ ...btnBaseStyle, width: "100%", padding: "10px", color: "#00ff7f", fontWeight: "900", border: "1px solid rgba(0, 255, 127, 0.5)", background: "rgba(0, 255, 127, 0.05)" }}>
                 👤 {t.guestEntryBtn || "KONUK & AÇIK VERİ GİRİŞİ"}
@@ -331,12 +355,10 @@ export default function YKOSDashboard({
           </div>
         )}
       </div>
-
       {/* 2. DİNAMİK ARAMA BARI */}
       <div style={{ marginBottom: "12px" }}>
         <SearchBar placeholder={t?.searchPlaceholder || "Arşivde veya Matriste Ara..."} onSearch={(q) => setSearchQuery(q)} />
       </div>
-
       {/* 3. DİNAMİK SAYAÇLAR */}
       <div style={cardStyle}>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(130px, 1fr))", gap: "10px" }}>
@@ -349,125 +371,171 @@ export default function YKOSDashboard({
           ))}
         </div>
       </div>
-
       {/* 4. ANA GÖVDE: YKOS ÇÖZÜMLÜLERİ VE İNDEKSLER */}
       <div style={{ ...cardStyle, display: "flex", flexDirection: "column" }}>
         <h3 style={{ color: "#ffd700", fontSize: "1.05rem", marginTop: 0, borderBottom: "1px solid rgba(255,215,0,0.3)", paddingBottom: "8px", marginBottom: "12px" }}>
-          ⚡ YKOS ÇÖZÜMLERİ VE İNDEKSLER (CANLI ARŞİV)
+          📚 TÜDİTAM Araştırma ve Okuma Arşivi
         </h3>
-
-        <div className="ykos-main-content-grid" style={{ display: "grid", gridTemplateColumns: "2.3fr 1fr", gap: "14px", minHeight: "440px", maxHeight: "560px" }}>
-          
-          <div className="ykos-archive-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", overflowY: "auto", paddingRight: "6px" }}>
+        <div className="ykos-main-content-grid" style={{ display: "grid", gridTemplateColumns: "2.3fr 1fr", gap: "14px", alignItems: "start" }}>
+          <div className="ykos-archive-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: "12px" }}>
+            {filteredGridCards.length === 0 && <p role="status" style={{ gridColumn: "1 / -1", color: "#cbd5e1" }}>Arşivde eşleşen içerik bulunamadı.</p>}
             {filteredGridCards.map((card, idx) => {
               if (card.isMatrixCard) {
                 return (
                   <div
                     key={`matrix-${idx}`}
-                    onClick={() => handleCardClick(card)}
+                    role="button" tabIndex={0}
+                  onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); (() => handleCardClick(card))(event); } }}
+                  onClick={() => handleCardClick(card)}
                     style={{ background: "rgba(6, 182, 212, 0.05)", border: "1.5px solid #06b6d4", borderRadius: "6px", padding: "10px 12px", cursor: "pointer", display: "flex", gap: "10px", alignItems: "center", transition: "all 0.2s" }}
                     onMouseEnter={(e) => (e.currentTarget.style.borderColor = "#ffd700")}
                     onMouseLeave={(e) => (e.currentTarget.style.borderColor = "#06b6d4")}
                   >
                     <div style={{ width: "38px", height: "38px", background: "#081b26", border: "1px solid #06b6d4", borderRadius: "4px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "18px", flexShrink: 0 }}>🌌</div>
                     <div style={{ flex: 1, minWidth: 0 }}>
-                      <div style={{ fontSize: "0.82rem", fontWeight: "bold", color: "#ffd700" }}>{card.title}</div>
-                      <div style={{ fontSize: "0.65rem", color: "#38bdf8", wordBreak: "break-all" }}>{card.desc}</div>
+                      <div style={{ fontSize: "1rem", fontWeight: "bold", color: "#ffd700" }}>{card.title}</div>
+                      <div style={{ fontSize: "0.9rem", color: "#38bdf8", wordBreak: "break-all" }}>{card.desc}</div>
                     </div>
                   </div>
                 );
               }
-
               return (
                 <div
-                  key={card.id || `card-${idx}`}
+                  key={`card-${idx}`}
+                  role="button" tabIndex={0}
+                  onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); (() => handleCardClick(card))(event); } }}
                   onClick={() => handleCardClick(card)}
-                  style={{ background: "rgba(0, 255, 127, 0.02)", border: "1px solid rgba(0, 255, 127, 0.3)", borderRadius: "6px", padding: "9px 11px", cursor: "pointer", display: "flex", flexDirection: "column", justifyContent: "space-between", transition: "all 0.2s" }}
-                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#00ff7f"; e.currentTarget.style.background = "rgba(0, 255, 127, 0.08)"; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(0, 255, 127, 0.3)"; e.currentTarget.style.background = "rgba(0, 255, 127, 0.02)"; }}
+                  style={{ background: "#0c101d", border: "1px solid rgba(255, 215, 0, 0.25)", borderRadius: "6px", padding: "10px 12px", cursor: "pointer", display: "flex", gap: "10px", alignItems: "center", transition: "all 0.2s" }}
+                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#ffd700"; e.currentTarget.style.background = "rgba(255, 215, 0, 0.08)"; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(255, 215, 0, 0.25)"; e.currentTarget.style.background = "#0c101d"; }}
                 >
-                  <div>
-                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "6px", marginBottom: "4px" }}>
-                      <div style={{ fontSize: "0.75rem", fontWeight: "bold", color: "#00ff7f", lineHeight: "1.3" }}>► {card.title}</div>
-                      {card.isNew && (
-                        <span style={{ background: "#22c55e", color: "#000", fontSize: "8px", fontWeight: "900", padding: "1px 4px", borderRadius: "2px", flexShrink: 0 }}>{t.newBadge || "YENİ"}</span>
-                      )}
+                  <div style={{ width: "38px", height: "38px", background: "#1a1505", border: "1px solid #ffd700", borderRadius: "4px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "18px", flexShrink: 0 }}>
+                    {card.icon || "📜"}
+                  </div>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ fontSize: "1rem", fontWeight: "bold", color: "#ffd700", whiteSpace: "normal", overflowWrap: "anywhere" }}>
+                      {card.title}
                     </div>
-                    <p style={{ margin: 0, fontSize: "0.68rem", color: "#aaa", lineHeight: "1.35", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{card.desc}</p>
+                    <div style={{ fontSize: "0.9rem", color: "#ccc", lineHeight: "1.55", marginTop: "2px" }}>
+                      {card.desc}
+                    </div>
                   </div>
                 </div>
               );
             })}
           </div>
-
           <div style={{ display: "flex", flexDirection: "column", gap: "10px", background: "rgba(255, 215, 0, 0.02)", padding: "12px", borderRadius: "8px", border: "1.5px solid rgba(255, 215, 0, 0.3)", overflowY: "auto" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1.5px solid #ffd700", paddingBottom: "6px" }}>
               <span style={{ color: "#ffd700", fontSize: "0.85rem", fontWeight: "bold", display: "flex", alignItems: "center", gap: "6px" }}>📑 {t.approvedTitle || "ONAYLI İÇERİK & VERİ"}</span>
               <span style={{ background: "#ffd700", color: "#000", fontSize: "8.5px", fontWeight: "900", padding: "2px 6px", borderRadius: "3px" }}>{t.publishBadge || "YAYIN"}</span>
             </div>
-
+            {rightColumnItems.length === 0 && <p role="status" style={{ color: "#cbd5e1" }}>Eşleşen yayın bulunamadı.</p>}
             {rightColumnItems.map((item, idx) => {
               const itemImg = item.image || item.gorsel || item.imageUrl || item.resim;
               return (
                 <div
                   key={`right-item-${idx}`}
+                  role="button" tabIndex={0}
+                  onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); (item.onClick)(event); } }}
                   onClick={item.onClick}
                   style={{ display: "flex", gap: "10px", alignItems: "center", background: idx === 0 ? "rgba(255, 215, 0, 0.08)" : "#0c101d", border: idx === 0 ? "1.5px solid #ffd700" : "1px solid rgba(255, 215, 0, 0.25)", borderRadius: "6px", padding: "10px", cursor: "pointer", transition: "all 0.2s" }}
                   onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#ffd700"; e.currentTarget.style.background = "rgba(255, 215, 0, 0.15)"; e.currentTarget.style.transform = "translateX(2px)"; }}
                   onMouseLeave={(e) => { e.currentTarget.style.borderColor = idx === 0 ? "#ffd700" : "rgba(255, 215, 0, 0.25)"; e.currentTarget.style.background = idx === 0 ? "rgba(255, 215, 0, 0.08)" : "#0c101d"; e.currentTarget.style.transform = "none"; }}
                 >
                   <div style={{ width: "42px", height: "42px", background: "#1a1505", border: "1px solid #ffd700", borderRadius: "4px", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "16px", flexShrink: 0, overflow: "hidden" }}>
-                    {itemImg ? <img src={itemImg} alt={item.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : (item.icon || "📑")}
+                    {itemImg ? (
+                      <img
+                        src={itemImg}
+                        alt={item.title}
+                        style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                      />
+                    ) : (
+                      item.icon || "📑"
+                    )}
                   </div>
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2px" }}>
-                      <h4 style={{ margin: 0, fontSize: "0.78rem", color: "#ffd700", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{item.title}</h4>
-                      <span style={{ fontSize: "0.62rem", color: "#22c55e", fontWeight: "bold" }}>{t.contentLink || "İÇERİK ➔"}</span>
+                      <h4 style={{ margin: 0, fontSize: "0.95rem", color: "#ffd700", whiteSpace: "normal", overflowWrap: "anywhere" }}>
+                        {item.title}
+                      </h4>
+                      <span style={{ fontSize: "0.8rem", color: "#22c55e", fontWeight: "bold" }}>
+                        {t.contentLink || "İÇERİK ➔"}
+                      </span>
                     </div>
-                    <p style={{ margin: 0, fontSize: "0.66rem", color: "#ccc", lineHeight: "1.3", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>{item.desc}</p>
+                    <p style={{ margin: 0, fontSize: "0.9rem", color: "#ccc", lineHeight: "1.3", display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden" }}>
+                      {item.desc}
+                    </p>
                   </div>
                 </div>
               );
             })}
           </div>
         </div>
-
         {/* ALT BUTTONLAR */}
         <div style={{ display: "flex", gap: "10px", justifyContent: "center", width: "100%", maxWidth: "950px", margin: "14px auto 0 auto", flexWrap: "wrap" }}>
-          <button onClick={onVisualize} style={{ flex: 1, minWidth: "220px", background: "linear-gradient(135deg, #ffd700, #b8860b)", color: "#000", border: "none", padding: "12px", borderRadius: "8px", fontWeight: "900", fontSize: "0.85rem", cursor: "pointer" }}>
+          <button
+            onClick={onVisualize}
+            style={{ flex: 1, minWidth: "220px", background: "linear-gradient(135deg, #ffd700, #b8860b)", color: "#000", border: "none", padding: "12px", borderRadius: "8px", fontWeight: "900", fontSize: "0.85rem", cursor: "pointer" }}
+          >
             {t.visualizeBtn || "BALONCUK MATRİSİNİ GÖRSELLEŞTİR →"}
           </button>
-          
-          <button onClick={onNavigateAcikVeri} style={{ flex: 1, minWidth: "220px", background: "linear-gradient(135deg, #00ff7f, #008000)", color: "#000", border: "none", padding: "12px", borderRadius: "8px", fontWeight: "900", fontSize: "0.85rem", cursor: "pointer" }}>
-            🌐 {t.openDataBtn || "AÇIK VERİ PORTALINA GİT"}
+          <button
+            onClick={onNavigateAcikVeri}
+            style={{ flex: 1, minWidth: "220px", background: "linear-gradient(135deg, #4f46e5, #3730a3)", color: "#fff", border: "none", padding: "12px", borderRadius: "8px", fontWeight: "900", fontSize: "0.85rem", cursor: "pointer" }}
+          >
+            AÇIK VERİ PORTALINA GİT
           </button>
-
-          <button onClick={handleOpenVideoArchive} style={{ flex: 1, minWidth: "220px", background: "linear-gradient(135deg, #ef4444, #991b1b)", color: "#fff", border: "none", padding: "12px", borderRadius: "8px", fontWeight: "900", fontSize: "0.85rem", cursor: "pointer" }}>
-            🎥 VİDEO ARŞİVİ & SUNUMLAR
+          <button
+            onClick={handleOpenVideoArchive}
+            style={{ flex: 1, minWidth: "220px", background: "linear-gradient(135deg, #ef4444, #991b1b)", color: "#fff", border: "none", padding: "12px", borderRadius: "8px", fontWeight: "900", fontSize: "0.85rem", cursor: "pointer" }}
+          >
+            VİDEO ARŞİVİ VE SUNUMLAR
           </button>
         </div>
       </div>
-
+      <section aria-labelledby="ykos-tools-title" style={cardStyle}>
+        <h2 id="ykos-tools-title" style={{ color: "#ffd700", fontSize: "1.2rem", margin: "0 0 8px" }}>YKOS Çalışmaları ve Araçları</h2>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+          <button style={btnBaseStyle} onClick={onNavigateMethod}>YKOS Metodolojisi</button>
+          <button style={btnBaseStyle} onClick={onVisualize}>Kök Hece Matrisi</button>
+          <button style={btnBaseStyle} onClick={onNavigateAtlas}>Damga Atlası</button>
+          <button style={btnBaseStyle} onClick={() => setPosterModalOpen(true)}>Afiş ve Manifesto Serisi</button>
+        </div>
+      </section>
       {/* 🎥 VİDEO ARŞİVİ SEÇİM MODALI */}
       {videoModalOpen && (
-        <div style={{
-          position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
-          backgroundColor: "rgba(0, 0, 0, 0.88)", backdropFilter: "blur(8px)",
-          zIndex: 9999, display: "flex", justifyContent: "center", alignItems: "center", padding: "16px"
-        }}>
-          <div style={{
-            background: "#050811", border: "2px solid #ffd700", borderRadius: "16px",
-            width: "100%", maxWidth: "1050px", maxHeight: "90vh", display: "flex", flexDirection: "column",
-            boxShadow: "0 0 35px rgba(255, 215, 0, 0.35)", overflow: "hidden"
-          }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "16px 20px", borderBottom: "1.5px solid rgba(255, 215, 0, 0.3)", background: "rgba(255, 215, 0, 0.05)" }}>
+        <div
+          style={{
+            position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
+            backgroundColor: "rgba(0, 0, 0, 0.88)", backdropFilter: "blur(8px)",
+            zIndex: 9999, display: "flex", justifyContent: "center", alignItems: "center", padding: "16px"
+          }}
+        >
+          <div
+            style={{
+              background: "#050811", border: "2px solid #ffd700", borderRadius: "16px",
+              width: "100%", maxWidth: "1050px", maxHeight: "90vh", display: "flex", flexDirection: "column",
+              boxShadow: "0 0 35px rgba(255, 215, 0, 0.35)", overflow: "hidden"
+            }}
+          >
+            <div
+              style={{
+                display: "flex", justifyContent: "space-between", alignItems: "center",
+                padding: "16px 20px", borderBottom: "1.5px solid rgba(255, 215, 0, 0.3)",
+                background: "rgba(255, 215, 0, 0.05)"
+              }}
+            >
               <h2 style={{ margin: 0, fontSize: "1.15rem", color: "#ffd700", fontWeight: "900" }}>
                 🎥 YKOS VİDEO ARŞİVİ VE SUNUM LİSTESİ
               </h2>
-              <button onClick={() => setVideoModalOpen(false)} style={{ background: "transparent", border: "1px solid #ef4444", color: "#ef4444", width: "32px", height: "32px", borderRadius: "50%", cursor: "pointer", fontWeight: "bold" }}>✕</button>
+              <button
+                onClick={() => setVideoModalOpen(false)}
+                style={{ background: "transparent", border: "1px solid #ef4444", color: "#ef4444", width: "32px", height: "32px", borderRadius: "50%", cursor: "pointer", fontWeight: "bold" }}
+              >
+                ✕
+              </button>
             </div>
-
-            <div style={{ display: "grid", gridTemplateColumns: "1.4fr 1fr", gap: "16px", padding: "18px", overflowY: "auto", flex: 1 }}>
+            <div className="tuditam-modal-grid" style={{ display: "grid", gridTemplateColumns: "1.4fr 1fr", gap: "16px", padding: "18px", overflowY: "auto", flex: 1 }}>
               <div>
                 {activeVideo ? (
                   <div>
@@ -476,12 +544,7 @@ export default function YKOSDashboard({
                     </h3>
                     <div style={{ position: "relative", paddingBottom: "56.25%", height: 0, overflow: "hidden", borderRadius: "8px", border: "1.5px solid #ffd700" }}>
                       <iframe
-                        src={(() => {
-                          const url = activeVideo.videoUrl || activeVideo.video || activeVideo.videoBaglantisi || "";
-                          if (url.includes("embed")) return url;
-                          const match = url.match(/(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))([\w-]{11})/);
-                          return match ? `https://www.youtube.com/embed/${match[1]}` : url;
-                        })()}
+                        src={videoEmbedUrl(activeVideo.videoUrl || activeVideo.video || activeVideo.videoBaglantisi)}
                         title="Video Oynatıcı"
                         style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: 0 }}
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -505,14 +568,15 @@ export default function YKOSDashboard({
                   <p style={{ color: "#888" }}>Lütfen listeden bir video seçin.</p>
                 )}
               </div>
-
               <div style={{ display: "flex", flexDirection: "column", gap: "8px", overflowY: "auto", maxHeight: "420px", paddingRight: "4px" }}>
                 {allVideoRecords.map((vid, i) => {
                   const isSelected = activeVideo?.id === vid.id;
                   return (
                     <div
                       key={vid.id || i}
-                      onClick={() => setActiveVideo(vid)}
+                      role="button" tabIndex={0}
+                  onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); (() => setActiveVideo(vid))(event); } }}
+                  onClick={() => setActiveVideo(vid)}
                       style={{
                         background: isSelected ? "rgba(245, 158, 11, 0.2)" : "#0c101d",
                         border: isSelected ? "1.5px solid #f59e0b" : "1px solid rgba(255, 215, 0, 0.2)",
@@ -522,7 +586,7 @@ export default function YKOSDashboard({
                     >
                       <span style={{ fontSize: "1.5rem" }}>▶️</span>
                       <div style={{ flex: 1, minWidth: 0 }}>
-                        <div style={{ color: isSelected ? "#ffd700" : "#fff", fontWeight: "bold", fontSize: "0.85rem", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                        <div style={{ color: isSelected ? "#ffd700" : "#fff", fontWeight: "bold", fontSize: "0.85rem", whiteSpace: "normal", overflowWrap: "anywhere" }}>
                           {vid.title || vid.baslik}
                         </div>
                         <div style={{ color: "#94a3b8", fontSize: "0.7rem", marginTop: "2px" }}>
@@ -537,7 +601,6 @@ export default function YKOSDashboard({
           </div>
         </div>
       )}
-
       {/* 5. 11'Lİ YKOS AFİŞ & MANİFESTO VİTRİN MODALI */}
       {posterModalOpen && (
         <div style={{
@@ -564,8 +627,7 @@ export default function YKOSDashboard({
               </div>
               <button onClick={() => setPosterModalOpen(false)} style={{ background: "transparent", border: "1px solid #ef4444", color: "#ef4444", width: "32px", height: "32px", borderRadius: "50%", cursor: "pointer", fontWeight: "bold", fontSize: "1rem" }}>✕</button>
             </div>
-
-            <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr", gap: "16px", padding: "18px", overflowY: "auto", flex: 1 }}>
+            <div className="tuditam-modal-grid" style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr", gap: "16px", padding: "18px", overflowY: "auto", flex: 1 }}>
               <div style={{ background: "linear-gradient(145deg, rgba(15, 23, 42, 0.9), rgba(5, 8, 17, 0.95))", border: "1.5px solid #f59e0b", borderRadius: "12px", padding: "24px", display: "flex", flexDirection: "column", justifyContent: "space-between", boxShadow: "inset 0 0 20px rgba(0,0,0,0.8)" }}>
                 <div>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "12px" }}>
@@ -581,23 +643,24 @@ export default function YKOSDashboard({
                   <button onClick={() => { setPosterModalOpen(false); onNavigateMethod(); }} style={{ background: "rgba(245, 158, 11, 0.2)", border: "1px solid #f59e0b", color: "#f59e0b", padding: "6px 12px", borderRadius: "6px", fontSize: "0.75rem", fontWeight: "bold", cursor: "pointer" }}>METODOLOJİDE İNCELE ➔</button>
                 </div>
               </div>
-
               <div style={{ display: "flex", flexDirection: "column", gap: "8px", overflowY: "auto", maxHeight: "420px", paddingRight: "4px" }}>
                 {YKOS_POSTERS.map((p) => {
                   const isSelected = selectedPoster.id === p.id;
                   return (
                     <div
                       key={p.id}
-                      onClick={() => setSelectedPoster(p)}
+                      role="button" tabIndex={0}
+                  onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); (() => setSelectedPoster(p))(event); } }}
+                  onClick={() => setSelectedPoster(p)}
                       style={{ background: isSelected ? "rgba(245, 158, 11, 0.15)" : "#0c101d", border: isSelected ? "1.5px solid #f59e0b" : "1px solid rgba(255, 215, 0, 0.2)", borderRadius: "8px", padding: "10px 12px", cursor: "pointer", display: "flex", gap: "10px", alignItems: "center", transition: "all 0.2s" }}
                     >
                       <span style={{ fontSize: "1.4rem" }}>{p.icon}</span>
                       <div style={{ flex: 1, minWidth: 0 }}>
                         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                          <span style={{ color: isSelected ? "#ffd700" : "#ffffff", fontWeight: "bold", fontSize: "0.82rem", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>{p.title}</span>
+                          <span style={{ color: isSelected ? "#ffd700" : "#ffffff", fontWeight: "bold", fontSize: "1rem", whiteSpace: "normal", overflowWrap: "anywhere" }}>{p.title}</span>
                           <span style={{ color: "#f59e0b", fontSize: "0.7rem", fontWeight: "900", flexShrink: 0 }}>#{p.no}</span>
                         </div>
-                        <div style={{ color: "#94a3b8", fontSize: "0.68rem", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis", marginTop: "2px" }}>{p.desc}</div>
+                        <div style={{ color: "#94a3b8", fontSize: "0.85rem", whiteSpace: "normal", overflowWrap: "anywhere", marginTop: "2px" }}>{p.desc}</div>
                       </div>
                     </div>
                   );
@@ -607,7 +670,6 @@ export default function YKOSDashboard({
           </div>
         </div>
       )}
-
     </div>
   );
 }

@@ -61,7 +61,7 @@ export default function Header() {
                 src="/tuditam-logo.png" 
                 alt="TÜDİTAM Mühür" 
                 style={{ width: "100%", height: "100%", borderRadius: "50%", objectFit: "cover" }}
-                onError={(e) => { e.target.style.display = 'none'; }}
+             
               />
             </div>
             

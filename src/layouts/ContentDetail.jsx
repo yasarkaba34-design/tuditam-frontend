@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getEmbedUrl } from "../data/videoEmbed";
 import { translations } from "../data/i18n";
+import { defaultArchiveArticles } from "../data/ykosDataService";
 
 export default function ContentDetail({ selectedId, currentLang = "TR" }) {
   const [record, setRecord] = useState(null);
@@ -34,7 +35,18 @@ export default function ContentDetail({ selectedId, currentLang = "TR" }) {
         }
       }
 
-      // 2. Statik içeriklerde ara
+      // 2. YKOS ARAŞTIRMA & OKUMA ARŞİVİNDE ARA
+      if (!found && selectedId) {
+        found = defaultArchiveArticles.find(
+          (item) =>
+            String(item.id) === String(selectedId) ||
+            (item.title &&
+              item.title.toLowerCase() ===
+                String(selectedId).toLowerCase())
+        );
+      }
+
+      // 3. Statik içeriklerde ara
       if (!found) {
         const t = translations[currentLang] || translations["TR"];
 
@@ -52,7 +64,7 @@ export default function ContentDetail({ selectedId, currentLang = "TR" }) {
         );
       }
 
-      // 3. Son çare
+      // 4. Son çare
       if (!found && saved.length > 0) {
         found = saved[0];
       }
@@ -223,7 +235,7 @@ export default function ContentDetail({ selectedId, currentLang = "TR" }) {
           </div>
         )}
 
-        {/* ANA YAZI — EKSİK OLAN BÖLÜM */}
+        {/* ANA YAZI */}
         <div
           style={{
             fontSize: "1rem",
