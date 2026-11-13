@@ -1,5 +1,64 @@
 import React, { useState } from 'react';
 import { Search, Shield, Cpu, Terminal, RefreshCw, Layers } from 'lucide-react';
+const ANCIENT_LANGUAGE_GROUPS = [
+  { label: "Anadolu ve Ege", options: [
+    { value: "HATTİCE", label: "Hattice — Anadolu" },
+    { value: "HITITCE", label: "Hititçe — Anadolu" },
+    { value: "LUWICE", label: "Luvice — Anadolu" },
+    { value: "LİKÇE", label: "Likçe — Anadolu" },
+    { value: "LIDCE", label: "Lidce — Anadolu" },
+    { value: "PALACA", label: "Palaca — Anadolu" },
+    { value: "KARCA", label: "Karca — Anadolu" },
+    { value: "FRIGCE", label: "Frigce — Anadolu" },
+    { value: "URARTUCA", label: "Urartuca — Doğu Anadolu" }
+  ]},
+  { label: "Mezopotamya ve Levant", options: [
+    { value: "SUMERCE", label: "Sümerce — Mezopotamya" },
+    { value: "AKKADCA", label: "Akkadca — Mezopotamya" },
+    { value: "HURRICE", label: "Hurrice — Kuzey Mezopotamya" },
+    { value: "ELAMCA", label: "Elamca — İran / Mezopotamya" },
+    { value: "UGARITCE", label: "Ugaritçe — Levant" },
+    { value: "FENIKECE", label: "Fenikece — Levant" },
+    { value: "ARAMICE", label: "Aramice — Levant" },
+    { value: "IBRANICE", label: "İbranice — Levant" },
+    { value: "PUNICE", label: "Punikçe — Kuzey Afrika" }
+  ]},
+  { label: "Mısır ve Afrika", options: [
+    { value: "MISIRCA", label: "Eski Mısır dili" },
+    { value: "GEEZ", label: "Ge'ez — Etiyopya" }
+  ]},
+  { label: "İran ve Orta Asya", options: [
+    { value: "ESKI_PERSCE", label: "Eski Persçe" },
+    { value: "AVESTACA", label: "Avestaca" },
+    { value: "SOGDCA", label: "Soğdca" },
+    { value: "TOHARCA_A", label: "Toharca A" },
+    { value: "TOHARCA_B", label: "Toharca B" }
+  ]},
+  { label: "Güney ve Doğu Asya", options: [
+    { value: "SANSKRITCE", label: "Sanskritçe" },
+    { value: "KLASIK_CINCE", label: "Klasik Çince" },
+    { value: "ESKI_TIBETCE", label: "Eski Tibetçe" },
+    { value: "ESKI_JAPONCA", label: "Eski Japonca" },
+    { value: "ESKI_TAMIL", label: "Eski Tamilce" }
+  ]},
+  { label: "Avrupa", options: [
+    { value: "MYKEN_YUNANCASI", label: "Miken Yunancası" },
+    { value: "ANTIK_YUNANCA", label: "Antik Yunanca" },
+    { value: "LATINCE", label: "Latince" },
+    { value: "ETRUSKCE", label: "Etrüskçe" },
+    { value: "GALYA_KELTCE", label: "Galya Keltçesi" },
+    { value: "GOTCA", label: "Gotça" },
+    { value: "ESKI_NORSCA", label: "Eski Norsça" }
+  ]},
+  { label: "Amerikalar", options: [
+    { value: "KLASIK_MAYA", label: "Klasik Maya yazı dili" },
+    { value: "KLASIK_NAHUATL", label: "Klasik Nahuatl" }
+  ]}
+];
+
+const ANCIENT_LANGUAGE_LABELS = Object.fromEntries(
+  ANCIENT_LANGUAGE_GROUPS.flatMap((group) => group.options.map((option) => [option.value, option.label]))
+);
 
 export default function YKOSAnalysisEngine() {
   const [inputWord, setInputWord] = useState('');
@@ -30,17 +89,19 @@ export default function YKOSAnalysisEngine() {
     setResult(null);
 
     setTimeout(() => {
-      const upperWord = inputWord.toUpperCase().trim();
-      const layerData = database[selectedLayer] || {};
-      
-      if (layerData[upperWord]) {
-        setResult(layerData[upperWord]);
+      const upperWord = inputWord.toLocaleUpperCase("tr").trim();
+      const layerData = database[selectedLayer];
+      const localEntry = layerData?.[upperWord];
+
+      if (localEntry) {
+        setResult({ ...localEntry, isLocalExample: true });
       } else {
+        const layerName = ANCIENT_LANGUAGE_LABELS[selectedLayer] || selectedLayer;
         setResult({
-          root: upperWord.slice(0, 3) + ' (Kök-Heceye İndirgendi)',
-          meaning: 'Anadolu Refugium Arkaik Töz Karşılığı',
-          shell: 'Yabancı ekler (-os, -is, -um) başarıyla sıyrıldı.',
-          resonance: '%94.2 Tahmini Türk Lehçeleri Rezonansı'
+          unavailable: true,
+          message: layerData
+            ? layerName + " katmanında “" + upperWord + "” için yerel örnek kayıt bulunmuyor."
+            : layerName + " katmanı seçilebilir durumda; ancak bu dil için henüz yerel test verisi eklenmedi."
         });
       }
       setIsAnalyzing(false);
@@ -78,9 +139,13 @@ export default function YKOSAnalysisEngine() {
             onChange={(e) => setSelectedLayer(e.target.value)}
             className="w-full bg-black border border-[#D4AF37]/50 text-[#D4AF37] p-3 rounded focus:outline-none focus:border-[#FFD700]"
           >
-            <option value="LİKÇE">LİKÇE (Lycian Corpus)</option>
-            <option value="PALACA">PALACA (Palaic Corpus)</option>
-            <option value="HATTİCE">HATTİCE (Hattian Layer)</option>
+            {ANCIENT_LANGUAGE_GROUPS.map((group) => (
+              <optgroup key={group.label} label={group.label}>
+                {group.options.map((option) => (
+                  <option key={option.value} value={option.value}>{option.label}</option>
+                ))}
+              </optgroup>
+            ))}
           </select>
         </div>
 
@@ -92,7 +157,8 @@ export default function YKOSAnalysisEngine() {
             </label>
             <div className="flex space-x-2">
               <input 
-                type="text" 
+                type="text"
+                size={21} 
                 value={inputWord}
                 onChange={(e) => setInputWord(e.target.value)}
                 placeholder="Örn: ERİN..." 
@@ -120,6 +186,13 @@ export default function YKOSAnalysisEngine() {
             </p>
           </div>
         ) : result ? (
+          result.unavailable ? (
+            <div style={{ padding: "18px", color: "#fcd34d", lineHeight: 1.6 }}>
+              <strong>Bu katman için yerel eşleşme kaydı yok.</strong>
+              <p style={{ margin: "8px 0 0" }}>{result.message}</p>
+              <p style={{ margin: "8px 0 0", color: "#94a3b8" }}>Seçim, dil katmanını listeler; kaynaklı test verisi eklenmeden sonuç veya uyum oranı üretilmez.</p>
+            </div>
+          ) : (
           <div className="space-y-4">
             <div className="flex items-center justify-between border-b border-[#D4AF37]/20 pb-2">
               <span className="text-xs uppercase text-[#D4AF37]/60">ANALİZ SONUCU & TÖZ EŞLEŞMESİ</span>
@@ -142,6 +215,7 @@ export default function YKOSAnalysisEngine() {
               </div>
             </div>
           </div>
+          )
         ) : (
           <div className="text-center py-6 text-[#D4AF37]/40">
             <Terminal className="w-10 h-10 mx-auto mb-2 opacity-30" />
