@@ -1,0 +1,818 @@
+{
+  "schemaVersion": 1,
+  "title": "YKOS prototip kök-hece envanteri",
+  "status": "prototype-candidates",
+  "count": 100,
+  "sourceBranch": "main",
+  "sourceFiles": [
+    "src/bubblematrix/bm_proto_hitt_luvi_100.json",
+    "src/bubblematrix/bm_proto_hittit_luvi_1-20 .json",
+    "src/bubblematrix/bm_proto_hitit_luvi_21_40 .json",
+    "src/bubblematrix/bm_proto_hitit_luvi_41_60 .json",
+    "src/bubblematrix/bm_proto_hitit_luvi_61_80 .json",
+    "src/bubblematrix/bm_proto_hitit_luvi_81_100 .json"
+  ],
+  "validationNote": "Merged from the prototype files on the old main branch. The 100 IDs are complete after combining overlapping partial files; the source files do not provide citations or first-attestation dates. Treat these as unvalidated research candidates, not established etymologies.",
+  "records": [
+    {
+      "id": 1,
+      "label": "yol",
+      "proto_hece": "I-ŠA",
+      "ritim": "K",
+      "semiyotik": "iz → rota → yol",
+      "geo": "Hattuşa"
+    },
+    {
+      "id": 2,
+      "label": "su",
+      "proto_hece": "ŠU",
+      "ritim": "U",
+      "semiyotik": "akış → yaşam → su",
+      "geo": "Kilikya-Toros"
+    },
+    {
+      "id": 3,
+      "label": "taş",
+      "proto_hece": "TA",
+      "ritim": "K",
+      "semiyotik": "yer → nesne → taş",
+      "geo": "Hattuşa"
+    },
+    {
+      "id": 4,
+      "label": "el",
+      "proto_hece": "A-LA",
+      "ritim": "A",
+      "semiyotik": "uzuv → güç → el",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 5,
+      "label": "gün",
+      "proto_hece": "KU-NA",
+      "ritim": "U",
+      "semiyotik": "ışık → zaman → gün",
+      "geo": "Toros"
+    },
+    {
+      "id": 6,
+      "label": "ay",
+      "proto_hece": "A-YA",
+      "ritim": "A",
+      "semiyotik": "ışık → gök → ay",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 7,
+      "label": "kara",
+      "proto_hece": "KA-RA",
+      "ritim": "K",
+      "semiyotik": "toprak → yüzey → kara",
+      "geo": "Hattuşa"
+    },
+    {
+      "id": 8,
+      "label": "yer",
+      "proto_hece": "E-RA",
+      "ritim": "A",
+      "semiyotik": "zemin → konum → yer",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 9,
+      "label": "suyolu",
+      "proto_hece": "ŠU-I-ŠA",
+      "ritim": "U+K",
+      "semiyotik": "akış → rota → su yolu",
+      "geo": "Toros-Hattuşa"
+    },
+    {
+      "id": 10,
+      "label": "dağ",
+      "proto_hece": "TA-KA",
+      "ritim": "K",
+      "semiyotik": "yükselti → sınır → dağ",
+      "geo": "Hattuşa"
+    },
+    {
+      "id": 11,
+      "label": "göz",
+      "proto_hece": "KU-UŠ",
+      "ritim": "U",
+      "semiyotik": "ışık → algı → göz",
+      "geo": "Toros"
+    },
+    {
+      "id": 12,
+      "label": "söz",
+      "proto_hece": "ŠA-UZ",
+      "ritim": "A+U",
+      "semiyotik": "ses → bildirim → söz",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 13,
+      "label": "kapı",
+      "proto_hece": "KA-PA",
+      "ritim": "K",
+      "semiyotik": "sınır → giriş → kapı",
+      "geo": "Hattuşa"
+    },
+    {
+      "id": 14,
+      "label": "ev",
+      "proto_hece": "E-WA",
+      "ritim": "A",
+      "semiyotik": "barınak → yuva → ev",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 15,
+      "label": "ateş",
+      "proto_hece": "A-TAŠ",
+      "ritim": "A+K",
+      "semiyotik": "ısı → güç → ateş",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 16,
+      "label": "demir",
+      "proto_hece": "TE-MUR",
+      "ritim": "A+U",
+      "semiyotik": "taş → maden → demir",
+      "geo": "Toros"
+    },
+    {
+      "id": 17,
+      "label": "yıl",
+      "proto_hece": "I-LA",
+      "ritim": "A",
+      "semiyotik": "zaman → döngü → yıl",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 18,
+      "label": "balık",
+      "proto_hece": "PA-LAK",
+      "ritim": "PA+K",
+      "semiyotik": "canlı → av → balık",
+      "geo": "Kilikya"
+    },
+    {
+      "id": 19,
+      "label": "kuş",
+      "proto_hece": "KU-UŠ",
+      "ritim": "U",
+      "semiyotik": "hareket → gök → kuş",
+      "geo": "Toros"
+    },
+    {
+      "id": 20,
+      "label": "yıldız",
+      "proto_hece": "IL-TI-SA",
+      "ritim": "A+K",
+      "semiyotik": "ışık → işaret → yıldız",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 21,
+      "label": "ağaç",
+      "proto_hece": "A-KA-ŠA",
+      "ritim": "A+K",
+      "semiyotik": "canlı → dal → ağaç",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 22,
+      "label": "toprak",
+      "proto_hece": "TU-PA-RAK",
+      "ritim": "U+PA",
+      "semiyotik": "zemin → madde → toprak",
+      "geo": "Hattuşa"
+    },
+    {
+      "id": 23,
+      "label": "rüzgâr",
+      "proto_hece": "RU-ZA-AR",
+      "ritim": "U+A",
+      "semiyotik": "akış → hareket → rüzgâr",
+      "geo": "Kilikya"
+    },
+    {
+      "id": 24,
+      "label": "deniz",
+      "proto_hece": "TA-NA-SA",
+      "ritim": "K+A",
+      "semiyotik": "su → genişlik → deniz",
+      "geo": "Kilikya"
+    },
+    {
+      "id": 25,
+      "label": "tahta",
+      "proto_hece": "TA-TA",
+      "ritim": "K",
+      "semiyotik": "yüzey → yapı → tahta",
+      "geo": "Hattuşa"
+    },
+    {
+      "id": 26,
+      "label": "kül",
+      "proto_hece": "KU-LA",
+      "ritim": "U+A",
+      "semiyotik": "ateş → kalıntı → kül",
+      "geo": "Toros"
+    },
+    {
+      "id": 27,
+      "label": "yüz",
+      "proto_hece": "IU-ZA",
+      "ritim": "U+A",
+      "semiyotik": "algı → ifade → yüz",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 28,
+      "label": "kalp",
+      "proto_hece": "KA-LUP",
+      "ritim": "K+PA",
+      "semiyotik": "öz → yaşam → kalp",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 29,
+      "label": "akıl",
+      "proto_hece": "A-KIL",
+      "ritim": "A+K",
+      "semiyotik": "ışık → düşünce → akıl",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 30,
+      "label": "söğüt",
+      "proto_hece": "ŠA-UT",
+      "ritim": "A+U",
+      "semiyotik": "bitki → akış → söğüt",
+      "geo": "Kilikya"
+    },
+    {
+      "id": 31,
+      "label": "bulut",
+      "proto_hece": "PU-LUT",
+      "ritim": "PA+U",
+      "semiyotik": "su → gök → bulut",
+      "geo": "Kilikya"
+    },
+    {
+      "id": 32,
+      "label": "yağmur",
+      "proto_hece": "IA-MU-RA",
+      "ritim": "A+U",
+      "semiyotik": "su → düşüş → yağmur",
+      "geo": "Toros"
+    },
+    {
+      "id": 33,
+      "label": "çiçek",
+      "proto_hece": "ŠI-ŠEK",
+      "ritim": "A+K",
+      "semiyotik": "bitki → renk → çiçek",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 34,
+      "label": "köy",
+      "proto_hece": "KU-YA",
+      "ritim": "U+A",
+      "semiyotik": "topluluk → yerleşim → köy",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 35,
+      "label": "tarla",
+      "proto_hece": "TA-AR-LA",
+      "ritim": "K+A",
+      "semiyotik": "yüzey → üretim → tarla",
+      "geo": "Hattuşa"
+    },
+    {
+      "id": 36,
+      "label": "ekmek",
+      "proto_hece": "E-KEM",
+      "ritim": "A+K",
+      "semiyotik": "tahıl → besin → ekmek",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 37,
+      "label": "bal",
+      "proto_hece": "PA-AL",
+      "ritim": "PA+A",
+      "semiyotik": "tat → besin → bal",
+      "geo": "Kilikya"
+    },
+    {
+      "id": 38,
+      "label": "süt",
+      "proto_hece": "ŠU-TA",
+      "ritim": "U+K",
+      "semiyotik": "besin → akış → süt",
+      "geo": "Toros"
+    },
+    {
+      "id": 39,
+      "label": "köpek",
+      "proto_hece": "KU-PAK",
+      "ritim": "U+PA",
+      "semiyotik": "canlı → koruma → köpek",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 40,
+      "label": "at",
+      "proto_hece": "A-TA",
+      "ritim": "A+K",
+      "semiyotik": "hareket → güç → at",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 41,
+      "label": "kurt",
+      "proto_hece": "KUR-TA",
+      "ritim": "U+K",
+      "semiyotik": "avcı → canlı → kurt",
+      "geo": "Toros"
+    },
+    {
+      "id": 42,
+      "label": "tilki",
+      "proto_hece": "TI-LAK",
+      "ritim": "A+K",
+      "semiyotik": "çeviklik → zeka → tilki",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 43,
+      "label": "yılan",
+      "proto_hece": "IL-AN",
+      "ritim": "A+N",
+      "semiyotik": "akış → giz → yılan",
+      "geo": "Toros"
+    },
+    {
+      "id": 44,
+      "label": "arı",
+      "proto_hece": "A-RI",
+      "ritim": "A",
+      "semiyotik": "üretim → yaşam → arı",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 45,
+      "label": "kan",
+      "proto_hece": "KA-NA",
+      "ritim": "K+A",
+      "semiyotik": "öz → yaşam → kan",
+      "geo": "Hattuşa"
+    },
+    {
+      "id": 46,
+      "label": "kemik",
+      "proto_hece": "KE-MIK",
+      "ritim": "A+K",
+      "semiyotik": "yapı → dayanıklılık → kemik",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 47,
+      "label": "omuz",
+      "proto_hece": "U-MUZ",
+      "ritim": "U",
+      "semiyotik": "taşıma → destek → omuz",
+      "geo": "Toros"
+    },
+    {
+      "id": 48,
+      "label": "baş",
+      "proto_hece": "PA-ŠA",
+      "ritim": "PA+K",
+      "semiyotik": "kimlik → yön → baş",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 49,
+      "label": "kulak",
+      "proto_hece": "KU-LAK",
+      "ritim": "U+K",
+      "semiyotik": "algı → ses → kulak",
+      "geo": "Toros"
+    },
+    {
+      "id": 50,
+      "label": "dil",
+      "proto_hece": "TI-LA",
+      "ritim": "A",
+      "semiyotik": "ileti → anlam → dil",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 51,
+      "label": "elma",
+      "proto_hece": "AL-MA",
+      "ritim": "A+MA",
+      "semiyotik": "canlı → meyve → elma",
+      "geo": "Kilikya"
+    },
+    {
+      "id": 52,
+      "label": "armut",
+      "proto_hece": "AR-MU-TA",
+      "ritim": "A+U+K",
+      "semiyotik": "canlı → meyve → armut",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 53,
+      "label": "üzüm",
+      "proto_hece": "U-ZUM",
+      "ritim": "U",
+      "semiyotik": "bitki → besin → üzüm",
+      "geo": "Kilikya"
+    },
+    {
+      "id": 54,
+      "label": "buğday",
+      "proto_hece": "PU-TA",
+      "ritim": "PA+K",
+      "semiyotik": "tahıl → besin → buğday",
+      "geo": "Hattuşa"
+    },
+    {
+      "id": 55,
+      "label": "arpa",
+      "proto_hece": "AR-PA",
+      "ritim": "A+PA",
+      "semiyotik": "tahıl → besin → arpa",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 56,
+      "label": "yağ",
+      "proto_hece": "IA-KA",
+      "ritim": "A+K",
+      "semiyotik": "sıvı → besin → yağ",
+      "geo": "Kilikya"
+    },
+    {
+      "id": 57,
+      "label": "tuz",
+      "proto_hece": "TU-ZA",
+      "ritim": "U+A",
+      "semiyotik": "taş → tat → tuz",
+      "geo": "Toros"
+    },
+    {
+      "id": 58,
+      "label": "sucuk",
+      "proto_hece": "ŠU-KUK",
+      "ritim": "U+K",
+      "semiyotik": "et → işlenmiş besin → sucuk",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 59,
+      "label": "peynir",
+      "proto_hece": "PA-IN-RA",
+      "ritim": "PA+A",
+      "semiyotik": "süt → katı → peynir",
+      "geo": "Kilikya"
+    },
+    {
+      "id": 60,
+      "label": "yemek",
+      "proto_hece": "IA-MAK",
+      "ritim": "A+K",
+      "semiyotik": "besin → eylem → yemek",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 61,
+      "label": "çorba",
+      "proto_hece": "ŠUR-PA",
+      "ritim": "U+PA",
+      "semiyotik": "karışım → besin → çorba",
+      "geo": "Toros"
+    },
+    {
+      "id": 62,
+      "label": "tabak",
+      "proto_hece": "TA-PAK",
+      "ritim": "K+PA",
+      "semiyotik": "yüzey → kap → tabak",
+      "geo": "Hattuşa"
+    },
+    {
+      "id": 63,
+      "label": "kaşık",
+      "proto_hece": "KA-ŠIK",
+      "ritim": "K",
+      "semiyotik": "araç → taşıma → kaşık",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 64,
+      "label": "çatal",
+      "proto_hece": "ŠA-TA-LA",
+      "ritim": "A+K",
+      "semiyotik": "bölme → araç → çatal",
+      "geo": "Hattuşa"
+    },
+    {
+      "id": 65,
+      "label": "bıçak",
+      "proto_hece": "PA-ŠAK",
+      "ritim": "PA+K",
+      "semiyotik": "kesme → araç → bıçak",
+      "geo": "Hattuşa"
+    },
+    {
+      "id": 66,
+      "label": "sofra",
+      "proto_hece": "ŠU-PA-RA",
+      "ritim": "U+PA+A",
+      "semiyotik": "düzen → topluluk → sofra",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 67,
+      "label": "koltuk",
+      "proto_hece": "KU-UL-TAK",
+      "ritim": "U+K",
+      "semiyotik": "destek → oturma → koltuk",
+      "geo": "Toros"
+    },
+    {
+      "id": 68,
+      "label": "masa",
+      "proto_hece": "MA-SA",
+      "ritim": "MA+A",
+      "semiyotik": "yüzey → düzen → masa",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 69,
+      "label": "sandalye",
+      "proto_hece": "ŠA-AN-TA-LI",
+      "ritim": "A+N+K",
+      "semiyotik": "oturma → araç → sandalye",
+      "geo": "Kilikya"
+    },
+    {
+      "id": 70,
+      "label": "eşik",
+      "proto_hece": "KA-PA-IŠ",
+      "ritim": "K+PA+K",
+      "semiyotik": "sınır → geçiş → eşik",
+      "geo": "Hattuşa"
+    },
+    {
+      "id": 71,
+      "label": "evren",
+      "proto_hece": "E-UR-AN",
+      "ritim": "A+U+N",
+      "semiyotik": "bütün → kozmos → evren",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 72,
+      "label": "dünya",
+      "proto_hece": "TU-AN-YA",
+      "ritim": "U+A",
+      "semiyotik": "yer → küre → dünya",
+      "geo": "Toros"
+    },
+    {
+      "id": 73,
+      "label": "gökyüzü",
+      "proto_hece": "KU-UK-IU",
+      "ritim": "U+K",
+      "semiyotik": "ışık → gök → gökyüzü",
+      "geo": "Kilikya"
+    },
+    {
+      "id": 74,
+      "label": "yeraltı",
+      "proto_hece": "E-RA-AL-TA",
+      "ritim": "A+N+K",
+      "semiyotik": "zemin → derinlik → yeraltı",
+      "geo": "Hattuşa"
+    },
+    {
+      "id": 75,
+      "label": "zaman",
+      "proto_hece": "ZA-MA-AN",
+      "ritim": "A+MA+N",
+      "semiyotik": "döngü → süre → zaman",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 76,
+      "label": "ışık",
+      "proto_hece": "I-ŠIK",
+      "ritim": "A+K",
+      "semiyotik": "ateş → parlaklık → ışık",
+      "geo": "Hattuşa"
+    },
+    {
+      "id": 77,
+      "label": "gölge",
+      "proto_hece": "KU-UL-KA",
+      "ritim": "U+K",
+      "semiyotik": "ışık → karşıt → gölge",
+      "geo": "Toros"
+    },
+    {
+      "id": 78,
+      "label": "ses",
+      "proto_hece": "ŠA-AS",
+      "ritim": "A",
+      "semiyotik": "titreşim → algı → ses",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 79,
+      "label": "ritim",
+      "proto_hece": "RI-TI-MA",
+      "ritim": "A+K",
+      "semiyotik": "hareket → düzen → ritim",
+      "geo": "Kilikya"
+    },
+    {
+      "id": 80,
+      "label": "sözcük",
+      "proto_hece": "ŠA-UZ-KU",
+      "ritim": "A+U+K",
+      "semiyotik": "ses → anlam → sözcük",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 81,
+      "label": "kavram",
+      "proto_hece": "KA-UR-MA",
+      "ritim": "K+U+MA",
+      "semiyotik": "düşünce → soyut → kavram",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 82,
+      "label": "anlam",
+      "proto_hece": "AN-LA-MA",
+      "ritim": "N+A+MA",
+      "semiyotik": "işaret → içerik → anlam",
+      "geo": "Kilikya"
+    },
+    {
+      "id": 83,
+      "label": "bilgi",
+      "proto_hece": "PI-IL-KI",
+      "ritim": "PA+A+K",
+      "semiyotik": "veri → içerik → bilgi",
+      "geo": "Hattuşa"
+    },
+    {
+      "id": 84,
+      "label": "akıl",
+      "proto_hece": "A-KIL",
+      "ritim": "A+K",
+      "semiyotik": "ışık → düşünce → akıl",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 85,
+      "label": "düşünce",
+      "proto_hece": "TU-ŠA-AN-KI",
+      "ritim": "U+A+N+K",
+      "semiyotik": "akış → içsel → düşünce",
+      "geo": "Toros"
+    },
+    {
+      "id": 86,
+      "label": "söylem",
+      "proto_hece": "ŠA-UL-MA",
+      "ritim": "A+U+MA",
+      "semiyotik": "ses → ifade → söylem",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 87,
+      "label": "kültür",
+      "proto_hece": "KU-UL-TUR",
+      "ritim": "U+K",
+      "semiyotik": "topluluk → davranış → kültür",
+      "geo": "Toros"
+    },
+    {
+      "id": 88,
+      "label": "tarih",
+      "proto_hece": "TA-RI-IK",
+      "ritim": "K+A",
+      "semiyotik": "iz → kayıt → tarih",
+      "geo": "Hattuşa"
+    },
+    {
+      "id": 89,
+      "label": "yazı",
+      "proto_hece": "IA-ZA",
+      "ritim": "A+ZA",
+      "semiyotik": "işaret → sembol → yazı",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 90,
+      "label": "kitap",
+      "proto_hece": "KI-TA-PA",
+      "ritim": "K+A+PA",
+      "semiyotik": "yazı → bütün → kitap",
+      "geo": "Hattuşa"
+    },
+    {
+      "id": 91,
+      "label": "oku",
+      "proto_hece": "U-KU",
+      "ritim": "U+K",
+      "semiyotik": "işaret → kavrama → okumak",
+      "geo": "Toros"
+    },
+    {
+      "id": 92,
+      "label": "yazmak",
+      "proto_hece": "IA-ZA-MAK",
+      "ritim": "A+ZA+K",
+      "semiyotik": "sembol → üretim → yazmak",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 93,
+      "label": "düş",
+      "proto_hece": "TU-ŠA",
+      "ritim": "U+A",
+      "semiyotik": "akış → imge → düş",
+      "geo": "Toros"
+    },
+    {
+      "id": 94,
+      "label": "hayal",
+      "proto_hece": "HA-IA-AL",
+      "ritim": "A+A+N",
+      "semiyotik": "imge → tasarım → hayal",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 95,
+      "label": "gerçek",
+      "proto_hece": "KAR-ŠEK",
+      "ritim": "K+K",
+      "semiyotik": "iz → doğruluk → gerçek",
+      "geo": "Hattuşa"
+    },
+    {
+      "id": 96,
+      "label": "yasa",
+      "proto_hece": "IA-SA",
+      "ritim": "A+SA",
+      "semiyotik": "düzen → kural → yasa",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 97,
+      "label": "kural",
+      "proto_hece": "KU-RA-AL",
+      "ritim": "U+A+N",
+      "semiyotik": "sınır → düzen → kural",
+      "geo": "Toros"
+    },
+    {
+      "id": 98,
+      "label": "sistem",
+      "proto_hece": "ŠI-IS-TA-MA",
+      "ritim": "A+K+MA",
+      "semiyotik": "düzen → bütün → sistem",
+      "geo": "İç Anadolu"
+    },
+    {
+      "id": 99,
+      "label": "düzen",
+      "proto_hece": "TU-ZA-AN",
+      "ritim": "U+A+N",
+      "semiyotik": "akış → yapı → düzen",
+      "geo": "Toros"
+    },
+    {
+      "id": 100,
+      "label": "evrensel",
+      "proto_hece": "E-UR-AN-SA-AL",
+      "ritim": "A+U+N+SA",
+      "semiyotik": "bütün → kapsam → evrensel",
+      "geo": "Kilikya"
+    }
+  ]
+}

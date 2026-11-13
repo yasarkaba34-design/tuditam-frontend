@@ -51,6 +51,8 @@ export default function YKOSDashboard({
   onNavigateLogin = () => {},
   onNavigateAtlas = () => {},
   onNavigateEngine = () => {},
+  onNavigateTest = () => {},
+  onNavigate3D = () => {},
   onNavigateFlow = () => {},
   onNavigateMethod = () => {},
   onNavigateAcikVeri = () => {},
@@ -376,6 +378,12 @@ style={{
         <h3 style={{ color: "#ffd700", fontSize: "1.05rem", marginTop: 0, borderBottom: "1px solid rgba(255,215,0,0.3)", paddingBottom: "8px", marginBottom: "12px" }}>
           📚 TÜDİTAM Araştırma ve Okuma Arşivi
         </h3>
+        <nav aria-label="YKOS test, okuma ve matris görünümleri" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))", gap: "9px", margin: "0 0 14px" }}>
+          <button type="button" onClick={onNavigateTest} style={{ background: "#050811", border: "1px solid #06b6d4", color: "#67e8f9", padding: "10px 4px", borderRadius: "8px", fontSize: "0.78rem", fontWeight: "bold", cursor: "pointer" }}>🧪 TEST</button>
+          <button type="button" onClick={onNavigateEngine} style={{ background: "#050811", border: "1px solid #22c55e", color: "#86efac", padding: "10px 4px", borderRadius: "8px", fontSize: "0.78rem", fontWeight: "bold", cursor: "pointer" }}>📖 OKUMA &amp; ANALİZ</button>
+          <button type="button" onClick={onVisualize} style={{ background: "#050811", border: "1px solid #f59e0b", color: "#fbbf24", padding: "10px 4px", borderRadius: "8px", fontSize: "0.78rem", fontWeight: "bold", cursor: "pointer" }}>🌐 MATRİS</button>
+          <button type="button" onClick={onNavigate3D} style={{ background: "#050811", border: "1px solid #a78bfa", color: "#c4b5fd", padding: "10px 4px", borderRadius: "8px", fontSize: "0.78rem", fontWeight: "bold", cursor: "pointer" }}>🧊 3D MATRİS</button>
+        </nav>
         <div className="ykos-main-content-grid" style={{ display: "grid", gridTemplateColumns: "2.3fr 1fr", gap: "14px", alignItems: "start" }}>
           <div className="ykos-archive-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: "12px" }}>
             {filteredGridCards.length === 0 && <p role="status" style={{ gridColumn: "1 / -1", color: "#cbd5e1" }}>Arşivde eşleşen içerik bulunamadı.</p>}
@@ -484,6 +492,12 @@ style={{
             style={{ flex: 1, minWidth: "220px", background: "linear-gradient(135deg, #4f46e5, #3730a3)", color: "#fff", border: "none", padding: "12px", borderRadius: "8px", fontWeight: "900", fontSize: "0.85rem", cursor: "pointer" }}
           >
             AÇIK VERİ PORTALINA GİT
+          </button>
+          <button
+            onClick={() => document.querySelector(".ykos-archive-grid")?.scrollIntoView({ behavior: "smooth", block: "start" })}
+            style={{ flex: 1, minWidth: "220px", background: "linear-gradient(135deg, #38bdf8, #0284c7)", color: "#000", border: "none", padding: "12px", borderRadius: "8px", fontWeight: "900", fontSize: "0.85rem", cursor: "pointer" }}
+          >
+            📁 ARŞİV
           </button>
           <button
             onClick={handleOpenVideoArchive}
