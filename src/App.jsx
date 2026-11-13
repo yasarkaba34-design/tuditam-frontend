@@ -9,6 +9,9 @@ import BubbleMatrix from "./mega/BubbleMatrix.jsx";
 import AtlasMap from "./mega/AtlasMap";
 import Hakkimizda from "./pages/Hakkimizda";
 import ContentDetail from "./layouts/ContentDetail";
+import YKOSAnalysisEngine from "./components/YKOSAnalysisEngine";
+import RootTestPage from "./pages/RootTestPage";
+import ProtoRoots3DMatrix from "./pages/ProtoRoots3DMatrix";
 import "./index.css";
 
 export default function App() {
@@ -39,13 +42,33 @@ export default function App() {
           onNavigateRead={handleNavigateRead}
           onNavigateLogin={() => setActiveView("login")}
           onNavigateAtlas={() => setActiveView("atlas")}
-          onNavigateEngine={() => setActiveView("dashboard")}
+          onNavigateEngine={() => setActiveView("analysis")}
+          onNavigateTest={() => setActiveView("test")}
+          onNavigate3D={() => setActiveView("matrix3d")}
           onNavigateFlow={() => setActiveView("dashboard")}
           onNavigateMethod={() => setActiveView("method")}
           onNavigateAcikVeri={() => setActiveView("acikveri")}
           onNavigateOpsCenter={() => setActiveView("ops")}
         />
       )}
+
+      {/* OKUMA & ANALİZ */}
+      {activeView === "analysis" && (
+        <div>
+          <div style={{ padding: "10px 20px" }}>
+            <button type="button" onClick={() => setActiveView("dashboard")} style={{ background: "#ffd700", color: "#000", border: "none", padding: "8px 16px", borderRadius: "6px", fontWeight: "bold", cursor: "pointer" }}>
+              ⬅ Ana Sayfaya Dön
+            </button>
+          </div>
+          <YKOSAnalysisEngine />
+        </div>
+      )}
+
+      {/* TEST KAYITLARI */}
+      {activeView === "test" && <RootTestPage onGoHome={() => setActiveView("dashboard")} />}
+
+      {/* 3D KÖK-HECE MATRİSİ */}
+      {activeView === "matrix3d" && <ProtoRoots3DMatrix onGoHome={() => setActiveView("dashboard")} />}
 
       {/* İÇERİK DETAY */}
       {activeView === "detail" && (
