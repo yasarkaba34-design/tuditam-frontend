@@ -494,6 +494,12 @@ style={{
             AÇIK VERİ PORTALINA GİT
           </button>
           <button
+            onClick={() => document.querySelector(".ykos-archive-grid")?.scrollIntoView({ behavior: "smooth", block: "start" })}
+            style={{ flex: 1, minWidth: "220px", background: "linear-gradient(135deg, #38bdf8, #0284c7)", color: "#000", border: "none", padding: "12px", borderRadius: "8px", fontWeight: "900", fontSize: "0.85rem", cursor: "pointer" }}
+          >
+            📁 ARŞİV
+          </button>
+          <button
             onClick={handleOpenVideoArchive}
             style={{ flex: 1, minWidth: "220px", background: "linear-gradient(135deg, #ef4444, #991b1b)", color: "#fff", border: "none", padding: "12px", borderRadius: "8px", fontWeight: "900", fontSize: "0.85rem", cursor: "pointer" }}
           >
