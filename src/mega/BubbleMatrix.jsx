@@ -159,7 +159,7 @@ export default function BubbleMatrix({ onGoHome, onSelectNode }) {
 
         {/* GENİŞLETİLMİŞ MATRİS BALONCUK VE BAĞLANTI GRAFİĞİ */}
         <div style={{ background: "#050811", border: "1px solid rgba(255, 215, 0, 0.3)", borderRadius: "8px", height: "420px", position: "relative", overflow: "hidden", marginBottom: "10px" }}>
-          <svg style={{ width: "100%", height: "100%", viewBox: "150 10 650 400" }}>
+          <svg viewBox="100 0 720 420" preserveAspectRatio="xMidYMid meet" style={{ width: "100%", height: "100%", display: "block" }}>
             
             {/* Çekirdek Hatlar */}
             <line x1="470" y1="190" x2="530" y2="260" stroke="rgba(245, 158, 11, 0.6)" strokeWidth="1.8" />
