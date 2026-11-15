@@ -1,5 +1,7 @@
 // src/App.jsx
 import React, { useEffect, useState } from "react";
+import { signOut } from "firebase/auth";
+import { auth } from "./data/firebase";
 import YKOSDashboard from "./layouts/YKOSDashboard";
 import AdminPanel from "./layouts/AdminPanel";
 import AdminLogin from "./components/AdminLogin";
@@ -228,7 +230,7 @@ export default function App() {
       {activeView === "admin" && (
         <AdminPanel
           currentLang={currentLang}
-          onLogout={() => setActiveView("dashboard")}
+          onLogout={async () => { await signOut(auth); setActiveView("dashboard"); }}
         />
       )}
     </div>
