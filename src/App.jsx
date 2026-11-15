@@ -1,5 +1,5 @@
 // src/App.jsx
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import YKOSDashboard from "./layouts/YKOSDashboard";
 import AdminPanel from "./layouts/AdminPanel";
 import AdminLogin from "./components/AdminLogin";
@@ -15,7 +15,22 @@ import ProtoRoots3DMatrix from "./pages/ProtoRoots3DMatrix";
 import "./index.css";
 
 export default function App() {
-  const [currentLang, setCurrentLang] = useState("TR");
+  const [currentLang, setCurrentLang] = useState(() => {
+    try {
+      const saved = window.localStorage.getItem("tuditam-language");
+      const supported = ["TR", "EN", "DE", "FR", "ES", "IT", "JA", "ZH", "RU", "AR", "FA"];
+      return supported.includes(saved) ? saved : "TR";
+    } catch {
+      return "TR";
+    }
+  });
+  useEffect(() => {
+    try {
+      window.localStorage.setItem("tuditam-language", currentLang);
+    } catch {
+      // Language switching remains available if browser storage is disabled.
+    }
+  }, [currentLang]);
   const [activeView, setActiveView] = useState("dashboard");
   const [selectedContentId, setSelectedContentId] = useState(null);
 
