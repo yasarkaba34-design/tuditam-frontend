@@ -16,41 +16,6 @@ const normalizeExternalUrl = (value) => {
 export default function AdminPanel({ onLogout, userRole = "admin" }) {
   const [records, setRecords] = useState([]);
   const [editingId, setEditingId] = useState(null);
-  const [showPasswordChange, setShowPasswordChange] = useState(false);
-  const [oldPassword, setOldPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [newPasswordAgain, setNewPasswordAgain] = useState("");
-  const handlePasswordChange = () => {
-    const PASSWORD_KEY = "tuditam_admin_password";
-    const DEFAULT_PASSWORD = "YKOS2026";
-
-    const currentPassword =
-      localStorage.getItem(PASSWORD_KEY) || DEFAULT_PASSWORD;
-
-    if (oldPassword !== currentPassword) {
-      alert("Mevcut şifre yanlış.");
-      return;
-    }
-
-    if (newPassword.length < 6) {
-      alert("Yeni şifre en az 6 karakter olmalıdır.");
-      return;
-    }
-
-    if (newPassword !== newPasswordAgain) {
-      alert("Yeni şifreler birbiriyle uyuşmuyor.");
-      return;
-    }
-
-    localStorage.setItem(PASSWORD_KEY, newPassword);
-
-    setOldPassword("");
-    setNewPassword("");
-    setNewPasswordAgain("");
-    setShowPasswordChange(false);
-
-    alert("✓ Yönetici şifresi değiştirildi.");
-  };
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("Damga & Epigrafi");
   const [summary, setSummary] = useState("");
@@ -289,21 +254,7 @@ if (editingId) {
       
       {/* ÜST BAŞLIK BARI */}
      <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
-  <button
-    onClick={() => setShowPasswordChange(!showPasswordChange)}
-    style={{
-      background: "#d4a900",
-      color: "#000",
-      border: "none",
-      padding: "6px 12px",
-      borderRadius: "5px",
-      fontWeight: "bold",
-      cursor: "pointer",
-      fontSize: "0.8rem"
-    }}
-  >
-    🔑 Şifre Değiştir
-  </button>
+
 
   <button
     onClick={onLogout}
@@ -321,62 +272,6 @@ if (editingId) {
     Çıkış Yap
   </button>
 </div>
-{showPasswordChange && (
-  <div
-    style={{
-      marginTop: "10px",
-      marginBottom: "12px",
-      padding: "12px",
-      border: "1px solid #d4a900",
-      borderRadius: "6px",
-      background: "#0c101d"
-    }}
-  >
-    <div style={{ color: "#ffd700", fontWeight: "bold", marginBottom: "8px" }}>
-      🔑 Yönetici Şifresini Değiştir
-    </div>
-
-    <div style={{ display: "flex", gap: "8px", flexWrap: "wrap" }}>
-      <input
-        type="password"
-        placeholder="Mevcut şifre"
-        value={oldPassword}
-        onChange={(e) => setOldPassword(e.target.value)}
-      />
-
-      <input
-        type="password"
-        placeholder="Yeni şifre"
-        value={newPassword}
-        onChange={(e) => setNewPassword(e.target.value)}
-      />
-
-      <input
-        type="password"
-        placeholder="Yeni şifre tekrar"
-        value={newPasswordAgain}
-        onChange={(e) => setNewPasswordAgain(e.target.value)}
-      />
-
-      <button
-        type="button"
-        onClick={handlePasswordChange}
-        style={{
-          background: "#22c55e",
-          color: "#000",
-          border: "none",
-          borderRadius: "4px",
-          padding: "7px 12px",
-          fontWeight: "bold",
-          cursor: "pointer"
-        }}
-      >
-        ✓ KAYDET
-      </button>
-    </div>
-  </div>
-)}
-
       {/* 2 SÜTUNLU GÖVDE */}
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1.25fr", gap: "16px", alignItems: "start" }}>
         
