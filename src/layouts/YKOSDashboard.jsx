@@ -235,7 +235,7 @@ export default function YKOSDashboard({
               gap: "6px"
             }}
           >
-            ☰ {t.nav?.menu || "MENÜ"}
+            ☰ {t.menu || "MENÜ"}
           </button>
         </div>
         <div style={{ position: "absolute", right: "14px", top: "14px", zIndex: 10 }}>
@@ -376,13 +376,13 @@ style={{
       {/* 4. ANA GÖVDE: YKOS ÇÖZÜMLÜLERİ VE İNDEKSLER */}
       <div style={{ ...cardStyle, display: "flex", flexDirection: "column" }}>
         <h3 style={{ color: "#ffd700", fontSize: "1.05rem", marginTop: 0, borderBottom: "1px solid rgba(255,215,0,0.3)", paddingBottom: "8px", marginBottom: "12px" }}>
-          📚 TÜDİTAM Araştırma ve Okuma Arşivi
+          {t.archiveSectionTitle || "📚 TÜDİTAM Araştırma ve Okuma Arşivi"}
         </h3>
-        <nav aria-label="YKOS test, okuma ve matris görünümleri" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))", gap: "9px", margin: "0 0 14px" }}>
-          <button type="button" onClick={onNavigateTest} style={{ background: "#050811", border: "1px solid #06b6d4", color: "#67e8f9", padding: "10px 4px", borderRadius: "8px", fontSize: "0.78rem", fontWeight: "bold", cursor: "pointer" }}>🧪 TEST</button>
-          <button type="button" onClick={onNavigateEngine} style={{ background: "#050811", border: "1px solid #22c55e", color: "#86efac", padding: "10px 4px", borderRadius: "8px", fontSize: "0.78rem", fontWeight: "bold", cursor: "pointer" }}>📖 OKUMA &amp; ANALİZ</button>
-          <button type="button" onClick={onVisualize} style={{ background: "#050811", border: "1px solid #f59e0b", color: "#fbbf24", padding: "10px 4px", borderRadius: "8px", fontSize: "0.78rem", fontWeight: "bold", cursor: "pointer" }}>🌐 MATRİS</button>
-          <button type="button" onClick={onNavigate3D} style={{ background: "#050811", border: "1px solid #a78bfa", color: "#c4b5fd", padding: "10px 4px", borderRadius: "8px", fontSize: "0.78rem", fontWeight: "bold", cursor: "pointer" }}>🧊 3D MATRİS</button>
+        <nav aria-label={t.archiveNavLabel || "Test, okuma ve matris görünümleri"} style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))", gap: "9px", margin: "0 0 14px" }}>
+          <button type="button" onClick={onNavigateTest} style={{ background: "#050811", border: "1px solid #06b6d4", color: "#67e8f9", padding: "10px 4px", borderRadius: "8px", fontSize: "0.78rem", fontWeight: "bold", cursor: "pointer" }}>{`🧪 ${t.testButton || "TEST"}`}</button>
+          <button type="button" onClick={onNavigateEngine} style={{ background: "#050811", border: "1px solid #22c55e", color: "#86efac", padding: "10px 4px", borderRadius: "8px", fontSize: "0.78rem", fontWeight: "bold", cursor: "pointer" }}>{`📖 ${t.readingButton || "OKUMA & ANALİZ"}`}</button>
+          <button type="button" onClick={onVisualize} style={{ background: "#050811", border: "1px solid #f59e0b", color: "#fbbf24", padding: "10px 4px", borderRadius: "8px", fontSize: "0.78rem", fontWeight: "bold", cursor: "pointer" }}>{`🌐 ${t.matrixButton || "MATRİS"}`}</button>
+          <button type="button" onClick={onNavigate3D} style={{ background: "#050811", border: "1px solid #a78bfa", color: "#c4b5fd", padding: "10px 4px", borderRadius: "8px", fontSize: "0.78rem", fontWeight: "bold", cursor: "pointer" }}>{`🧊 ${t.matrix3dButton || "3D MATRİS"}`}</button>
         </nav>
         <div className="ykos-main-content-grid" style={{ display: "grid", gridTemplateColumns: "2.3fr 1fr", gap: "14px", alignItems: "start" }}>
           <div className="ykos-archive-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: "12px" }}>
@@ -491,29 +491,29 @@ style={{
             onClick={onNavigateAcikVeri}
             style={{ flex: 1, minWidth: "220px", background: "linear-gradient(135deg, #4f46e5, #3730a3)", color: "#fff", border: "none", padding: "12px", borderRadius: "8px", fontWeight: "900", fontSize: "0.85rem", cursor: "pointer" }}
           >
-            AÇIK VERİ PORTALINA GİT
+            {t.openDataBtn || "AÇIK VERİ PORTALINA GİT"}
           </button>
           <button
             onClick={() => document.querySelector(".ykos-archive-grid")?.scrollIntoView({ behavior: "smooth", block: "start" })}
             style={{ flex: 1, minWidth: "220px", background: "linear-gradient(135deg, #38bdf8, #0284c7)", color: "#000", border: "none", padding: "12px", borderRadius: "8px", fontWeight: "900", fontSize: "0.85rem", cursor: "pointer" }}
           >
-            📁 ARŞİV
+            📁 {t.archiveButton || "ARŞİV"}
           </button>
           <button
             onClick={handleOpenVideoArchive}
             style={{ flex: 1, minWidth: "220px", background: "linear-gradient(135deg, #ef4444, #991b1b)", color: "#fff", border: "none", padding: "12px", borderRadius: "8px", fontWeight: "900", fontSize: "0.85rem", cursor: "pointer" }}
           >
-            VİDEO ARŞİVİ VE SUNUMLAR
+            {t.videoArchiveButton || "VİDEO ARŞİVİ VE SUNUMLAR"}
           </button>
         </div>
       </div>
       <section aria-labelledby="ykos-tools-title" style={cardStyle}>
-        <h2 id="ykos-tools-title" style={{ color: "#ffd700", fontSize: "1.2rem", margin: "0 0 8px" }}>YKOS Çalışmaları ve Araçları</h2>
+        <h2 id="ykos-tools-title" style={{ color: "#ffd700", fontSize: "1.2rem", margin: "0 0 8px" }}>{t.workToolsTitle || "YKOS Çalışmaları ve Araçları"}</h2>
         <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
-          <button style={btnBaseStyle} onClick={onNavigateMethod}>YKOS Metodolojisi</button>
-          <button style={btnBaseStyle} onClick={onVisualize}>Kök Hece Matrisi</button>
-          <button style={btnBaseStyle} onClick={onNavigateAtlas}>Damga Atlası</button>
-          <button style={btnBaseStyle} onClick={() => setPosterModalOpen(true)}>Afiş ve Manifesto Serisi</button>
+          <button style={btnBaseStyle} onClick={onNavigateMethod}>{t.methodologyButton || "YKOS Metodolojisi"}</button>
+          <button style={btnBaseStyle} onClick={onVisualize}>{t.rootMatrixButton || "Kök Hece Matrisi"}</button>
+          <button style={btnBaseStyle} onClick={onNavigateAtlas}>{t.tamgaAtlasButton || "Damga Atlası"}</button>
+          <button style={btnBaseStyle} onClick={() => setPosterModalOpen(true)}>{t.manifestoButton || "Afiş ve Manifesto Serisi"}</button>
         </div>
       </section>
       {/* 🎥 VİDEO ARŞİVİ SEÇİM MODALI */}
