@@ -1,6 +1,18 @@
 // src/layouts/AdminPanel.jsx
 import React, { useState, useEffect } from "react";
 
+const normalizeExternalUrl = (value) => {
+  const raw = String(value || "").trim();
+  if (!raw) return "";
+  const candidate = /^[a-z][a-z0-9+.-]*:\/\//i.test(raw) ? raw : `https://${raw}`;
+  try {
+    const parsed = new URL(candidate);
+    return parsed.protocol === "http:" || parsed.protocol === "https:" ? parsed.href : "";
+  } catch {
+    return "";
+  }
+};
+
 export default function AdminPanel({ onLogout, userRole = "admin" }) {
   const [records, setRecords] = useState([]);
   const [editingId, setEditingId] = useState(null);
@@ -45,7 +57,8 @@ export default function AdminPanel({ onLogout, userRole = "admin" }) {
   const [content, setContent] = useState("");
   const [mainImage, setMainImage] = useState("");
   const [galleryImages, setGalleryImages] = useState([]);
-  const [videoUrl, setVideoUrl] = useState(""); // 🎥 Yeni: Video URL alanı
+  const [videoUrl, setVideoUrl] = useState(""); // 🎥 Video URL
+  const [externalUrl, setExternalUrl] = useState("");
 
   // Sayfalama
   const [currentPage, setCurrentPage] = useState(1);
@@ -144,6 +157,11 @@ const handleGalleryChange = (e) => {
       return;
     }
 
+    const normalizedExternalUrl = normalizeExternalUrl(externalUrl);
+    if (externalUrl.trim() && !normalizedExternalUrl) {
+      alert("Bağlantı http:// veya https:// adresi olmalı.");
+      return;
+    }
     const existing = JSON.parse(localStorage.getItem("ykos_admin_records") || "[]");
 
 if (editingId) {
@@ -165,7 +183,8 @@ if (editingId) {
             r.videoUrl ||
             r.video ||
             r.videoBaglantisi ||
-            ""
+            "",
+          externalUrl: normalizedExternalUrl
         }
       : r
   );
@@ -187,6 +206,7 @@ if (editingId) {
     image: mainImage || "",
     gallery: galleryImages || [],
     videoUrl: videoUrl.trim(),
+    externalUrl: normalizedExternalUrl,
     status: "published",
     durum: "onaylandi",
     date: new Date().toLocaleDateString("tr-TR")
@@ -206,6 +226,7 @@ if (editingId) {
     setMainImage("");
     setGalleryImages([]);
     setVideoUrl("");
+    setExternalUrl("");
     loadRecords();
   };
 
@@ -229,6 +250,7 @@ if (editingId) {
     setMainImage(record.image || record.mansetGorsel || "");
     setGalleryImages(record.gallery || record.galeri || []);
     setVideoUrl(record.videoUrl || record.video || "");
+    setExternalUrl(record.externalUrl || record.sourceUrl || record.linkUrl || record.link || record.url || "");
   };
 
   const handleDelete = (id) => {
@@ -252,7 +274,18 @@ if (editingId) {
   const currentPublishedRecords = publishedRecords.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
-    <div style={{ maxWidth: "1350px", margin: "0 auto", padding: "12px", color: "#fff" }}>
+    <div className="tuditam-admin-panel" style={{ maxWidth: "1350px", margin: "0 auto", padding: "12px", color: "#fff" }}>
+      <style>{`
+        .tuditam-admin-panel { box-sizing: border-box; }
+        .tuditam-admin-panel input, .tuditam-admin-panel textarea, .tuditam-admin-panel select { font-size: 16px !important; }
+        .tuditam-entry-panel { position: relative; overflow: hidden; border-radius: 14px !important; border-color: rgba(56,189,248,.55) !important; background: linear-gradient(155deg, rgba(8,22,37,.98), rgba(5,8,17,.98)) !important; box-shadow: 0 14px 36px rgba(0,0,0,.4), inset 0 1px rgba(255,255,255,.04); }
+        .tuditam-entry-panel h3 { padding: 0 0 10px !important; margin-bottom: 14px !important; font-size: 1rem !important; letter-spacing: .02em; }
+        .tuditam-entry-panel input, .tuditam-entry-panel textarea, .tuditam-entry-panel select { border-radius: 8px !important; transition: border-color .18s ease, box-shadow .18s ease; }
+        .tuditam-entry-panel input:focus, .tuditam-entry-panel textarea:focus, .tuditam-entry-panel select:focus { outline: none; border-color: #38bdf8 !important; box-shadow: 0 0 0 3px rgba(56,189,248,.14); }
+        .tuditam-entry-panel .ykos-external-link-field { padding: 10px; border: 1px solid rgba(56,189,248,.32); border-radius: 10px; background: rgba(8,47,73,.2); }
+        .tuditam-entry-panel .ykos-external-link-field input { display: block; width: 100%; min-width: 0; box-sizing: border-box; padding: 9px 10px; background: #060913; border: 1px solid #334155; color: #fff; font-size: .82rem; }
+        .ykos-link-preview { display: inline-block; margin-top: 7px; color: #7dd3fc; font-size: .74rem; font-weight: 700; text-decoration: none; }
+      `}</style>
       
       {/* ÜST BAŞLIK BARI */}
      <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
@@ -399,7 +432,7 @@ if (editingId) {
           </div>
 
           {/* 2. ALT: VERİ & HABER GİRİŞ FORMU */}
-          <div style={{ background: "rgba(255, 215, 0, 0.02)", border: "1.5px solid rgba(255, 215, 0, 0.35)", borderRadius: "8px", padding: "12px" }}>
+          <div className="tuditam-entry-panel" style={{ background: "rgba(255, 215, 0, 0.02)", border: "1.5px solid rgba(255, 215, 0, 0.35)", borderRadius: "8px", padding: "16px" }}>
             <h3 style={{ color: "#ffd700", marginTop: 0, fontSize: "0.88rem", borderBottom: "1px solid #333", paddingBottom: "4px", marginBottom: "8px" }}>
               {editingId ? "✏️ Kaydı Güncelle" : "➕ Yeni İçerik & Video Girişi"}
             </h3>
@@ -435,7 +468,15 @@ if (editingId) {
                 <input type="text" placeholder="https://www.youtube.com/watch?v=..." value={videoUrl} onChange={(e) => setVideoUrl(e.target.value)} style={{ width: "100%", padding: "6px", background: "#060913", border: "1px solid #334155", color: "#fff", borderRadius: "4px", fontSize: "0.78rem", boxSizing: "border-box" }} />
               </div>
 
-              <div style={{ background: "rgba(0,0,0,0.3)", padding: "8px", borderRadius: "5px", border: "1px solid #27272a" }}>
+              <div className="ykos-external-link-field">
+                <label htmlFor="record-external-url" style={{ display: "block", fontSize: "0.7rem", color: "#38bdf8", marginBottom: "5px", fontWeight: 800 }}>🔗 İlgili web adresi / kaynak bağlantısı</label>
+                <input id="record-external-url" type="text" inputMode="url" placeholder="https://ornek-kaynak.org/..." value={externalUrl} onChange={(e) => setExternalUrl(e.target.value)} />
+                {normalizeExternalUrl(externalUrl) && (
+                  <a href={normalizeExternalUrl(externalUrl)} target="_blank" rel="noopener noreferrer" className="ykos-link-preview">↗ Bağlantıyı yeni sekmede kontrol et</a>
+                )}
+              </div>
+
+              <div style={{ background: "rgba(0,0,0,0.3)", padding: "8px", borderRadius: "10px", border: "1px solid #27272a" }}>
                 <div style={{ marginBottom: "6px" }}>
                   <label style={{ display: "block", fontSize: "0.68rem", color: "#ffd700", marginBottom: "2px" }}>📸 Manşet Görsel</label>
                   <input type="file" accept="image/*" onChange={handleMainImageChange} style={{ fontSize: "0.7rem", color: "#94a3b8" }} />
