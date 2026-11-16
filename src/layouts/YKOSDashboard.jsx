@@ -381,10 +381,10 @@ export default function YKOSDashboard({
 
         <nav aria-label="YKOS araçları" className="ykos-tool-links" style={{ display: "grid", gridTemplateColumns: "repeat(4, minmax(0, 1fr))", gap: "8px", margin: "0 0 12px" }}>
           {[
-            { label: "🖉 TEST", href: "https://ykos.org/test", color: "#06b6d4" },
-            { label: "📖 OKUMA & ANALİZ", href: "https://ykos.org/analiz", color: "#22c55e" },
-            { label: "🌐 MATRİS", href: "https://ykos.org/matrix", color: "#f59e0b" },
-            { label: "🧊 3D MATRİS", href: "https://ykos.org/matrix-3d", color: "#a78bfa" },
+            { label: "🖉 TEST", href: "/ykos/test", color: "#06b6d4" },
+            { label: "📖 OKUMA & ANALİZ", href: "/ykos/analiz", color: "#22c55e" },
+            { label: "🌐 MATRİS", href: "/ykos/matrix", color: "#f59e0b" },
+            { label: "🧊 3D MATRİS", href: "/ykos/matrix-3d", color: "#a78bfa" },
           ].map((item) => (
             <a key={item.href} href={item.href} style={{ minHeight: "42px", boxSizing: "border-box", display: "flex", alignItems: "center", justifyContent: "center", padding: "8px 10px", border: `1px solid ${item.color}`, borderRadius: "7px", color: item.color, background: "#050811", textDecoration: "none", fontSize: "0.78rem", fontWeight: 800, textAlign: "center" }}>
               {item.label}
