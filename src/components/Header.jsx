@@ -46,6 +46,7 @@ export default function Header() {
           
           <div style={{ display: "flex", alignItems: "center", gap: "14px" }}>
             {/* Dairesel Altın Işıltılı TÜDİTAM Logosu */}
+            <a href="/" aria-label="TÜDİTAM ana sayfasına dön" title="Ana sayfaya dön" style={{ display: "inline-flex", textDecoration: "none", lineHeight: 0 }}>
             <div style={{
               width: "64px",
               height: "64px",
@@ -64,6 +65,7 @@ export default function Header() {
                 onError={(e) => { e.target.style.display = 'none'; }}
               />
             </div>
+            </a>
             
             {/* TÜDİTAM Başlık Yazısı */}
             <div style={{ textAlign: "left" }}>
