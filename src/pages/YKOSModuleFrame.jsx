@@ -59,9 +59,9 @@ export default function YKOSModuleFrame({ module, onHome }) {
         src={`https://www.ykos.org${selected.path}`}
         style={{
           position: "absolute",
-          inset: "56px 0 0",
+          inset: 0,
           width: "100%",
-          height: "calc(100% - 56px)",
+          height: "100%",
           border: 0,
           background: "#030712",
         }}
