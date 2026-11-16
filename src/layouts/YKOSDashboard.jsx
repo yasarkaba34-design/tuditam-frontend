@@ -285,8 +285,8 @@ export default function YKOSDashboard({
         <div style={{ textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", marginTop: "10px", marginBottom: "8px" }}>
           <a href="/" aria-label="TÜDİTAM ana sayfasına dön" style={{ margin: "0 0 6px 0", filter: "drop-shadow(0 0 16px rgba(245, 158, 11, 0.45))", display: "inline-block" }}>
             <img
-              src="/tuditam-logo.png"
-              alt="TÜDİTAM Logo"
+              src="/tuditam-logo.svg"
+              alt="TÜDİTAM amblemi"
               style={{ width: "260px", height: "auto", maxHeight: "220px", objectFit: "contain", display: "block", margin: "0 auto" }}
             />
           </a>
