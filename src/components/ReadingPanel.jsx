@@ -54,6 +54,9 @@ export default function ReadingPanel({ content, currentLang = "TR" }) {
     ? adminRecords.find((record) => String(record.id) === String(requestedId)) ||
       defaultArchiveArticles.find((item) => String(item.id) === String(requestedId)) ||
       staticItems.find((item) => String(item.id) === String(requestedId)) ||
+      adminRecords.find((record) => (record.title || record.baslik) === String(requestedId)) ||
+      defaultArchiveArticles.find((item) => item.title === String(requestedId)) ||
+      staticItems.find((item) => item.title === String(requestedId)) ||
       (requestedTitle
         ? adminRecords.find((record) => (record.title || record.baslik) === requestedTitle) ||
           defaultArchiveArticles.find((item) => item.title === requestedTitle) ||
