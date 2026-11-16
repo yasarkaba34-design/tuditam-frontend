@@ -285,8 +285,8 @@ export default function YKOSDashboard({
         <div style={{ textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", marginTop: "10px", marginBottom: "8px" }}>
           <a href="/" aria-label="TÜDİTAM ana sayfasına dön" style={{ margin: "0 0 6px 0", filter: "drop-shadow(0 0 16px rgba(245, 158, 11, 0.45))", display: "inline-block" }}>
             <img
-              src="/tuditam-logo.png"
-              alt="TÜDİTAM Logo"
+              src="/tuditam-logo.svg"
+              alt="TÜDİTAM amblemi"
               style={{ width: "260px", height: "auto", maxHeight: "220px", objectFit: "contain", display: "block", margin: "0 auto" }}
             />
           </a>
@@ -297,6 +297,9 @@ export default function YKOSDashboard({
 
           <p style={{ color: "#94a3b8", fontSize: "0.85rem", letterSpacing: "1.5px", margin: 0, textTransform: "uppercase", fontWeight: "600" }}>
             TÜRK DİLİ VE TARİHİ ARAŞTIRMALARI MERKEZİ — YKOS BİLGİ SİSTEMİ
+          </p>
+          <p style={{ color: "#38bdf8", fontSize: "0.7rem", letterSpacing: "1px", margin: "6px 0 0", textTransform: "uppercase", fontWeight: "600" }}>
+            GAZETECİLER SOSYAL SORUMLULUK PROJELERİ DERNEĞİ KURULUŞUDUR
           </p>
         </div>
 

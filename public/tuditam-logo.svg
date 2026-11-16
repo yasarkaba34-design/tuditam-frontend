@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+<title id="title">TÜDİTAM amblemi</title>
+<desc id="desc">Türk Dili ve Tarihi Araştırmaları Merkezi için lacivert ve altın renkli dairesel amblem.</desc>
+<defs>
+  <radialGradient id="bg" cx="50%" cy="42%" r="68%"><stop offset="0" stop-color="#172239"/><stop offset="1" stop-color="#050810"/></radialGradient>
+  <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff0a6"/><stop offset=".42" stop-color="#edbd50"/><stop offset="1" stop-color="#9b681d"/></linearGradient>
+  <path id="arc" d="M 74,256 A 182,182 0 0,1 438,256"/>
+</defs>
+<circle cx="256" cy="256" r="246" fill="url(#bg)" stroke="url(#gold)" stroke-width="8"/>
+<circle cx="256" cy="256" r="226" fill="none" stroke="#c6983e" stroke-width="2"/>
+<circle cx="256" cy="256" r="190" fill="none" stroke="#b7832c" stroke-width="2"/>
+<text fill="#f4d47b" font-family="Georgia,serif" font-size="17" font-weight="700" letter-spacing="2">
+  <textPath href="#arc" startOffset="50%" text-anchor="middle">TÜRK DİLİ VE TARİHİ ARAŞTIRMALARI</textPath>
+</text>
+<g fill="url(#gold)" stroke="#f8df91" stroke-width="2">
+  <path d="M256 92l9 19 21 3-15 14 4 21-19-10-19 10 4-21-15-14 21-3z"/>
+  <path d="M115 257l8 8-8 8-8-8zM397 257l8 8-8 8-8-8z"/>
+</g>
+<circle cx="256" cy="255" r="105" fill="#08101d" stroke="url(#gold)" stroke-width="5"/>
+<circle cx="256" cy="255" r="92" fill="none" stroke="#73521e" stroke-width="2"/>
+<path d="M195 303h122v13H195z" fill="url(#gold)"/>
+<path d="M215 296V190h82v22h-29v84h-24v-84h-29z" fill="url(#gold)"/>
+<path d="M207 323c16 8 32 12 49 12s33-4 49-12v15c-16 8-32 12-49 12s-33-4-49-12z" fill="#e4b64d"/>
+<text x="256" y="387" text-anchor="middle" fill="#f3d47d" font-family="Georgia,serif" font-size="27" font-weight="700" letter-spacing="3">TÜDİTAM</text>
+<text x="256" y="416" text-anchor="middle" fill="#c9ad70" font-family="Arial,sans-serif" font-size="12" font-weight="600" letter-spacing="2">ARAŞTIRMA MERKEZİ</text>
+<circle cx="256" cy="256" r="4" fill="#fff0a6"/>
+</svg>
