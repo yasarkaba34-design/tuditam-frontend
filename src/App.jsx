@@ -9,11 +9,16 @@ import AtlasMap from "./mega/AtlasMap";
 import Hakkimizda from "./pages/Hakkimizda";
 import ReadingPanel from "./components/ReadingPanel";
 import TuditamArchive from "./pages/TuditamArchive";
+import YKOSModuleFrame from "./pages/YKOSModuleFrame";
 import './index.css';
 
 const VIEW_PATHS = {
   dashboard: "/",
   matrix: "/matrix",
+  ykosTest: "/ykos/test",
+  ykosAnalysis: "/ykos/analiz",
+  ykosMatrix: "/ykos/matrix",
+  ykosMatrix3d: "/ykos/matrix-3d",
   atlas: "/atlas",
   method: "/method",
   acikveri: "/open-data",
@@ -72,6 +77,12 @@ export default function App() {
   }, []);
 
   const handleNavigateRead = (id) => navigate("detail", id);
+  const ykosModuleByView = {
+    ykosTest: "test",
+    ykosAnalysis: "analysis",
+    ykosMatrix: "matrix",
+    ykosMatrix3d: "matrix-3d",
+  };
 
   return (
     <div style={{ backgroundColor: "#030712", minHeight: "100vh", color: "#fff" }}>
@@ -89,6 +100,13 @@ export default function App() {
           onNavigateAcikVeri={() => navigate("acikveri")}
           onNavigateOpsCenter={() => navigate("ops")}
           onNavigateArchive={() => navigate("archive")}
+        />
+      )}
+
+      {ykosModuleByView[activeView] && (
+        <YKOSModuleFrame
+          module={ykosModuleByView[activeView]}
+          onHome={() => navigate("dashboard")}
         />
       )}
 
