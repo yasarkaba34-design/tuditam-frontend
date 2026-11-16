@@ -1,6 +1,7 @@
 // src/components/ReadingPanel.jsx
 import React, { useState, useEffect } from "react";
 import { translations } from "../data/i18n";
+import { defaultArchiveArticles } from "../data/ykosDataService";
 
 // Sizin hazırladığınız temiz ve kararlı embed dönüştürücü fonksiyon
 export const getEmbedUrl = (url) => {
@@ -40,49 +41,39 @@ export default function ReadingPanel({ content, currentLang = "TR" }) {
     }
   }, []);
 
-  // Kayıt bulma mekanizması (Admin kayıtları + Statik/Onaylı akış verileri)
-  let currentItem = null;
+  const t = translations[currentLang] || translations["TR"];
+  const staticItems = [...(t.verifiedItems || []), ...(t.cards || [])];
+  const requestedId = typeof content === "object"
+    ? content?.id
+    : content;
+  const requestedTitle = typeof content === "object"
+    ? (content?.title || content?.baslik)
+    : null;
 
-  if (content) {
-    if (typeof content === "object") {
-      // 1. Önce admin kayıtlarında ara
-      currentItem = adminRecords.find(
-        (r) => String(r.id) === String(content.id || content.title || content.baslik) ||
-               (r.title && content.title && r.title.toLowerCase() === content.title.toLowerCase()) ||
-               (r.baslik && content.baslik && r.baslik.toLowerCase() === content.baslik.toLowerCase())
-      );
-    } else {
-      currentItem = adminRecords.find(
-        (r) => String(r.id) === String(content) ||
-               (r.title && r.title.toLowerCase().includes(String(content).toLowerCase())) ||
-               (r.baslik && r.baslik.toLowerCase().includes(String(content).toLowerCase()))
-      );
-    }
-  }
+  const currentItem = content
+    ? adminRecords.find((record) => String(record.id) === String(requestedId)) ||
+      defaultArchiveArticles.find((item) => String(item.id) === String(requestedId)) ||
+      staticItems.find((item) => String(item.id) === String(requestedId)) ||
+      adminRecords.find((record) => (record.title || record.baslik) === String(requestedId)) ||
+      defaultArchiveArticles.find((item) => item.title === String(requestedId)) ||
+      staticItems.find((item) => item.title === String(requestedId)) ||
+      (requestedTitle
+        ? adminRecords.find((record) => (record.title || record.baslik) === requestedTitle) ||
+          defaultArchiveArticles.find((item) => item.title === requestedTitle) ||
+          staticItems.find((item) => item.title === requestedTitle)
+        : null)
+    : null;
 
-  // 2. Eğer admin kayıtlarında bulunamadıysa statik/onaylı akıştan (i18n) bulmaya çalış
   if (!currentItem) {
-    const t = translations[currentLang] || translations["TR"];
-    const allStaticItems = [...(t.verifiedItems || []), ...(t.cards || [])];
-    
-    if (content) {
-      const searchKey = typeof content === "object" ? (content.id || content.title) : content;
-      currentItem = allStaticItems.find(
-        (item) => String(item.id) === String(searchKey) ||
-                  (item.title && String(searchKey).toLowerCase().includes(item.title.toLowerCase())) ||
-                  (item.title && item.title.toLowerCase().includes(String(searchKey).toLowerCase()))
-      );
-    }
-
-    // Eğer hâlâ bulunamadıysa statik listesinden ilkini al
-    if (!currentItem && allStaticItems.length > 0) {
-      currentItem = allStaticItems[0];
-    }
-  }
-
-  // 3. Son çare varsayılan veri
-  if (!currentItem) {
-    currentItem = readsData[0];
+    return (
+      <div style={{ padding: "28px 20px", color: "#e2e8f0", maxWidth: "900px", margin: "0 auto" }}>
+        <div style={{ background: "#050811", border: "1.5px solid #ffd700", borderRadius: "12px", padding: "25px" }}>
+          <h1 style={{ color: "#ffd700", marginTop: 0 }}>İçerik bulunamadı</h1>
+          <p>Bu bağlantıdaki kayıt bu sitede yayımlanmıyor ya da adresi değişmiş olabilir.</p>
+          <a href="/" style={{ color: "#38bdf8" }}>Ana sayfaya dön</a>
+        </div>
+      </div>
+    );
   }
 
   const itemTitle = currentItem.title || currentItem.baslik || "Başlıksız Kayıt";

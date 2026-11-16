@@ -1,29 +1,75 @@
 // src/App.jsx
 import React, { useState, useEffect } from "react";
-import { nodeAnalysisData } from "./nodeAnalysisData";
 import YKOSDashboard from "./layouts/YKOSDashboard";
-import { defaultArchiveArticles } from "./data/ykosDataService";
 import AdminPanel from "./layouts/AdminPanel";
 import YalinVeriGirisi from './pages/YalinVeriGirisi';
 import OpsCenter from "./layouts/OpsCenter";
 import BubbleMatrix from "./mega/BubbleMatrix.jsx";
 import AtlasMap from "./mega/AtlasMap";
 import Hakkimizda from "./pages/Hakkimizda";
-// App.jsx içinde:
 import ReadingPanel from "./components/ReadingPanel";
 import './index.css';
 
+const VIEW_PATHS = {
+  dashboard: "/",
+  matrix: "/matrix",
+  atlas: "/atlas",
+  method: "/method",
+  acikveri: "/open-data",
+  ops: "/ops",
+  login: "/admin-login",
+};
+
+function getViewFromLocation() {
+  const pathname = window.location.pathname.replace(/\/+$/, "") || "/";
+  const readMatch = pathname.match(/^\/read\/(.+)$/);
+
+  if (readMatch) {
+    let contentId = readMatch[1];
+    try {
+      contentId = decodeURIComponent(contentId);
+    } catch {
+      // Keep the raw route segment if a malformed encoded URL is shared.
+    }
+    return { view: "detail", contentId };
+  }
+
+  const pathToView = Object.entries(VIEW_PATHS).find(([, path]) => path === pathname);
+  return { view: pathToView?.[0] || "dashboard", contentId: null };
+}
+
 export default function App() {
   const [currentLang, setCurrentLang] = useState("TR");
-  const [activeView, setActiveView] = useState("dashboard"); // dashboard, detail, matrix, atlas, method, acikveri, ops, login
-  const [selectedContentId, setSelectedContentId] = useState(null);
+  const [initialRoute] = useState(getViewFromLocation);
+  const [activeView, setActiveView] = useState(initialRoute.view);
+  const [selectedContentId, setSelectedContentId] = useState(initialRoute.contentId);
 
-  // Navigasyon yardımcıları
-  const handleNavigateRead = (id) => {
-    setSelectedContentId(id);
-    setActiveView("detail");
+  const navigate = (view, contentId = null, { replace = false } = {}) => {
+    const routeId = contentId && typeof contentId === "object"
+      ? (contentId.id || contentId.hece || contentId.title || contentId.baslik)
+      : contentId;
+    const path = view === "detail" && routeId != null
+      ? `/read/${encodeURIComponent(String(routeId))}`
+      : (VIEW_PATHS[view] || "/");
+    if (window.location.pathname !== path) {
+      window.history[replace ? "replaceState" : "pushState"]({}, "", path);
+    }
+    setSelectedContentId(contentId);
+    setActiveView(view);
     window.scrollTo(0, 0);
   };
+
+  useEffect(() => {
+    const handlePopState = () => {
+      const route = getViewFromLocation();
+      setActiveView(route.view);
+      setSelectedContentId(route.contentId);
+    };
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
+
+  const handleNavigateRead = (id) => navigate("detail", id);
 
   return (
     <div style={{ backgroundColor: "#030712", minHeight: "100vh", color: "#fff" }}>
@@ -31,15 +77,15 @@ export default function App() {
         <YKOSDashboard
           currentLang={currentLang}
           setCurrentLang={setCurrentLang}
-          onVisualize={() => setActiveView("matrix")}
+          onVisualize={() => navigate("matrix")}
           onNavigateRead={handleNavigateRead}
-          onNavigateLogin={() => setActiveView("login")}
-          onNavigateAtlas={() => setActiveView("atlas")}
-          onNavigateEngine={() => setActiveView("dashboard")}
-          onNavigateFlow={() => setActiveView("dashboard")}
-          onNavigateMethod={() => setActiveView("method")}
-          onNavigateAcikVeri={() => setActiveView("acikveri")}
-          onNavigateOpsCenter={() => setActiveView("ops")}
+          onNavigateLogin={() => navigate("login")}
+          onNavigateAtlas={() => navigate("atlas")}
+          onNavigateEngine={() => navigate("dashboard")}
+          onNavigateFlow={() => navigate("dashboard")}
+          onNavigateMethod={() => navigate("method")}
+          onNavigateAcikVeri={() => navigate("acikveri")}
+          onNavigateOpsCenter={() => navigate("ops")}
         />
       )}
 
@@ -47,7 +93,7 @@ export default function App() {
         <div>
           <div style={{ padding: "10px 20px" }}>
             <button
-              onClick={() => setActiveView("dashboard")}
+              onClick={() => navigate("dashboard")}
               style={{ background: "#ffd700", color: "#000", border: "none", padding: "8px 16px", borderRadius: "6px", fontWeight: "bold", cursor: "pointer" }}
             >
               ⬅ Ana Sayfaya Dön
@@ -60,10 +106,7 @@ export default function App() {
       {activeView === "matrix" && (
         <div>
           <div style={{ padding: "10px 20px" }}>
-            <button
-              onClick={() => setActiveView("dashboard")}
-              style={{ background: "#ffd700", color: "#000", border: "none", padding: "8px 16px", borderRadius: "6px", fontWeight: "bold", cursor: "pointer" }}
-            >
+            <button onClick={() => navigate("dashboard")} style={{ background: "#ffd700", color: "#000", border: "none", padding: "8px 16px", borderRadius: "6px", fontWeight: "bold", cursor: "pointer" }}>
               ⬅ Ana Sayfaya Dön
             </button>
           </div>
@@ -74,10 +117,7 @@ export default function App() {
       {activeView === "atlas" && (
         <div>
           <div style={{ padding: "10px 20px" }}>
-            <button
-              onClick={() => setActiveView("dashboard")}
-              style={{ background: "#ffd700", color: "#000", border: "1px solid #ffd700", padding: "8px 16px", borderRadius: "6px", fontWeight: "bold", cursor: "pointer" }}
-            >
+            <button onClick={() => navigate("dashboard")} style={{ background: "#ffd700", color: "#000", border: "1px solid #ffd700", padding: "8px 16px", borderRadius: "6px", fontWeight: "bold", cursor: "pointer" }}>
               ⬅ Ana Sayfaya Dön
             </button>
           </div>
@@ -88,10 +128,7 @@ export default function App() {
       {activeView === "method" && (
         <div>
           <div style={{ padding: "10px 20px" }}>
-            <button
-              onClick={() => setActiveView("dashboard")}
-              style={{ background: "#ffd700", color: "#000", border: "none", padding: "8px 16px", borderRadius: "6px", fontWeight: "bold", cursor: "pointer" }}
-            >
+            <button onClick={() => navigate("dashboard")} style={{ background: "#ffd700", color: "#000", border: "none", padding: "8px 16px", borderRadius: "6px", fontWeight: "bold", cursor: "pointer" }}>
               ⬅ Ana Sayfaya Dön
             </button>
           </div>
@@ -102,10 +139,7 @@ export default function App() {
       {activeView === "acikveri" && (
         <div>
           <div style={{ padding: "10px 20px" }}>
-            <button
-              onClick={() => setActiveView("dashboard")}
-              style={{ background: "#ffd700", color: "#000", border: "none", padding: "8px 16px", borderRadius: "6px", fontWeight: "bold", cursor: "pointer" }}
-            >
+            <button onClick={() => navigate("dashboard")} style={{ background: "#ffd700", color: "#000", border: "none", padding: "8px 16px", borderRadius: "6px", fontWeight: "bold", cursor: "pointer" }}>
               ⬅ Ana Sayfaya Dön
             </button>
           </div>
@@ -116,10 +150,7 @@ export default function App() {
       {activeView === "ops" && (
         <div>
           <div style={{ padding: "10px 20px" }}>
-            <button
-              onClick={() => setActiveView("dashboard")}
-              style={{ background: "#ffd700", color: "#000", border: "none", padding: "8px 16px", borderRadius: "6px", fontWeight: "bold", cursor: "pointer" }}
-            >
+            <button onClick={() => navigate("dashboard")} style={{ background: "#ffd700", color: "#000", border: "none", padding: "8px 16px", borderRadius: "6px", fontWeight: "bold", cursor: "pointer" }}>
               ⬅ Ana Sayfaya Dön
             </button>
           </div>
@@ -130,10 +161,7 @@ export default function App() {
       {activeView === "login" && (
         <div>
           <div style={{ padding: "10px 20px" }}>
-            <button
-              onClick={() => setActiveView("dashboard")}
-              style={{ background: "#ffd700", color: "#000", border: "none", padding: "8px 16px", borderRadius: "6px", fontWeight: "bold", cursor: "pointer" }}
-            >
+            <button onClick={() => navigate("dashboard")} style={{ background: "#ffd700", color: "#000", border: "none", padding: "8px 16px", borderRadius: "6px", fontWeight: "bold", cursor: "pointer" }}>
               ⬅ Ana Sayfaya Dön
             </button>
           </div>
