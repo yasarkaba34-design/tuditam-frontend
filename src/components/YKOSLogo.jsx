@@ -3,6 +3,7 @@ import React from "react";
 
 export default function YKOSLogo({ size = 120, className = "" }) {
   return (
+    <a href="/" aria-label="YKOS ana sayfasına dön" style={{ textDecoration: "none", color: "inherit" }}>
     <div 
       className={`ykos-logo-wrapper ${className}`}
       style={{
@@ -15,7 +16,7 @@ export default function YKOSLogo({ size = 120, className = "" }) {
       }}
     >
       <img
-        src="/assets/ykos-eagle-logo.png"
+        src="/images/ykos-logo.png"
         alt="YKOS Siber Kartal Amblemi"
         style={{
           width: `${size}px`,
@@ -25,5 +26,6 @@ export default function YKOSLogo({ size = 120, className = "" }) {
         }}
       />
     </div>
+    </a>
   );
 }
