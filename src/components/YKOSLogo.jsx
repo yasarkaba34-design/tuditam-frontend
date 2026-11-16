@@ -3,7 +3,8 @@ import React from "react";
 
 export default function YKOSLogo({ size = 120, className = "" }) {
   return (
-    <div 
+    <a href="/" aria-label="TÜDİTAM ana sayfasına dön" title="Ana sayfaya dön" style={{ display: "inline-flex", textDecoration: "none", lineHeight: 0 }}>
+      <div
       className={`ykos-logo-wrapper ${className}`}
       style={{
         display: "inline-flex",
@@ -24,6 +25,7 @@ export default function YKOSLogo({ size = 120, className = "" }) {
           display: "block"
         }}
       />
-    </div>
+      </div>
+    </a>
   );
 }
