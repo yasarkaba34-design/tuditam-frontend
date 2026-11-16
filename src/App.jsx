@@ -8,16 +8,20 @@ import BubbleMatrix from "./mega/BubbleMatrix.jsx";
 import AtlasMap from "./mega/AtlasMap";
 import Hakkimizda from "./pages/Hakkimizda";
 import ReadingPanel from "./components/ReadingPanel";
+import TuditamArchive from "./pages/TuditamArchive";
+import TuditamArchive from "./pages/TuditamArchive";
 import './index.css';
 
 const VIEW_PATHS = {
   dashboard: "/",
+  archive: "/arsiv",
   matrix: "/matrix",
   atlas: "/atlas",
   method: "/method",
   acikveri: "/open-data",
   ops: "/ops",
   login: "/admin-login",
+  archive: "/arsiv",
 };
 
 function getViewFromLocation() {
@@ -78,6 +82,7 @@ export default function App() {
           currentLang={currentLang}
           setCurrentLang={setCurrentLang}
           onVisualize={() => navigate("matrix")}
+          onNavigateArchive={() => navigate("archive")}
           onNavigateRead={handleNavigateRead}
           onNavigateLogin={() => navigate("login")}
           onNavigateAtlas={() => navigate("atlas")}
@@ -86,8 +91,13 @@ export default function App() {
           onNavigateMethod={() => navigate("method")}
           onNavigateAcikVeri={() => navigate("acikveri")}
           onNavigateOpsCenter={() => navigate("ops")}
+          onNavigateArchive={() => navigate("archive")}
         />
       )}
+
+      {activeView === "archive" && <TuditamArchive onClose={() => navigate("dashboard")} />}
+
+      {activeView === "archive" && <TuditamArchive onClose={() => navigate("dashboard")} />}
 
       {activeView === "detail" && (
         <div>
