@@ -298,6 +298,9 @@ export default function YKOSDashboard({
           <p style={{ color: "#94a3b8", fontSize: "0.85rem", letterSpacing: "1.5px", margin: 0, textTransform: "uppercase", fontWeight: "600" }}>
             TÜRK DİLİ VE TARİHİ ARAŞTIRMALARI MERKEZİ — YKOS BİLGİ SİSTEMİ
           </p>
+          <p style={{ color: "#38bdf8", fontSize: "0.7rem", letterSpacing: "1px", margin: "6px 0 0", textTransform: "uppercase", fontWeight: "600" }}>
+            GAZETECİLER SOSYAL SORUMLULUK PROJELERİ DERNEĞİ KURULUŞUDUR
+          </p>
         </div>
 
         {menuOpen && (
