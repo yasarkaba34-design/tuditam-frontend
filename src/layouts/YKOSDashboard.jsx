@@ -31,6 +31,7 @@ export default function YKOSDashboard({
   onNavigateMethod = () => {},
   onNavigateAcikVeri = () => {},
   onNavigateOpsCenter = () => {},
+  onNavigateArchive = () => {},
 }) {
   const [langOpen, setLangOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -182,6 +183,9 @@ export default function YKOSDashboard({
             flex-direction: column !important;
             grid-template-columns: 1fr !important;
           }
+          .ykos-tool-links {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+          }
         }
       `}</style>
 
@@ -261,13 +265,13 @@ export default function YKOSDashboard({
         </div>
 
         <div style={{ textAlign: "center", display: "flex", flexDirection: "column", alignItems: "center", marginTop: "10px", marginBottom: "8px" }}>
-          <div style={{ margin: "0 0 6px 0", filter: "drop-shadow(0 0 16px rgba(245, 158, 11, 0.45))" }}>
+          <a href="/" aria-label="TÜDİTAM ana sayfasına dön" style={{ margin: "0 0 6px 0", filter: "drop-shadow(0 0 16px rgba(245, 158, 11, 0.45))", display: "inline-block" }}>
             <img
-              src="/tuditam-logo-yeni.png"
+              src="/tuditam-logo.png"
               alt="TÜDİTAM Logo"
               style={{ width: "260px", height: "auto", maxHeight: "220px", objectFit: "contain", display: "block", margin: "0 auto" }}
             />
-          </div>
+          </a>
 
           <h1 style={{ color: "#f59e0b", fontSize: "2.4rem", fontWeight: "900", letterSpacing: "4px", margin: "0 0 4px 0", textShadow: "0 0 25px rgba(245, 158, 11, 0.5)" }}>
             TÜDİTAM
@@ -354,6 +358,19 @@ export default function YKOSDashboard({
           ⚡ YKOS ÇÖZÜMLERİ VE İNDEKSLER (CANLI ARŞİV)
         </h3>
 
+        <nav aria-label="YKOS araçları" className="ykos-tool-links" style={{ display: "grid", gridTemplateColumns: "repeat(4, minmax(0, 1fr))", gap: "8px", margin: "0 0 12px" }}>
+          {[
+            { label: "🖉 TEST", href: "https://ykos.org/test", color: "#06b6d4" },
+            { label: "📖 OKUMA & ANALİZ", href: "https://ykos.org/analiz", color: "#22c55e" },
+            { label: "🌐 MATRİS", href: "https://ykos.org/matrix", color: "#f59e0b" },
+            { label: "🧊 3D MATRİS", href: "https://ykos.org/matrix-3d", color: "#a78bfa" },
+          ].map((item) => (
+            <a key={item.href} href={item.href} style={{ minHeight: "42px", boxSizing: "border-box", display: "flex", alignItems: "center", justifyContent: "center", padding: "8px 10px", border: `1px solid ${item.color}`, borderRadius: "7px", color: item.color, background: "#050811", textDecoration: "none", fontSize: "0.78rem", fontWeight: 800, textAlign: "center" }}>
+              {item.label}
+            </a>
+          ))}
+        </nav>
+
         <div className="ykos-main-content-grid" style={{ display: "grid", gridTemplateColumns: "2.3fr 1fr", gap: "14px", minHeight: "440px", maxHeight: "560px" }}>
           
           <div className="ykos-archive-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px", overflowY: "auto", paddingRight: "6px" }}>
@@ -436,8 +453,11 @@ export default function YKOSDashboard({
             {t.visualizeBtn || "BALONCUK MATRİSİNİ GÖRSELLEŞTİR →"}
           </button>
           
-          <button onClick={onNavigateAcikVeri} style={{ flex: 1, minWidth: "220px", background: "linear-gradient(135deg, #00ff7f, #008000)", color: "#000", border: "none", padding: "12px", borderRadius: "8px", fontWeight: "900", fontSize: "0.85rem", cursor: "pointer" }}>
+          <button onClick={onNavigateAcikVeri} style={{ flex: 1, minWidth: "190px", background: "linear-gradient(135deg, #00ff7f, #008000)", color: "#000", border: "none", padding: "12px", borderRadius: "8px", fontWeight: "900", fontSize: "0.85rem", cursor: "pointer" }}>
             🌐 {t.openDataBtn || "AÇIK VERİ PORTALINA GİT"}
+          </button>
+          <button onClick={onNavigateArchive} style={{ flex: 1, minWidth: "160px", background: "linear-gradient(135deg, #38bdf8, #0284c7)", color: "#000", border: "none", padding: "12px", borderRadius: "8px", fontWeight: "900", fontSize: "0.85rem", cursor: "pointer" }}>
+            📁 ARŞİV
           </button>
 
           <button onClick={handleOpenVideoArchive} style={{ flex: 1, minWidth: "220px", background: "linear-gradient(135deg, #ef4444, #991b1b)", color: "#fff", border: "none", padding: "12px", borderRadius: "8px", fontWeight: "900", fontSize: "0.85rem", cursor: "pointer" }}>
