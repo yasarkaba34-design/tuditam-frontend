@@ -45,20 +45,29 @@ export default function YKOSDashboard({
   const [allVideoRecords, setAllVideoRecords] = useState([]);
   const [activeVideo, setActiveVideo] = useState(null);
 
-  // Butona tıklandığında çalışacak fonksiyon
-  const handleOpenVideoArchive = () => {
+  const hasVideo = (record) => Boolean(record?.videoUrl || record?.video || record?.videoBaglantisi);
+
+  const handleOpenVideoArchive = (selectedRecord = null) => {
     try {
       const saved = JSON.parse(localStorage.getItem("ykos_admin_records") || "[]");
-      const vids = saved.filter(r => r.videoUrl || r.video || r.videoBaglantisi);
+      const vids = saved
+        .filter((record) =>
+          (record.status === "approved" || record.status === "published" || record.durum === "onaylandi") &&
+          hasVideo(record)
+        )
+        .map((record) => ({
+          ...record,
+          videoUrl: record.videoUrl || record.video || record.videoBaglantisi
+        }));
       setAllVideoRecords(vids);
       if (vids.length > 0) {
-        setActiveVideo(vids[0]);
+        setActiveVideo(vids.find((video) => video.id === selectedRecord?.id) || vids[0]);
         setVideoModalOpen(true);
       } else {
-        alert("Henüz sistemde video eklenmiş bir kayıt bulunmuyor.");
+        alert("Henüz yayımlanmış video kaydı bulunmuyor.");
       }
     } catch (e) {
-      console.error(e);
+      console.error("Video arşivi okunamadı:", e);
     }
   };
 
@@ -136,9 +145,18 @@ export default function YKOSDashboard({
     return card.title?.toLowerCase().includes(q) || (card.desc && card.desc.toLowerCase().includes(q));
   });
 
+  const rightColumnVideoItems = currentLang === "TR"
+    ? adminRecords.filter(hasVideo).slice(0, 4).map((record) => ({
+        id: record.id,
+        title: record.title || record.baslik || "TÜDİTAM videosu",
+        desc: record.summary || record.ozet || record.category || record.kategori || "TÜDİTAM video arşivi",
+        record
+      }))
+    : [];
+
   const rightColumnItems = currentLang === "TR" && adminRecords.length > 0
     ? [
-        ...adminRecords.map((rec) => ({
+        ...adminRecords.filter((record) => !hasVideo(record)).map((rec) => ({
           id: rec.id,
           title: rec.title || rec.baslik,
           desc: rec.summary || rec.ozet,
@@ -444,6 +462,29 @@ export default function YKOSDashboard({
                 </div>
               );
             })}
+            {rightColumnVideoItems.length > 0 && (
+              <>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "1px solid rgba(239,68,68,0.55)", padding: "8px 0 6px", marginTop: "8px" }}>
+                  <span style={{ color: "#fca5a5", fontSize: "0.82rem", fontWeight: "bold" }}>🎥 YAYINLANAN VİDEOLAR</span>
+                  <span style={{ color: "#fca5a5", fontSize: "0.65rem" }}>{rightColumnVideoItems.length} kayıt</span>
+                </div>
+                {rightColumnVideoItems.map((item, idx) => (
+                  <button
+                    key={`right-video-${item.id || idx}`}
+                    type="button"
+                    onClick={() => handleOpenVideoArchive(item.record)}
+                    style={{ display: "flex", width: "100%", gap: "10px", alignItems: "center", background: "#0c101d", border: "1px solid rgba(239,68,68,0.45)", borderRadius: "6px", padding: "10px", color: "#fff", textAlign: "left", cursor: "pointer" }}
+                  >
+                    <span style={{ width: "42px", height: "42px", display: "grid", placeItems: "center", background: "rgba(239,68,68,0.12)", border: "1px solid #ef4444", borderRadius: "4px", fontSize: "18px", flexShrink: 0 }}>▶️</span>
+                    <span style={{ flex: 1, minWidth: 0 }}>
+                      <strong style={{ display: "block", color: "#fca5a5", fontSize: "0.76rem", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{item.title}</strong>
+                      <span style={{ display: "block", color: "#cbd5e1", fontSize: "0.66rem", marginTop: "3px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{item.desc}</span>
+                    </span>
+                    <span style={{ color: "#f87171", fontSize: "0.62rem", fontWeight: "bold", flexShrink: 0 }}>İZLE ➔</span>
+                  </button>
+                ))}
+              </>
+            )}
           </div>
         </div>
 
