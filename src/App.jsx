@@ -45,8 +45,11 @@ export default function App() {
   const [selectedContentId, setSelectedContentId] = useState(initialRoute.contentId);
 
   const navigate = (view, contentId = null, { replace = false } = {}) => {
-    const path = view === "detail" && contentId != null
-      ? `/read/${encodeURIComponent(String(contentId))}`
+    const routeId = contentId && typeof contentId === "object"
+      ? (contentId.id || contentId.hece || contentId.title || contentId.baslik)
+      : contentId;
+    const path = view === "detail" && routeId != null
+      ? `/read/${encodeURIComponent(String(routeId))}`
       : (VIEW_PATHS[view] || "/");
     if (window.location.pathname !== path) {
       window.history[replace ? "replaceState" : "pushState"]({}, "", path);
