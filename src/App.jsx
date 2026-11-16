@@ -8,6 +8,7 @@ import BubbleMatrix from "./mega/BubbleMatrix.jsx";
 import AtlasMap from "./mega/AtlasMap";
 import Hakkimizda from "./pages/Hakkimizda";
 import ReadingPanel from "./components/ReadingPanel";
+import TuditamArchive from "./pages/TuditamArchive";
 import './index.css';
 
 const VIEW_PATHS = {
@@ -18,6 +19,7 @@ const VIEW_PATHS = {
   acikveri: "/open-data",
   ops: "/ops",
   login: "/admin-login",
+  archive: "/arsiv",
 };
 
 function getViewFromLocation() {
@@ -86,8 +88,11 @@ export default function App() {
           onNavigateMethod={() => navigate("method")}
           onNavigateAcikVeri={() => navigate("acikveri")}
           onNavigateOpsCenter={() => navigate("ops")}
+          onNavigateArchive={() => navigate("archive")}
         />
       )}
+
+      {activeView === "archive" && <TuditamArchive onClose={() => navigate("dashboard")} />}
 
       {activeView === "detail" && (
         <div>
