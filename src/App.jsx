@@ -119,7 +119,7 @@ export default function App() {
               onClick={() => navigate("dashboard")}
               style={{ background: "#ffd700", color: "#000", border: "none", padding: "8px 16px", borderRadius: "6px", fontWeight: "bold", cursor: "pointer" }}
             >
-              ⬅ Ana Sayfaya Dön
+              ⬅ TÜDİTAM’a Dön
             </button>
           </div>
           <ReadingPanel content={selectedContentId} currentLang={currentLang} />
@@ -130,7 +130,7 @@ export default function App() {
         <div>
           <div style={{ padding: "10px 20px" }}>
             <button onClick={() => navigate("dashboard")} style={{ background: "#ffd700", color: "#000", border: "none", padding: "8px 16px", borderRadius: "6px", fontWeight: "bold", cursor: "pointer" }}>
-              ⬅ Ana Sayfaya Dön
+              ⬅ TÜDİTAM’a Dön
             </button>
           </div>
           <BubbleMatrix currentLang={currentLang} />
@@ -141,7 +141,7 @@ export default function App() {
         <div>
           <div style={{ padding: "10px 20px" }}>
             <button onClick={() => navigate("dashboard")} style={{ background: "#ffd700", color: "#000", border: "1px solid #ffd700", padding: "8px 16px", borderRadius: "6px", fontWeight: "bold", cursor: "pointer" }}>
-              ⬅ Ana Sayfaya Dön
+              ⬅ TÜDİTAM’a Dön
             </button>
           </div>
           <AtlasMap currentLang={currentLang} />
@@ -152,7 +152,7 @@ export default function App() {
         <div>
           <div style={{ padding: "10px 20px" }}>
             <button onClick={() => navigate("dashboard")} style={{ background: "#ffd700", color: "#000", border: "none", padding: "8px 16px", borderRadius: "6px", fontWeight: "bold", cursor: "pointer" }}>
-              ⬅ Ana Sayfaya Dön
+              ⬅ TÜDİTAM’a Dön
             </button>
           </div>
           <Hakkimizda currentLang={currentLang} />
@@ -163,7 +163,7 @@ export default function App() {
         <div>
           <div style={{ padding: "10px 20px" }}>
             <button onClick={() => navigate("dashboard")} style={{ background: "#ffd700", color: "#000", border: "none", padding: "8px 16px", borderRadius: "6px", fontWeight: "bold", cursor: "pointer" }}>
-              ⬅ Ana Sayfaya Dön
+              ⬅ TÜDİTAM’a Dön
             </button>
           </div>
           <YalinVeriGirisi currentLang={currentLang} />
@@ -174,7 +174,7 @@ export default function App() {
         <div>
           <div style={{ padding: "10px 20px" }}>
             <button onClick={() => navigate("dashboard")} style={{ background: "#ffd700", color: "#000", border: "none", padding: "8px 16px", borderRadius: "6px", fontWeight: "bold", cursor: "pointer" }}>
-              ⬅ Ana Sayfaya Dön
+              ⬅ TÜDİTAM’a Dön
             </button>
           </div>
           <OpsCenter currentLang={currentLang} />
@@ -185,7 +185,7 @@ export default function App() {
         <div>
           <div style={{ padding: "10px 20px" }}>
             <button onClick={() => navigate("dashboard")} style={{ background: "#ffd700", color: "#000", border: "none", padding: "8px 16px", borderRadius: "6px", fontWeight: "bold", cursor: "pointer" }}>
-              ⬅ Ana Sayfaya Dön
+              ⬅ TÜDİTAM’a Dön
             </button>
           </div>
           <AdminPanel currentLang={currentLang} />
