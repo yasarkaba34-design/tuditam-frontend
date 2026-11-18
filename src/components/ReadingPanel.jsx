@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { translations } from "../data/i18n";
 import { defaultArchiveArticles } from "../data/ykosDataService";
+import ShareButtons from "./ShareButtons";
 
 // Sizin hazırladığınız temiz ve kararlı embed dönüştürücü fonksiyon
 export const getEmbedUrl = (url) => {
@@ -70,7 +71,7 @@ export default function ReadingPanel({ content, currentLang = "TR" }) {
         <div style={{ background: "#050811", border: "1.5px solid #ffd700", borderRadius: "12px", padding: "25px" }}>
           <h1 style={{ color: "#ffd700", marginTop: 0 }}>İçerik bulunamadı</h1>
           <p>Bu bağlantıdaki kayıt bu sitede yayımlanmıyor ya da adresi değişmiş olabilir.</p>
-          <a href="/" style={{ color: "#38bdf8" }}>Ana sayfaya dön</a>
+          <a href="/" style={{ color: "#38bdf8" }}>TÜDİTAM’a dön</a>
         </div>
       </div>
     );
@@ -87,10 +88,6 @@ export default function ReadingPanel({ content, currentLang = "TR" }) {
 
   const videoEmbedUrl = getEmbedUrl(itemVideo);
 
-  const handleShare = () => {
-    navigator.clipboard.writeText(window.location.href);
-    alert("Bağlantı panoya kopyalandı! Dilediğiniz yerde paylaşabilirsiniz.");
-  };
 
   return (
     <div style={{ padding: "20px", color: "#fff", fontFamily: "Segoe UI, sans-serif", maxWidth: "900px", margin: "0 auto" }}>
@@ -126,24 +123,7 @@ export default function ReadingPanel({ content, currentLang = "TR" }) {
               {itemCategory}
             </span>
 
-            <button
-              onClick={handleShare}
-              style={{
-                backgroundColor: "rgba(56, 189, 248, 0.15)",
-                border: "1px solid #38bdf8",
-                color: "#38bdf8",
-                padding: "5px 14px",
-                borderRadius: "6px",
-                fontSize: "0.78rem",
-                fontWeight: "bold",
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                gap: "6px"
-              }}
-            >
-              📤 Bu İçeriği Paylaş
-            </button>
+
           </div>
 
           <h1 style={{ color: "#ffd700", fontSize: "1.8rem", margin: "15px 0 6px 0" }}>
@@ -167,6 +147,8 @@ export default function ReadingPanel({ content, currentLang = "TR" }) {
             />
           </div>
         )}
+
+        <ShareButtons title={itemTitle} />
 
         {/* Detay Metni */}
         <div
