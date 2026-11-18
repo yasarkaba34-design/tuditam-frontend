@@ -71,7 +71,7 @@ export default function ReadingPanel({ content, currentLang = "TR" }) {
         <div style={{ background: "#050811", border: "1.5px solid #ffd700", borderRadius: "12px", padding: "25px" }}>
           <h1 style={{ color: "#ffd700", marginTop: 0 }}>İçerik bulunamadı</h1>
           <p>Bu bağlantıdaki kayıt bu sitede yayımlanmıyor ya da adresi değişmiş olabilir.</p>
-          <a href="/" style={{ color: "#38bdf8" }}>Ana sayfaya dön</a>
+          <a href="/" style={{ color: "#38bdf8" }}>TÜDİTAM’a dön</a>
         </div>
       </div>
     );
