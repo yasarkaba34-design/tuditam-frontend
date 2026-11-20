@@ -219,7 +219,7 @@ T-Sütunlarının YKOS Epigrafik Analizi:
 
 Göbeklitepe, dilsiz bir tapınak değil; Türkçenin ve eklemeli dillerin temelini oluşturan kök-hece kozmolojisinin taşa kazınmış ilk anayasasıdır.`,
     date: "23.08.2026"
-  }
+  },
   {
     id: "TD-YKOS-PROTOKOL-2026-11-20",
     category: "Türk Dünyası · YKOS Yöntem Notu",
