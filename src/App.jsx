@@ -188,7 +188,7 @@ export default function App() {
               ⬅ TÜDİTAM’a Dön
             </button>
           </div>
-          <AdminPanel currentLang={currentLang} />
+          <AdminPanel currentLang={currentLang} onLogout={() => navigate("dashboard")} />
         </div>
       )}
     </div>
