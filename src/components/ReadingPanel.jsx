@@ -42,7 +42,10 @@ export default function ReadingPanel({ content, currentLang = "TR" }) {
     if (!imageExpanded) return undefined;
     const previousOverflow = document.body.style.overflow;
     const handleKeyDown = (event) => {
-      if (event.key === "Escape") {\n        setImageExpanded(false);\n        imageTriggerRef.current?.focus();\n      }
+      if (event.key === "Escape") {
+        setImageExpanded(false);
+        imageTriggerRef.current?.focus();
+      }
     };
     document.body.style.overflow = "hidden";
     window.addEventListener("keydown", handleKeyDown);
