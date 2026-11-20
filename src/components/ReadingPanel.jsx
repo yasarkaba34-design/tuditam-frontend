@@ -1,5 +1,5 @@
 // src/components/ReadingPanel.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { translations } from "../data/i18n";
 import { defaultArchiveArticles } from "../data/ykosDataService";
 import ShareButtons from "./ShareButtons";
@@ -31,6 +31,27 @@ const readsData = [
 ];
 
 export default function ReadingPanel({ content, currentLang = "TR" }) {
+  const [imageExpanded, setImageExpanded] = useState(false);
+  const imageTriggerRef = useRef(null);
+  const closeImage = () => {
+    setImageExpanded(false);
+    imageTriggerRef.current?.focus();
+  };
+
+  useEffect(() => {
+    if (!imageExpanded) return undefined;
+    const previousOverflow = document.body.style.overflow;
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") closeImage();
+    };
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [imageExpanded]);
+
   const [adminRecords, setAdminRecords] = useState([]);
 
   useEffect(() => {
@@ -140,10 +161,48 @@ export default function ReadingPanel({ content, currentLang = "TR" }) {
         {/* Manşet Görseli */}
         {itemImage && (
           <div style={{ marginBottom: "20px", textAlign: "center" }}>
+            <button
+              ref={imageTriggerRef}
+              type="button"
+              aria-haspopup="dialog"
+              aria-expanded={imageExpanded}
+              aria-label={"Görseli büyüt: " + itemTitle}
+              onClick={() => setImageExpanded(true)}
+              style={{ display: "inline-block", position: "relative", maxWidth: "100%", padding: 0, border: 0, borderRadius: "8px", background: "transparent", cursor: "zoom-in" }}
+            >
+              <img
+                src={itemImage}
+                alt={itemTitle}
+                style={{ display: "block", maxWidth: "100%", maxHeight: "400px", borderRadius: "8px", border: "1px solid #ffd700", objectFit: "cover" }}
+              />
+              <span aria-hidden="true" style={{ position: "absolute", right: "10px", bottom: "10px", padding: "6px 10px", borderRadius: "999px", color: "#fff", background: "rgba(3, 7, 18, 0.84)", fontSize: "0.8rem", fontWeight: 700 }}>
+                ⛶ Büyüt
+              </span>
+            </button>
+          </div>
+        )}
+
+        {imageExpanded && (
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label={"Büyütülmüş görsel: " + itemTitle}
+            onClick={closeImage}
+            style={{ position: "fixed", inset: 0, zIndex: 10000, display: "flex", alignItems: "center", justifyContent: "center", padding: "64px 24px 24px", boxSizing: "border-box", background: "rgba(0, 0, 0, 0.93)", cursor: "zoom-out" }}
+          >
+            <button
+              type="button"
+              aria-label="Büyütülmüş görseli kapat"
+              onClick={(event) => { event.stopPropagation(); closeImage(); }}
+              style={{ position: "absolute", top: "16px", right: "20px", width: "44px", height: "44px", border: "1px solid rgba(255,255,255,0.7)", borderRadius: "50%", color: "#fff", background: "rgba(20,20,20,0.85)", fontSize: "28px", lineHeight: 1, cursor: "pointer" }}
+            >
+              ×
+            </button>
             <img
               src={itemImage}
               alt={itemTitle}
-              style={{ maxWidth: "100%", maxHeight: "400px", borderRadius: "8px", border: "1px solid #ffd700", objectFit: "cover" }}
+              onClick={(event) => event.stopPropagation()}
+              style={{ display: "block", maxWidth: "min(96vw, 1800px)", maxHeight: "calc(100vh - 96px)", width: "auto", height: "auto", objectFit: "contain", cursor: "default" }}
             />
           </div>
         )}
