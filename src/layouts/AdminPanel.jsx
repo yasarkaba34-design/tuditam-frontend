@@ -1,7 +1,7 @@
 // src/layouts/AdminPanel.jsx
 import React, { useState, useEffect } from "react";
 
-export default function AdminPanel({ onLogout, userRole = "admin" }) {
+export default function AdminPanel({ onLogout = () => { window.location.assign("/"); }, userRole = "admin" }) {
   const [records, setRecords] = useState([]);
   const [editingId, setEditingId] = useState(null);
 
@@ -175,6 +175,7 @@ export default function AdminPanel({ onLogout, userRole = "admin" }) {
           </div>
         </div>
         <button
+          type="button"
           onClick={onLogout}
           style={{ background: "#dc2626", color: "#fff", border: "none", padding: "6px 16px", borderRadius: "5px", fontWeight: "bold", cursor: "pointer", fontSize: "0.8rem" }}
         >
