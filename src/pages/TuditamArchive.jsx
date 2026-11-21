@@ -13,7 +13,7 @@ function toArchiveItem(item, index, isLocal = false) {
   };
 }
 
-export default function TuditamArchive({ onClose = () => { window.location.assign("/"); } }) {
+export default function TuditamArchive({ onClose = () => { window.location.assign("/"); }, onRead = () => {} }) {
   const [localRecords, setLocalRecords] = useState([]);
 
   useEffect(() => {
@@ -44,7 +44,7 @@ export default function TuditamArchive({ onClose = () => { window.location.assig
         >
           ← Ana sayfaya dön
         </button>
-        <ArchivePanel archive={archive} onClose={onClose} />
+        <ArchivePanel archive={archive} onClose={onClose} onRead={onRead} />
       </div>
     </main>
   );

@@ -110,7 +110,7 @@ export default function App() {
         />
       )}
 
-      {activeView === "archive" && <TuditamArchive onClose={() => navigate("dashboard")} />}
+      {activeView === "archive" && <TuditamArchive onClose={() => navigate("dashboard")} onRead={handleNavigateRead} />}
 
       {activeView === "detail" && (
         <div>

@@ -219,7 +219,46 @@ T-Sütunlarının YKOS Epigrafik Analizi:
 
 Göbeklitepe, dilsiz bir tapınak değil; Türkçenin ve eklemeli dillerin temelini oluşturan kök-hece kozmolojisinin taşa kazınmış ilk anayasasıdır.`,
     date: "23.08.2026"
-  }
+  },
+  {
+    id: "TD-YKOS-PROTOKOL-2026-11-20",
+    category: "Türk Dünyası · YKOS Yöntem Notu",
+    title: "Anadolu Dil Katmanları: Kök-Hece İnceleme Protokolü",
+    summary: "YKOS kök-hece okumalarını kaynak kaydı, yöntem yorumu ve yeniden inceleme durumlarıyla izlemek için başlangıç çerçevesi. Bu kayıt test sonucu veya tamamlanmış veri kümesi değildir.",
+    content: `## Amaç ve kapsam
+
+Bu yöntem notu, Anadolu dil katmanlarında önerilen kök ve hece okumalarının Türk dili ve lehçelerindeki karşılaştırmalarla nasıl izlenebileceğini açıklar. YKOS (Yaşar Kaba Okuma Sistemi), bu çalışmada kullanılan okuma ve kodlama yöntemidir. TÜDİTAM ise araştırma ve yayınların kurumsal çatısıdır; bu iki işlev birbirinden ayrıdır.
+
+Çalışma, bir kök/hece önerisini kaynaklı kayıt, karşılaştırma ve yeniden incelemeye açar. Tekil benzerlikler tek başına tarihsel akrabalık, köken veya aktarım kanıtı sayılmaz.
+
+## Her kayıt için izlenecek alanlar
+
+- Kaydın kimliği, sürümü ve durumu
+- İncelenen dil/lehçe, özgün biçim ve kaynakta verilen anlam
+- Kök/hece ayrımı ve bu ayrımın uygulama kuralı
+- Sözlük, metin veya katalog künyesi; sayfa, kayıt numarası ya da erişilebilir bağlantı
+- En eski belgeli tanıklık iddiası varsa tarih, yer ve bunu destekleyen kaynak
+- YKOS okuması; ham kaynak bilgisinden ayrı biçimde
+- Alternatif okuma, karşı kanıt ve itiraz notu
+- Son değişiklik tarihi ve inceleyen kayıtları
+
+## Test ile veri kümesinin durumu
+
+Bir aday veri kümesinin derlenmiş olması, testin tamamlandığı anlamına gelmez. Tamamlanmış test kaydı; kapsamı ve kuralları, kullanılan veri kümesinin sürümünü, her maddeye ait kaynakları, sonuçların nasıl üretildiğini ve yeniden inceleme kayıtlarını göstermelidir. Bu unsurlar yayımlanmadan oran veya başarı sonucu doğrulanmış kabul edilmez.
+
+Durum etiketleri ayrı tutulmalıdır: aday kayıt, kaynak kontrolünde, yöntem incelemesinde, doğrulanmış kaynak kaydı, çelişkili/ikincil yeniden inceleme ve arşiv. Bir kaynak kaydının doğrulanması, YKOS yorumunun doğrulandığı anlamına gelmez.
+
+## Ekli çalışma notunun değerlendirmesi
+
+20 Kasım 2026 tarihinde iletilen “PROTO KÖK.docx” dosyasında 60 ve 100 kelimelik setler, dört dil karşılaştırması, Hitit-Luvi biçimleri ve yüzdelik sonuçlar anlatılıyor. Dosyada bu iddiaları madde madde yeniden üretmeye yetecek kaynak künyeleri, veri dökümü, sürüm bilgisi ve test hesaplama adımları bulunmadığından, bunlar bu kayıtta doğrulanmış veri veya sonuç olarak aktarılmamıştır. Belge, kaynaklandırma ve yeniden inceleme bekleyen ön not niteliğinde tutulmalıdır.
+
+Bu yöntem notuna söz konusu yüzdeler, tekil eşleşmeler veya tamamlanmış test iddiası taşınmamıştır. Yeni bir test ancak kendi tarihli ve sürümlenmiş aday kümesiyle ayrıca kaydedilmelidir.
+
+## Sonraki işlem
+
+Önce her aday için kaynak biçimini ve künye bilgisini tamamlayın; ardından YKOS okumasını ayrı alanda kaydedip alternatif çözümlemeleri ekleyin. Veri kümesi sürümünü sabitledikten sonra test adımlarını ve sonuçları yayımlayın. Eksik kaynak veya çelişki silinmez; durumu belirtilerek yeniden incelemeye bırakılır.`,
+    date: "20.11.2026"
+  },
 ];
 
 export const loadArchiveData = () => defaultArchiveArticles;

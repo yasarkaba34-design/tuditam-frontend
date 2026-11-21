@@ -8,7 +8,7 @@ import "./ArchivePanel.css";
  *  - archive: arşiv listesi (id, title, type, date, description, file)
  *  - onClose: paneli kapatma işlevi
  */
-export default function ArchivePanel({ archive, onClose }) {
+export default function ArchivePanel({ archive, onClose, onRead = () => {} }) {
   const [activeItem, setActiveItem] = useState(null);
 
   return (
@@ -47,6 +47,14 @@ export default function ArchivePanel({ archive, onClose }) {
                 Dosyayı İndir
               </a>
             )}
+            <button
+              type="button"
+              className="download-btn"
+              onClick={() => onRead(activeItem.id)}
+              style={{ border: 0, cursor: "pointer" }}
+            >
+              Tam kaydı aç
+            </button>
           </>
         ) : (
           <p className="placeholder">Bir arşiv kaydı seçiniz.</p>
